@@ -25,14 +25,14 @@ public class JobController {
     }
 
     @PostMapping("api/job")
-    public Job addJob(Job job) { // add @RequestBody if body is raw
+    public Job addJob(@RequestBody Job job) { // add @RequestBody if body is raw
         job.setStatus(Status.NEW);
         repo.save(job);
         return job;
     }
 
     @PutMapping("api/job")
-    public Job updateJob(Job job) { // add @RequestBody if body is raw
+    public Job updateJob(@RequestBody Job job) { // add @RequestBody if body is raw
         repo.save(job);
         return job;
     }
