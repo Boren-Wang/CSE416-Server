@@ -14,30 +14,30 @@ public class JobController {
     @Autowired
     JobRepo repo;
 
-    @GetMapping("/jobs")
+    @GetMapping("api/jobs")
     public List<Job> getJobs() {
         return repo.findAll();
     }
 
-    @GetMapping("/job/{jobId}")
+    @GetMapping("api/job/{jobId}")
     public Optional<Job> getJob(@PathVariable("jobId") int jobId) {
         return repo.findById(jobId);
     }
 
-    @PostMapping("/job")
+    @PostMapping("api/job")
     public Job addJob(Job job) { // add @RequestBody if body is raw
         job.setStatus(Status.NEW);
         repo.save(job);
         return job;
     }
 
-    @PutMapping("/job")
+    @PutMapping("api/job")
     public Job updateJob(Job job) { // add @RequestBody if body is raw
         repo.save(job);
         return job;
     }
 
-    @DeleteMapping("/job/{jobId}")
+    @DeleteMapping("api/job/{jobId}")
     public String deleteJob(@PathVariable("jobId") int jobId) {
         Job job = repo.getOne(jobId);
         repo.delete(job);
