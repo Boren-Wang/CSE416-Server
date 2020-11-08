@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Job {
     @Id
-//    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int jobId;
     private State state;
     private Status status;
