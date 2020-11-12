@@ -3,29 +3,28 @@ package com.example.demo.model;
 import com.example.demo.enumerate.Minority;
 import com.example.demo.enumerate.State;
 import com.example.demo.enumerate.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Job {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private int jobId;
     private State state;
     private Status status;
     private int numberOfDistrictings;
     private double compactnessGoal;
     private int populationDifference;
-//    private List<Minority> minorities;
-//    private Summary summary;
+    private Set<Minority> minorities;
+    private List<Box> summary;
 //    private Districting random;
 //    private Districting average;
 //    private Districting extreme;
 
+    @Id
+    @GeneratedValue
     public int getJobId() {
         return jobId;
     }
@@ -34,6 +33,8 @@ public class Job {
         this.jobId = jobId;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="state_name")
     public State getState() {
         return state;
     }
@@ -74,21 +75,27 @@ public class Job {
         this.populationDifference = populationDifference;
     }
 
-//    public List<Minority> getMinorities() {
-//        return minorities;
-//    }
+    @ElementCollection(targetClass = Minority.class)
+    @CollectionTable(name = "job_minority",
+            joinColumns = @JoinColumn(name = "job_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "minority_name")
+    public Set<Minority> getMinorities() {
+        return minorities;
+    }
 
-//    public void setMinorities(List<Minority> minorities) {
-//        this.minorities = minorities;
-//    }
+    public void setMinorities(Set<Minority> minorities) {
+        this.minorities = minorities;
+    }
 
-//    public Summary getSummary() {
-//        return summary;
-//    }
-//
-//    public void setSummary(Summary summary) {
-//        this.summary = summary;
-//    }
+    @OneToMany(mappedBy = "job")
+    public List<Box> getSummary() {
+        return summary;
+    }
+
+    public void setSummary(List<Box> summary) {
+        this.summary = summary;
+    }
 
 //    public Districting getRandom() {
 //        return random;

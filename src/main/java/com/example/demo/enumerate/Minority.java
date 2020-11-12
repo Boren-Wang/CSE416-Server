@@ -1,8 +1,11 @@
 package com.example.demo.enumerate;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+
 public enum Minority {
-    ASIANAMERICAN,
-    BLACKAMERICAN,
-    NATIVEAMERICAN,
-    HISPANICAMERICAN;
+    ASIAN,
+    BLACK,
+    NATIVE,
+    HISPANIC;
 }

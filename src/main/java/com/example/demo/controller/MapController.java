@@ -19,5 +19,4 @@ public class MapController {
         String json = new String(Files.readAllBytes(Paths.get(filePath)));
         return json;
     }
-
 }
