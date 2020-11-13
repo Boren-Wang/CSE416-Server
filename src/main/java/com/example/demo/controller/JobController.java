@@ -3,8 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dao.BoxRepo;
 import com.example.demo.dao.JobRepo;
 import com.example.demo.enumerate.Status;
-import com.example.demo.model.Box;
-import com.example.demo.model.Job;
+import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +14,6 @@ import java.util.Optional;
 public class JobController {
     @Autowired
     JobRepo jobRepo;
-
-    @Autowired
-    BoxRepo boxRepo;
 
     @GetMapping("api/jobs")
     public List<Job> getJobs() {
@@ -32,12 +28,18 @@ public class JobController {
     @PostMapping("api/job")
     public Job addJob(@RequestBody Job job) { // add @RequestBody if body is raw
         job.setStatus(Status.NEW);
-        jobRepo.save(job);
         List<Box> summary = job.getSummary();
-        for(Box box: summary) {
+        for(Box box : summary) {
             box.setJob(job);
-            boxRepo.save(box);
         }
+        Districting average = job.getAverage();
+        for(District district : average.getDistricts()){
+            district.setDistricting(average);
+            for(Precinct precinct : district.getPrecincts()){
+                precinct.setDistrict(district);
+            }
+        }
+        jobRepo.save(job);
         return job;
     }
 

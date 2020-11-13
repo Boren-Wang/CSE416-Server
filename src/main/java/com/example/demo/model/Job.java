@@ -3,7 +3,6 @@ package com.example.demo.model;
 import com.example.demo.enumerate.Minority;
 import com.example.demo.enumerate.State;
 import com.example.demo.enumerate.Status;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,9 +18,9 @@ public class Job {
     private int populationDifference;
     private Set<Minority> minorities;
     private List<Box> summary;
-//    private Districting random;
-//    private Districting average;
-//    private Districting extreme;
+    private Districting random;
+    private Districting average;
+    private Districting extreme;
 
     @Id
     @GeneratedValue
@@ -88,7 +87,7 @@ public class Job {
         this.minorities = minorities;
     }
 
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", cascade = {CascadeType.ALL})
     public List<Box> getSummary() {
         return summary;
     }
@@ -97,27 +96,30 @@ public class Job {
         this.summary = summary;
     }
 
-//    public Districting getRandom() {
-//        return random;
-//    }
-//
-//    public void setRandom(Districting random) {
-//        this.random = random;
-//    }
-//
-//    public Districting getAverage() {
-//        return average;
-//    }
-//
-//    public void setAverage(Districting average) {
-//        this.average = average;
-//    }
-//
-//    public Districting getExtreme() {
-//        return extreme;
-//    }
-//
-//    public void setExtreme(Districting extreme) {
-//        this.extreme = extreme;
-//    }
+    @OneToOne(cascade = {CascadeType.ALL})
+    public Districting getRandom() {
+        return random;
+    }
+
+    public void setRandom(Districting random) {
+        this.random = random;
+    }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    public Districting getAverage() {
+        return average;
+    }
+
+    public void setAverage(Districting average) {
+        this.average = average;
+    }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    public Districting getExtreme() {
+        return extreme;
+    }
+
+    public void setExtreme(Districting extreme) {
+        this.extreme = extreme;
+    }
 }
