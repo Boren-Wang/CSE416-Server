@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.BoxRepo;
-import com.example.demo.dao.JobRepo;
+import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.enumerate.Status;
 import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
