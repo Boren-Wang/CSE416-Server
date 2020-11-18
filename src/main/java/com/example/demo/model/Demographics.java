@@ -89,4 +89,19 @@ public class Demographics {
     public void setHispanicVap(int hispanicVap) {
         this.hispanicVap = hispanicVap;
     }
+
+    @Override
+    public String toString() {
+        return "Demographics{" +
+                "demographicsId=" + demographicsId +
+                ", population=" + population +
+                ", votingAgePopulation=" + votingAgePopulation +
+                ", minoritiesVap=" + minoritiesVap +
+                ", asianVap=" + asianVap +
+                ", blackVap=" + blackVap +
+                ", whiteVap=" + whiteVap +
+                ", nativeVap=" + nativeVap +
+                ", hispanicVap=" + hispanicVap +
+                '}';
+    }
 }

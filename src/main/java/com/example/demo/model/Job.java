@@ -122,4 +122,21 @@ public class Job {
     public void setExtreme(Districting extreme) {
         this.extreme = extreme;
     }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "jobId=" + jobId +
+                ", state=" + state +
+                ", status=" + status +
+                ", numberOfDistrictings=" + numberOfDistrictings +
+                ", compactnessGoal=" + compactnessGoal +
+                ", populationDifference=" + populationDifference +
+                ", minorities=" + minorities +
+                ", summary=" + summary +
+                ", random=" + random +
+                ", average=" + average +
+                ", extreme=" + extreme +
+                '}';
+    }
 }

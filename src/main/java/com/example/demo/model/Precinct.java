@@ -49,4 +49,14 @@ public class Precinct {
     public void setDemographics(Demographics demographics) {
         this.demographics = demographics;
     }
+
+    @Override
+    public String toString() {
+        return "Precinct{" +
+                "precinctId=" + precinctId +
+                ", countyId=" + countyId +
+                ", district=" + district +
+                ", demographics=" + demographics +
+                '}';
+    }
 }

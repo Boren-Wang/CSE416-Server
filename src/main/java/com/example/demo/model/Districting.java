@@ -1,12 +1,13 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Districting {
     private int districtingId;
-    private Set<District> districts;
+    private List<District> districts;
+    private String geojsonFilePath;
 
     @Id
     @GeneratedValue
@@ -19,11 +20,28 @@ public class Districting {
     }
 
     @OneToMany(mappedBy = "districting", cascade = {CascadeType.ALL})
-    public Set<District> getDistricts() {
+    public List<District> getDistricts() {
         return districts;
     }
 
-    public void setDistricts(Set<District> districts) {
+    public void setDistricts(List<District> districts) {
         this.districts = districts;
+    }
+
+    public String getGeojsonFilePath() {
+        return geojsonFilePath;
+    }
+
+    public void setGeojsonFilePath(String geojsonFilePath) {
+        this.geojsonFilePath = geojsonFilePath;
+    }
+
+    @Override
+    public String toString() {
+        return "Districting{" +
+                "districtingId=" + districtingId +
+                ", districts=" + districts +
+                ", geojsonFilePath='" + geojsonFilePath + '\'' +
+                '}';
     }
 }

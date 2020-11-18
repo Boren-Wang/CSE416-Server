@@ -60,4 +60,15 @@ public class District {
     public void setDemographics(Demographics demographics) {
         this.demographics = demographics;
     }
+
+    @Override
+    public String toString() {
+        return "District{" +
+                "districtId=" + districtId +
+                ", numberOfCounties=" + numberOfCounties +
+                ", precincts=" + precincts +
+                ", districting=" + districting +
+                ", demographics=" + demographics +
+                '}';
+    }
 }

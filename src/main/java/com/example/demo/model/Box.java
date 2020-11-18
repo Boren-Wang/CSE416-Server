@@ -74,4 +74,17 @@ public class Box {
     public void setJob(Job job) {
         this.job = job;
     }
+
+    @Override
+    public String toString() {
+        return "Box{" +
+                "boxId=" + boxId +
+                ", q1=" + q1 +
+                ", median=" + median +
+                ", q3=" + q3 +
+                ", min=" + min +
+                ", max=" + max +
+                ", job=" + job +
+                '}';
+    }
 }
