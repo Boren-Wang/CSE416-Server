@@ -13,7 +13,7 @@ public class JobController {
     JobHandler jh;
 
     @PostMapping("api/job")
-    public Job addJob(@RequestBody Job job) {
+    public Job addJob(@RequestBody Job job) throws Exception{
         jh.submitJob(job);
         return job;
     }

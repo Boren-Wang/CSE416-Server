@@ -17,7 +17,7 @@ public class MapController {
     }
 
     @GetMapping("api/districting/{districtingId}")
-    public String getStateGeojson(@PathVariable("districtingId") int districtingId) throws Exception{
+    public String getDistrictingGeojson(@PathVariable("districtingId") int districtingId) throws Exception{
         return mh.getDistrictingGeojson(districtingId);
     }
 }

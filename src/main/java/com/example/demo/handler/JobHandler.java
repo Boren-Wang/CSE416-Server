@@ -14,18 +14,19 @@ public class JobHandler {
     @Autowired
     JobRepo jobRepo;
 
-    public Job submitJob(Job job) {
+    @Autowired
+    SeawulfHandler sh;
+
+    public Job submitJob(Job job) throws Exception {
         job.setStatus(Status.NEW);
         jobRepo.save(job);
-
-        // Seawulf
-
+        System.out.println("Submitted job: "+job);
+        sh.dispatchJob(job);
         return job;
     }
 
     public Job getJob(int jobId) {
         Optional<Job> jobOptional = jobRepo.findById(jobId);
-
         if(jobOptional.isPresent()) {
             return jobOptional.get();
         } else {
@@ -34,7 +35,8 @@ public class JobHandler {
     }
 
     public List<Job> getJobHistory() {
-        return jobRepo.findAll();
+        List<Job> jobHistory = jobRepo.findAll();
+        return jobHistory;
     }
 
     public Job updateJob(Job job) {
@@ -43,12 +45,13 @@ public class JobHandler {
     }
 
     public void cancelJob(int jobId) {
-        // Seawulf
+
     }
 
     public void deleteJob(int jobId) {
         Job job = jobRepo.getOne(jobId);
         jobRepo.delete(job);
+        System.out.println("Deleted job: "+job);
     }
 
     public void setSummary(int jobId, List<Box> summary) {
