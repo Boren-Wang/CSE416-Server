@@ -19,9 +19,10 @@ public class JobHandler {
 
     public Job submitJob(Job job) throws Exception {
         job.setStatus(Status.NEW);
+        int jobId = sh.dispatchJob(job);
+        job.setJobId(jobId);
         jobRepo.save(job);
         System.out.println("Submitted job: "+job);
-        sh.dispatchJob(job);
         return job;
     }
 
@@ -44,8 +45,9 @@ public class JobHandler {
         return job;
     }
 
-    public void cancelJob(int jobId) {
-
+    public void cancelJob(int jobId) throws Exception {
+        sh.cancelJob(jobId);
+        System.out.println("Canceled job: "+jobId);
     }
 
     public void deleteJob(int jobId) {

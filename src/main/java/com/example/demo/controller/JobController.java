@@ -35,9 +35,9 @@ public class JobController {
     }
 
     @PostMapping("api/job/{jobId}/cancel")
-    public String cancelJob(@PathVariable("jobId") int jobId) {
+    public String cancelJob(@PathVariable("jobId") int jobId) throws Exception {
         jh.cancelJob(jobId);
-        return "Cancel job "+jobId;
+        return "Canceled job "+jobId;
     }
 
     @DeleteMapping("api/job/{jobId}")
