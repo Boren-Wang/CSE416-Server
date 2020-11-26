@@ -19,7 +19,7 @@ public class JobController {
     }
 
     @GetMapping("api/jobs")
-    public List<Job> getJobs() {
+    public List<Job> getJobs() throws Exception {
         return jh.getJobHistory();
     }
 
@@ -41,7 +41,7 @@ public class JobController {
     }
 
     @DeleteMapping("api/job/{jobId}")
-    public String deleteJob(@PathVariable("jobId") int jobId) {
+    public String deleteJob(@PathVariable("jobId") int jobId) throws Exception {
         jh.deleteJob(jobId);
         return "Deleted job "+jobId;
     }

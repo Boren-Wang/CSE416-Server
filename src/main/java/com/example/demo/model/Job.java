@@ -12,7 +12,7 @@ import java.util.Set;
 public class Job {
     private int jobId;
     private State state;
-    private Status status;
+    private String status;
     private int numberOfDistrictings;
     private double compactnessGoal;
     private int populationDifference;
@@ -23,7 +23,6 @@ public class Job {
     private Districting extreme;
 
     @Id
-    @GeneratedValue
     public int getJobId() {
         return jobId;
     }
@@ -42,11 +41,11 @@ public class Job {
         this.state = state;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

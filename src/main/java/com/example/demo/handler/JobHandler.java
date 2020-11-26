@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,11 +19,10 @@ public class JobHandler {
     SeawulfHandler sh;
 
     public Job submitJob(Job job) throws Exception {
-        job.setStatus(Status.NEW);
         int jobId = sh.dispatchJob(job);
         job.setJobId(jobId);
         jobRepo.save(job);
-        System.out.println("Submitted job: "+job);
+//        System.out.println("Submitted job: "+job);
         return job;
     }
 
@@ -35,8 +35,13 @@ public class JobHandler {
         }
     }
 
-    public List<Job> getJobHistory() {
+    public List<Job> getJobHistory() throws Exception {
         List<Job> jobHistory = jobRepo.findAll();
+        Map<Integer, String> dict = sh.getUpdates(); // dict stores the current status of each job
+        for(Job job : jobHistory) {
+            job.setStatus(dict.get(job.getJobId())); // update the status of each job
+            jobRepo.save(job);
+        }
         return jobHistory;
     }
 
@@ -47,13 +52,20 @@ public class JobHandler {
 
     public void cancelJob(int jobId) throws Exception {
         sh.cancelJob(jobId);
+        Optional<Job> jobOptional = jobRepo.findById(jobId);
+        if(jobOptional.isPresent()) {
+            Job job = jobOptional.get();
+            job.setStatus("Canceled");
+            jobRepo.save(job);
+        }
         System.out.println("Canceled job: "+jobId);
     }
 
-    public void deleteJob(int jobId) {
+    public void deleteJob(int jobId) throws Exception {
         Job job = jobRepo.getOne(jobId);
         jobRepo.delete(job);
-        System.out.println("Deleted job: "+job);
+        System.out.println("Deleted job: "+jobId);
+        sh.cancelJob(jobId);
     }
 
     public void setSummary(int jobId, List<Box> summary) {
