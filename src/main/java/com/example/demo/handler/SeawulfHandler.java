@@ -80,8 +80,12 @@ public class SeawulfHandler {
                     List<String> parts = Arrays.asList(line.trim().split(" "));
 //                    System.out.println(parts);
                     int jobId = Integer.valueOf(parts.get(0));
-                    String status = parts.get(4);
-                    dict.put(jobId, status);
+                    String status = parts.get(5);
+                    if(status.equals("PD")) {
+                        dict.put(jobId, "Pending");
+                    } else {
+                        dict.put(jobId, status);
+                    }
                 }
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
