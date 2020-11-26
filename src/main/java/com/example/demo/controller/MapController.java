@@ -16,6 +16,11 @@ public class MapController {
         return mh.getStateGeojson(stateName);
     }
 
+    @GetMapping("api/state/{stateName}/districting")
+    public String getStateCurrentDistrictingGeojson(@PathVariable("stateName") String stateName) throws Exception{
+        return mh.getStateCurrentDistrictingGeojson(stateName);
+    }
+
     @GetMapping("api/districting/{districtingId}")
     public String getDistrictingGeojson(@PathVariable("districtingId") int districtingId) throws Exception{
         return mh.getDistrictingGeojson(districtingId);

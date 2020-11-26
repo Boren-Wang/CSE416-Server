@@ -20,6 +20,13 @@ public class MapHandler {
         return json;
     }
 
+    public String getStateCurrentDistrictingGeojson(String stateName) throws Exception{
+        String fileName = stateName+"_current_districting.json";
+        String filePath = "src/main/resources/static/"+fileName;
+        String json = new String(Files.readAllBytes(Paths.get(filePath)));
+        return json;
+    }
+
     public String getDistrictingGeojson(int districtingId) throws Exception{
         Districting districting = districtingRepo.getOne(districtingId);
         String geojsonFilePath = districting.getGeojsonFilePath();
