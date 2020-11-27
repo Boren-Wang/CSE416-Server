@@ -77,10 +77,10 @@ public class SeawulfHandler {
             while ((line = reader.readLine()) != null) {
 //                System.out.println(line);
                 if(!isFirstLine && line!="") {
-                    List<String> parts = Arrays.asList(line.trim().split(" "));
+                    List<String> parts = Arrays.asList(line.trim().split("\\s+"));
 //                    System.out.println(parts);
                     int jobId = Integer.valueOf(parts.get(0));
-                    String status = parts.get(5);
+                    String status = parts.get(4);
                     if(status.equals("PD")) {
                         dict.put(jobId, "Pending");
                     } else {
