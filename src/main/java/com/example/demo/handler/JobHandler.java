@@ -37,10 +37,17 @@ public class JobHandler {
 
     public List<Job> getJobHistory() throws Exception {
         List<Job> jobHistory = jobRepo.findAll();
+        return jobHistory;
+    }
+
+    public List<Job> getJobUpdates() throws Exception {
+        List<Job> jobHistory = jobRepo.findAll();
         Map<Integer, String> dict = sh.getUpdates(); // dict stores the current status of each job
         for(Job job : jobHistory) {
-            job.setStatus(dict.get(job.getJobId())); // update the status of each job
-            jobRepo.save(job);
+            if(dict.get(job.getJobId())!=null) {
+                job.setStatus(dict.get(job.getJobId())); // update the status of each job
+                jobRepo.save(job);
+            }
         }
         return jobHistory;
     }

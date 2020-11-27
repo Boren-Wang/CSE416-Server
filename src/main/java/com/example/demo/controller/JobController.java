@@ -23,6 +23,11 @@ public class JobController {
         return jh.getJobHistory();
     }
 
+    @GetMapping("api/jobs/update")
+    public List<Job> getJobUpdates() throws Exception {
+        return jh.getJobUpdates();
+    }
+
     @GetMapping("api/job/{jobId}")
     public Job getJob(@PathVariable("jobId") int jobId) {
         return jh.getJob(jobId);
