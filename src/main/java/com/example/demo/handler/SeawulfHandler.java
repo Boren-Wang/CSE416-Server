@@ -73,10 +73,10 @@ public class SeawulfHandler {
             Map<Integer, String> dict = new HashMap<>();
             StringBuilder builder = new StringBuilder();
             String line = null;
-            int lineNumber = 0;
+            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
 //                System.out.println(line);
-                if(lineNumber>0 && line!="") {
+                if(!isFirstLine && line!="") {
                     List<String> parts = Arrays.asList(line.trim().split(" "));
 //                    System.out.println(parts);
                     int jobId = Integer.valueOf(parts.get(0));
@@ -87,9 +87,11 @@ public class SeawulfHandler {
                         dict.put(jobId, status);
                     }
                 }
+                if(line.contains("JOBID")) {
+                    isFirstLine = false;
+                }
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
-                lineNumber++;
             }
             String result = builder.toString();
             System.out.println(result);
