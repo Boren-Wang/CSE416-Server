@@ -95,6 +95,9 @@ public class SeawulfHandler {
             }
             String result = builder.toString();
             System.out.println(result);
+            for(int key : dict.keySet()) {
+                System.out.println(Integer.toString(key)+"-"+dict.get(key));
+            }
             return dict;
         } catch (IOException e) {
             e.printStackTrace();
