@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=40
 #SBATCH --nodes=2
 #SBATCH --time=00:05:00
-#SBATCH -p medium-40core
+#SBATCH --partition=short-40core
 
 echo $1
 echo $2
@@ -27,10 +27,10 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-# python mpi.py GA 5000 1
+# python main.py GEORGIA 5000 0.9
 state = sys.argv[1]
-numberOfDistrictings = int(sys.argv[2])
-compactnessGoal = float(sys.argv[3])
+numberOfDistrictings = sys.argv[2]
+compactnessGoal = sys.argv[3]
 
 print("This is node {}".format(rank))
 
@@ -46,7 +46,8 @@ print('rank', rank, 'has data:', data)
 if rank != 0:
     for i in data:
         print("Starting generating districting plan #{}".format(i))
-        os.system("time python main.py")
+        command = "time python main.py"+" "+state+" "+numberOfDistrictings+" "+compactnessGoal
+        os.system(command)
 
 comm.barrier()
 print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
