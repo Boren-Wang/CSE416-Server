@@ -7,6 +7,9 @@
 #SBATCH --time=00:05:00
 #SBATCH -p medium-40core
 
+echo $1
+echo $2
+echo $3
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
 
@@ -25,9 +28,9 @@ size = comm.Get_size()
 rank = comm.Get_rank()
 
 # python mpi.py GA 5000 1
-state = sys.argv[2]
-numberOfDistrictings = int(sys.argv[3])
-compactnessGoal = float(sys.argv[4])
+state = sys.argv[1]
+numberOfDistrictings = int(sys.argv[2])
+compactnessGoal = float(sys.argv[3])
 
 print("This is node {}".format(rank))
 
@@ -49,4 +52,4 @@ comm.barrier()
 print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
 EOF
 
-mpirun -np 2 python mpi.py
+mpirun -np 2 python mpi.py $1 $2 $3
