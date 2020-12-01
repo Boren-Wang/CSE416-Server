@@ -10,10 +10,11 @@
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
 
-cat << EOF > py_mpi_hello.py
+cat << EOF > mpi.py
 
 import os
 import time
+import sys
 
 from mpi4py import MPI
 
@@ -23,27 +24,29 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
+# python mpi.py GA 5000 1
+state = sys.argv[2]
+numberOfDistrictings = int(sys.argv[3])
+compactnessGoal = float(sys.argv[4])
+
 print("This is node {}".format(rank))
 
 if rank == 0:
     print("We have {} nodes in our cluster.".format(size))
-    data = [x for x in range(size)]
-    print('We will be scattering files across nodes:', data)
-else:
-    data = None
+    nodes = [x for x in range(size)]
+    print('We will be scattering files across nodes:', nodes) # The file is main.py
 
+data = [x for x in range(numberOfDistrictings)]
 data = comm.scatter(data, root=0)
 print('rank', rank, 'has data:', data)
 
 if rank != 0:
-    command = "python hello_world.py --node {}".format(data)
-    print("Running command:", command)
-    os.system(command)
-    print("Starting multiproc")
-    os.system("time python py_multiproc.py")
+    for i in data:
+        print("Starting generating districting plan #{}".format(i))
+        os.system("time python main.py")
 
 comm.barrier()
 print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
 EOF
 
-mpirun -np 2 python py_mpi_hello.py
+mpirun -np 2 python mpi.py

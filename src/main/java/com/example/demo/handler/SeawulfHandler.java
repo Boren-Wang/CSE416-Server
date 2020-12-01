@@ -41,7 +41,10 @@ public class SeawulfHandler {
         int jobId;
         if(job.getNumberOfDistrictings() > THRESHOLD) {
             System.out.println("Run in Seawulf");
-            ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh");
+            ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh",
+                    job.getState().name(),
+                    Integer.toString(job.getNumberOfDistrictings()),
+                    Double.toString(job.getCompactnessGoal()));
             pb.redirectErrorStream(true);
             Process process = pb.start();
             jobId = printProcessOutput(process);

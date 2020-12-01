@@ -21,6 +21,7 @@ public class JobHandler {
     public Job submitJob(Job job) throws Exception {
         int jobId = sh.dispatchJob(job);
         job.setJobId(jobId);
+        job.setStatus("Pending");
         jobRepo.save(job);
 //        System.out.println("Submitted job: "+job);
         return job;
