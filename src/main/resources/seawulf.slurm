@@ -7,9 +7,6 @@
 #SBATCH --time=00:05:00
 #SBATCH --partition=short-40core
 
-echo $1
-echo $2
-echo $3
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
 
@@ -27,10 +24,11 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-# python main.py GEORGIA 5000 0.9
+# python main.py GEORGIA 5000 100 0.9
 state = sys.argv[1]
 numberOfDistrictings = sys.argv[2]
-compactnessGoal = sys.argv[3]
+populationDifference = sys.argv[3]
+compactnessGoal = sys.argv[4]
 
 print("This is node {}".format(rank))
 
@@ -46,7 +44,7 @@ print('rank', rank, 'has data:', data)
 if rank != 0:
     for i in data:
         print("Starting generating districting plan #{}".format(i))
-        command = "time python main.py"+" "+state+" "+numberOfDistrictings+" "+compactnessGoal
+        command = "time python main.py"+" "+state+" "+numberOfDistrictings+" "+compactnessGoal+" "+compactnessGoal
         os.system(command)
 
 comm.barrier()

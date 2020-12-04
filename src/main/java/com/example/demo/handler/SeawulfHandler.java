@@ -44,6 +44,7 @@ public class SeawulfHandler {
             ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh",
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
+                    Integer.toString(job.getPopulationDifference()),
                     Double.toString(job.getCompactnessGoal()));
             pb.redirectErrorStream(true);
             Process process = pb.start();
@@ -52,7 +53,11 @@ public class SeawulfHandler {
             return jobId;
         } else {
             System.out.println("Run in Server");
-            ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/multiproc.py");
+            ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/main.py",
+                    job.getState().name(),
+                    Integer.toString(job.getNumberOfDistrictings()),
+                    Integer.toString(job.getPopulationDifference()),
+                    Double.toString(job.getCompactnessGoal())).inheritIO();
             pb.redirectErrorStream(true);
             Process process = pb.start();
             jobId = -1;
