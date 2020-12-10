@@ -1,17 +1,3 @@
-#!/usr/bin/env bash
-
-#SBATCH --job-name=test_ssh_submit
-#SBATCH --output=test_ssh_submit-latest.log
-#SBATCH --ntasks-per-node=40
-#SBATCH --nodes=2
-#SBATCH --time=00:05:00
-#SBATCH --partition=short-40core
-
-echo I am using the following nodes: $SLURM_JOB_NODELIST
-echo My job ID is: $SLURM_JOB_ID
-
-cat << EOF > mpi.py
-
 import os
 import time
 import sys
@@ -49,6 +35,3 @@ if rank == 1:
 
 comm.barrier()
 print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
-EOF
-
-mpirun -np 2 python mpi.py $1 $2 $3 $4

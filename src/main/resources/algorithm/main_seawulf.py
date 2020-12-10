@@ -7,7 +7,7 @@ from graph import Graph, Node
 import multiprocessing as mp
 from multiprocessing import Pool
 
-path_GA = 'src/main/resources/algorithm/GA_precincts_simplified_plus (1).json'
+path_GA = './algorithm/GA_precincts_simplified_plus (1).json'
 path_LA = ''
 path_MI = ''
 
