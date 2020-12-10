@@ -1,33 +1,75 @@
 import json
-import sys
+import cProfile, pstats
 import os
-from redistricting import rebalance
+import sys
+from multiprocessing import Pool
+import multiprocessing as mp
+from redistricting import redistricting
 from seed import generateSeed
 from graph import Graph, Node
-import multiprocessing as mp
-from multiprocessing import Pool
 
-path_GA = 'src/main/resources/algorithm/GA_precincts_simplified_plus (1).json'
-path_LA = ''
-path_MI = ''
+iterationLimit = 1000  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
 
-def generate_plan(arguments):
-    state = arguments[0]
-    populationDifference = arguments[1]
-    compactnessGoal = arguments[2]
+GA = 'src/main/resources/algorithm/GA.json' # 测试速度或者会不会报错的时候用ga速度最快
+districtsGA = 14
 
-    path = None
+MI = 'src/main/resources/algorithm/MI.json'
+districtsMI = 4
+
+LA = 'src/main/resources/algorithm/LA.json'
+districtsLA = 6
+
+# popDifference = 0.03
+# compactness = 0.1
+
+path = None
+num = 0
+graph = None
+
+
+def generatePlan():  # 这是需要多程去run的function
+    generateSeed(graph)
+    redistricting(graph, iterationLimit)
+
+    plan = []
+    for cluster in graph.clusters:
+        district = []
+        for node in cluster.nodes:
+            district.append(node.id)
+        plan.append(district)
+
+    return plan
+
+
+if __name__ == '__main__':
+    print(os.getcwd())
+
+    # 接受arguments
+    state = sys.argv[1]
+    numberOfDistrictings = int(sys.argv[2])  # <- 我的算法不需要这个
+    populationDifference = float(sys.argv[3])  # 0.015 ~ 0.03
+    compactnessGoal = float(sys.argv[4])  # 0.2~0.5
+
+    arguments = [state, populationDifference, compactnessGoal]
+    arguments_list = [arguments for x in range(numberOfDistrictings)]  # <-这里好像需要改改？
+    print(arguments_list)
+
+    # 确认路径
     if state == 'GEORGIA':
-        path = path_GA
+        path = GA
+        num = districtsGA
     if state == 'LOUISIANA':
-        path = path_LA
+        path = LA
+        num = districtsLA
     if state == 'MISSISSIPPI':
-        path = path_MI
+        path = MI
+        num = districtsMI
 
-    # import data
+    # 导入数据只需要一次，不需要多进程
     with open(path) as f:
         data = json.load(f)
-    graph = Graph(14, populationDifference) # number of districts=14 ,1/2population variation: 0.9ideal~1.1ideal
+
+    graph = Graph(num, populationDifference, compactnessGoal)
 
     for i in range(len(data['features'])):
         node = Node(data['features'][i]['properties']['ID'], data['features'][i]['properties']['TOTPOP'])
@@ -40,53 +82,17 @@ def generate_plan(arguments):
         for neighborId in neighborsId:
             graph.addEdge(id, neighborId)
 
-    graph.idealPop = int(graph.pop/graph.numCluster)
+    graph.idealPop = graph.getIdealPop()
+    graph.upper = graph.getUpper()
+    graph.lower = graph.getLower()
 
-    # generate seed plan
-    print("Generating seed plan...\n")
-    generateSeed(graph)
-
-    print("Ideal population: " + str(graph.idealPop))
-    print("Population variation: " + str(2 * graph.populationVariation))
-    print("Population valid range: " + str(graph.lowerBound) + "-" + str(graph.upperBound))
-    print('\n')
-    print("Seed plan:")
-    graph.printClusters()
-
-    # re-balance for 30 iterations
-    print("\n\nRebalance...\n")
-    print("--------------------------------------------------------------------------")
-    rebalance(graph, 30)
-
-    result = []
-    for cluster in graph.clusters:
-        district = []
-        for node in cluster.nodes:
-            district.append(node.id)
-        result.append(district)
-
-    return result
-
-if __name__ == '__main__':
-    print(os.getcwd())
-    state = sys.argv[1]
-    numberOfDistrictings = int(sys.argv[2])
-    populationDifference = float(sys.argv[3])
-    compactnessGoal = float(sys.argv[4])
-
-    arguments = [state, populationDifference, compactnessGoal]
-    arguments_list = [arguments for x in range(numberOfDistrictings)]
-    print(arguments_list)
-
+    # 多进程
     pool_size = mp.cpu_count()
     print("NUM CPUs", pool_size)
 
     with Pool(processes=pool_size) as pool:
-        for i in pool.imap_unordered(generate_plan, arguments_list):
+        for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)):  # <- 我把原先这里的argument list去掉了，我的function没有接受任何argument
             print(i)
 
     # exiting the 'with'-block has stopped the pool
     print("Now the pool is closed and no longer available")
-
-    
-

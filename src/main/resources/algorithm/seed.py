@@ -1,37 +1,39 @@
 import random
 
 
-def combine(cluster, target, graph):
-    #  update properties. Add all the properties of the target on the cluster.
-    cluster.nodes = cluster.nodes + target.nodes
-    cluster.updatePop()
-    cluster.updateEdges()
+def combine(source, target, graph):
+    #  update properties. Add all the properties of the target on the source cluster.
+    source.nodes = source.nodes + target.nodes
+    source.pop = source.pop + target.pop
+    source.updateEdges()
 
     # update cluster's neighbors and surrounded clusters's neighbors
-    for clu in target.neighbors:
-        if cluster == clu:
-            clu.removeNeighbor(target)
+    for cluster in target.neighbors:
+        cluster.removeNeighbor(target)
+
+        if source == cluster:
             continue
-        if cluster not in clu.neighbors:
-            clu.addNeighbor(cluster)
-        if clu not in cluster.neighbors:
-            cluster.addNeighbor(clu)
-        clu.removeNeighbor(target)
+        if source not in cluster.neighbors:
+            cluster.addNeighbor(source)
+        if cluster not in source.neighbors:
+            source.addNeighbor(cluster)
 
     # remove the target from the graph
     graph.removeCluster(target)
+
+    return source
 
 
 # use case 29. Generate seed districting (required)
 def generateSeed(graph):
     n = graph.numCluster
 
-    for cluster in graph.clusters:
-        cluster.updateEdges()
-
-    while len(graph.clusters) != n:  # until n districts on graphs
+    # until n districts on graphs
+    while len(graph.clusters) != n:
         clusters = graph.clusters
-        cluster = random.choice(clusters)  # randomly select a cluster
-        target = random.choice(cluster.neighbors)  # randomly select one of its neighbors
-        combine(cluster, target, graph)  # combine them
+
+        source = random.choice(clusters)
+        target = random.choice(source.neighbors)
+
+        combine(source, target, graph)
 

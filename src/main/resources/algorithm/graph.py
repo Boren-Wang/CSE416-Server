@@ -33,11 +33,6 @@ class Cluster:
     def removeNeighbor(self, cluster):
         self.neighbors.remove(cluster)
 
-    def updatePop(self):
-        self.pop = 0
-        for node in self.nodes:
-            self.pop += node.pop
-
     def updateEdges(self):
         self.edges = []
         for node in self.nodes:
@@ -50,17 +45,18 @@ class Cluster:
 
 
 class Graph:
-    def __init__(self, numCluster, populationVariation):
+    def __init__(self, numCluster, popDifference, compact):
         self.nodes = []
         self.nodesDic = {}
         self.clusters = []
         self.edges = []
-        self.pop = 0
         self.numCluster = numCluster
-        self.populationVariation = populationVariation
-        self.lowerBound = 0
-        self.upperBound = 0
+        self.pop = 0
+        self.lower = 0
+        self.upper = 0
         self.idealPop = 0
+        self.popDifference = popDifference
+        self.compact = compact
 
     def findCluster(self, node):
         for cluster in self.clusters:
@@ -68,22 +64,15 @@ class Graph:
                 return cluster
         return None
 
-    def findNode(self, n_id):
-        for node in self.nodes:
-            if node.id == n_id:
-                return node
-        return None
-
     def addNode(self, node):
         self.nodes.append(node)
         self.nodesDic[node.id] = node
         self.clusters.append(Cluster(node))
         self.pop += node.pop
-        self.updateBounds()
 
     def addEdge(self, uid, vid):
-        u = self.findNode(uid)
-        v = self.findNode(vid)
+        u = self.nodesDic[uid]
+        v = self.nodesDic[vid]
         if u not in v.neighbors and v not in u.neighbors:
             u.addNeighbor(v)
             v.addNeighbor(u)
@@ -95,6 +84,18 @@ class Graph:
             if uCluster not in vCluster.neighbors:
                 vCluster.addNeighbor(uCluster)
 
+    def removeCluster(self, cluster):
+        self.clusters.remove(cluster)
+
+    def getUpper(self):
+        return int(self.idealPop + self.idealPop * self.popDifference * 0.5)
+
+    def getLower(self):
+        return int(self.idealPop - self.idealPop * self.popDifference * 0.5)
+
+    def getIdealPop(self):
+        return int(self.pop/self.numCluster)
+
     def addNodeForms(self, nodeForms, popForms):
         for i in range(len(nodeForms)):
             node = Node(nodeForms[i], popForms[i])
@@ -104,41 +105,4 @@ class Graph:
         for uid, vid in edgeForms:
             self.addEdge(uid, vid)
 
-    def printClusters(self):
-        outString = [["ID", "Population", "PopulationVariation", "NeighborDistrict", "Precinct"]]
-
-        for cluster in self.clusters:
-            neighborsString ="["
-            nodesString ="["
-
-            for neighbor in cluster.neighbors:
-                if neighbor!=cluster.neighbors[-1]:
-                    neighborsString += str(neighbor.id) + ","
-                else:
-                    neighborsString += str(neighbor.id) + "]"
-
-            for node in cluster.nodes:
-                if node!=cluster.nodes[-1]:
-                    nodesString += str(node.id) + ","
-                else:
-                    nodesString += str(node.id) + "]"
-
-            outString.append([str(cluster.id), str(cluster.pop), str(abs(cluster.pop - self.idealPop)), neighborsString,
-                              nodesString])
-
-        print('{:<8} {:<8}  {:<8}  {:<8}                              {:<8}'.format(*outString[0]))
-
-        for i in range(1, len(outString)):
-            print('{:<8} {:<8}     {:<8}           {:<8}                              {:<8}'.format(*outString[i]))
-
-    def totPop(self):
-        return self.pop
-
-    def removeCluster(self, cluster):
-        self.clusters.remove(cluster)
-
-    def updateBounds(self):
-        ideal = self.pop/self.numCluster
-        self.lowerBound = int(ideal - ideal * self.populationVariation)
-        self.upperBound = int(ideal + ideal * self.populationVariation)
 
