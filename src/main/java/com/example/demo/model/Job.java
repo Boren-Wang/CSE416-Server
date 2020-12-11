@@ -3,12 +3,14 @@ package com.example.demo.model;
 import com.example.demo.enumerate.Minority;
 import com.example.demo.enumerate.State;
 import com.example.demo.enumerate.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "result"})
 public class Job {
     private int jobId;
     private State state;
@@ -17,6 +19,7 @@ public class Job {
     private double compactnessGoal;
     private int populationDifference;
     private Set<Minority> minorities;
+    private Result result;
     private List<Box> summary;
     private Districting random;
     private Districting average;
@@ -85,6 +88,15 @@ public class Job {
 
     public void setMinorities(Set<Minority> minorities) {
         this.minorities = minorities;
+    }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
     }
 
     @OneToMany(mappedBy = "job", cascade = {CascadeType.ALL})

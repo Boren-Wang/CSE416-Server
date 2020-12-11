@@ -13,8 +13,10 @@ public class Demographics {
     private int asianVap;
     private int blackVap;
     private int whiteVap;
-    private int nativeVap;
     private int hispanicVap;
+    private int AMINVap; // American Indians and Alaska Natives
+    private int NHPIVap; // Native Hawaiians and other Pacific Islanders
+
 
     @Id
     @GeneratedValue
@@ -74,20 +76,28 @@ public class Demographics {
         this.whiteVap = whiteVap;
     }
 
-    public int getNativeVap() {
-        return nativeVap;
-    }
-
-    public void setNativeVap(int nativeVap) {
-        this.nativeVap = nativeVap;
-    }
-
     public int getHispanicVap() {
         return hispanicVap;
     }
 
     public void setHispanicVap(int hispanicVap) {
         this.hispanicVap = hispanicVap;
+    }
+
+    public int getAMINVap() {
+        return AMINVap;
+    }
+
+    public void setAMINVap(int AMINVap) {
+        this.AMINVap = AMINVap;
+    }
+
+    public int getNHPIVap() {
+        return NHPIVap;
+    }
+
+    public void setNHPIVap(int NHPIVap) {
+        this.NHPIVap = NHPIVap;
     }
 
     @Override
@@ -100,8 +110,9 @@ public class Demographics {
                 ", asianVap=" + asianVap +
                 ", blackVap=" + blackVap +
                 ", whiteVap=" + whiteVap +
-                ", nativeVap=" + nativeVap +
                 ", hispanicVap=" + hispanicVap +
+                ", AMINVap=" + AMINVap +
+                ", NHPIVap=" + NHPIVap +
                 '}';
     }
 }

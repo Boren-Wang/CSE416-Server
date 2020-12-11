@@ -1,8 +1,15 @@
 package com.example.demo.handler;
 
+import com.example.demo.dataAccessObject.PrecinctRepo;
 import com.example.demo.model.*;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,19 +17,55 @@ import java.util.Set;
 @Service
 public class AlgorithmHandler {
     private int jobId;
-    private JobHandler jh = new JobHandler();
+    private Result result;
 
-    public int computeNumberOfCounties(District district) {
-        Set<Integer> countyIds = new HashSet<>();
+    @Autowired
+    JobHandler jh;
 
-        for(Precinct p : district.getPrecincts()) {
-            int countyId = p.getCountyId();
-            if(!countyIds.contains(countyId)) {
-                countyIds.add(countyId);
+    @Autowired
+    PrecinctRepo precinctRepo;
+
+    public void processResultJson() throws IOException {
+        this.result = new Result();
+
+        File file = new File("src/main/resources/results/result.json");
+        String content = FileUtils.readFileToString(file);
+        JSONArray plans = new JSONArray(content);
+
+        // for each plan in result
+        for(int i=0; i<plans.length(); i++) {
+            Districting districting = new Districting();
+            JSONArray districts = (JSONArray) plans.get(i);
+            // for each district in each plan:
+            for(int j=0; j<districts.length(); j++) {
+                District district = new District();
+                JSONArray precincts = (JSONArray) districts.get(i);
+                // for each precinct in each district:
+                for(int k=0; k<precincts.length(); k++) {
+                    int precinctId = (int) precincts.get(k);
+                    district.getPrecincts().add(precinctRepo.getOne(precinctId));
+                }
+                districting.getDistricts().add(district);
+            }
+            this.result.getDistrictings().add(districting);
+        }
+    }
+
+    public void computeNumberOfCountiesForEachDistrict() {
+        List<Districting> districtings = this.result.getDistrictings();
+
+        for(Districting districting : districtings) {
+            for(District district : districting.getDistricts()) {
+                Set<Integer> countyIds = new HashSet<>();
+                for (Precinct p : district.getPrecincts()) {
+                    int countyId = p.getCountyId();
+                    if (!countyIds.contains(countyId)) {
+                        countyIds.add(countyId);
+                    }
+                }
+                district.setNumberOfCounties(countyIds.size());
             }
         }
-
-        return countyIds.size();
     }
 
     public String generateSummaryFile(Job job) {

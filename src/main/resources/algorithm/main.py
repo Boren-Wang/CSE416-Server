@@ -8,7 +8,7 @@ from redistricting import redistricting
 from seed import generateSeed
 from graph import Graph, Node
 
-iterationLimit = 1000  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
+iterationLimit = 50  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
 
 GA = 'src/main/resources/algorithm/GA.json' # 测试速度或者会不会报错的时候用ga速度最快
 districtsGA = 14
@@ -43,8 +43,10 @@ def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一�
 
 if __name__ == '__main__':
     print(os.getcwd())
+    print("Started!")
 
-    # 接受arguments
+    # 接收arguments
+    # jobId = sys.argv[1]
     state = sys.argv[1]
     numberOfDistrictings = int(sys.argv[2]) # 进程池要完成的plan总量
     populationDifference = float(sys.argv[3])  # 0.015 ~ 0.03
@@ -90,10 +92,15 @@ if __name__ == '__main__':
     pool_size = mp.cpu_count()
     print("NUM CPUs", pool_size)
 
+    result = []
+
     with Pool(processes=pool_size) as pool:
         # 这里明细了多进程要完成的plan总量，进程池会自动分配进程，直到所有plan都生成
         for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)):
-            print(i)
+            result.append(i)
+            
+    with open('src/main/resources/results/result.json', 'w') as fp:
+        json.dump(result, fp)
 
     # exiting the 'with'-block has stopped the pool
     print("Now the pool is closed and no longer available")

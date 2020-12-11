@@ -32,7 +32,7 @@ public class District {
         this.numberOfCounties = numberOfCounties;
     }
 
-    @OneToMany(mappedBy = "district", cascade = {CascadeType.ALL})
+    @ManyToMany(mappedBy = "districts")
     public Set<Precinct> getPrecincts() {
         return precincts;
     }

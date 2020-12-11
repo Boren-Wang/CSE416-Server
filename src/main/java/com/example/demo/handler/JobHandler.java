@@ -95,9 +95,9 @@ public class JobHandler {
 
         for(District district : average.getDistricts()){
             district.setDistricting(average);
-            for(Precinct precinct : district.getPrecincts()){
-                precinct.setDistrict(district);
-            }
+//            for(Precinct precinct : district.getPrecincts()){
+//                precinct.setDistrict(district);
+//            }
         }
 
         jobRepo.save(job);
@@ -109,9 +109,9 @@ public class JobHandler {
 
         for(District district : extreme.getDistricts()){
             district.setDistricting(extreme);
-            for(Precinct precinct : district.getPrecincts()){
-                precinct.setDistrict(district);
-            }
+//            for(Precinct precinct : district.getPrecincts()){
+//                precinct.setDistrict(district);
+//            }
         }
 
         jobRepo.save(job);
@@ -123,9 +123,9 @@ public class JobHandler {
 
         for(District district : random.getDistricts()){
             district.setDistricting(random);
-            for(Precinct precinct : district.getPrecincts()){
-                precinct.setDistrict(district);
-            }
+//            for(Precinct precinct : district.getPrecincts()){
+//                precinct.setDistrict(district);
+//            }
         }
 
         jobRepo.save(job);

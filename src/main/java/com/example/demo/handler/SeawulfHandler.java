@@ -42,6 +42,7 @@ public class SeawulfHandler {
         if(job.getNumberOfDistrictings() > THRESHOLD) {
             System.out.println("Run in Seawulf");
             ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh",
+//                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Integer.toString(job.getPopulationDifference()),
@@ -54,12 +55,14 @@ public class SeawulfHandler {
         } else {
             System.out.println("Run in Server");
             ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/main.py",
+//                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Integer.toString(job.getPopulationDifference()),
                     Double.toString(job.getCompactnessGoal())).inheritIO();
             pb.redirectErrorStream(true);
             Process process = pb.start();
+            printProcessOutput(process);
             jobId = -1;
             return jobId;
         }

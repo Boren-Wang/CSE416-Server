@@ -3,23 +3,33 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "district"})
 public class Precinct {
     private int precinctId;
+    private String state;
     private int countyId;
-    private District district;
+    private String countyName;
+    private Set<District> districts;
     private Demographics demographics;
 
     @Id
-    @GeneratedValue
     public int getPrecinctId() {
         return precinctId;
     }
 
     public void setPrecinctId(int precinctId) {
         this.precinctId = precinctId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getCountyId() {
@@ -30,14 +40,26 @@ public class Precinct {
         this.countyId = countyId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "district_id")
-    public District getDistrict() {
-        return district;
+    public String getCountyName() {
+        return countyName;
     }
 
-    public void setDistrict(District district) {
-        this.district = district;
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
+    }
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Precinct_District",
+            joinColumns = { @JoinColumn(name = "precinct_id") },
+            inverseJoinColumns = { @JoinColumn(name = "district_id") }
+    )
+    public Set<District> getDistricts() {
+        return districts;
+    }
+
+    public void setDistricts(Set<District> districts) {
+        this.districts = districts;
     }
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -55,7 +77,8 @@ public class Precinct {
         return "Precinct{" +
                 "precinctId=" + precinctId +
                 ", countyId=" + countyId +
-                ", district=" + district +
+                ", countyName='" + countyName + '\'' +
+                ", districts=" + districts +
                 ", demographics=" + demographics +
                 '}';
     }

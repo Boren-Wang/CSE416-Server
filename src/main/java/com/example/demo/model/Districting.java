@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 public class Districting {
     private int districtingId;
+    private Result result;
     private List<District> districts;
     private String geojsonFilePath;
 
@@ -17,6 +18,16 @@ public class Districting {
 
     public void setDistrictingId(int districtingId) {
         this.districtingId = districtingId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="result_id")
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
     }
 
     @OneToMany(mappedBy = "districting", cascade = {CascadeType.ALL})

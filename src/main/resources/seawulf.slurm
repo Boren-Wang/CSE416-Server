@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#SBATCH --job-name=test_ssh_submit
-#SBATCH --output=test_ssh_submit-latest.log
-#SBATCH --ntasks-per-node=40
+#SBATCH --job-name=test
+#SBATCH --output=test.log
+#SBATCH --ntasks-per-node=24
 #SBATCH --nodes=2
-#SBATCH --time=00:05:00
-#SBATCH --partition=short-40core
+#SBATCH --time=04:00:00
+#SBATCH --partition=short-24core
 
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
