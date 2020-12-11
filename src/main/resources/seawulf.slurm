@@ -24,7 +24,7 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-# python main.py GEORGIA 5000 100 0.9
+# python main.py GEORGIA 80 0.03 0.5
 state = sys.argv[1]
 numberOfDistrictings = int(sys.argv[2])
 populationDifference = sys.argv[3]

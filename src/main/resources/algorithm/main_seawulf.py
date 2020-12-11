@@ -8,7 +8,7 @@ from redistricting import redistricting
 from seed import generateSeed
 from graph import Graph, Node
 
-iterationLimit = 1000  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
+iterationLimit = 50  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
 
 GA = './algorithm/GA.json' # 测试速度或者会不会报错的时候用ga速度最快
 districtsGA = 14
@@ -27,7 +27,7 @@ num = 0
 graph = None
 
 
-def generatePlan():  # 这是需要多程去run的function
+def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
     generateSeed(graph)
     redistricting(graph, iterationLimit)
 
@@ -46,13 +46,13 @@ if __name__ == '__main__':
 
     # 接受arguments
     state = sys.argv[1]
-    numberOfDistrictings = int(sys.argv[2])  # <- 我的算法不需要这个
+    numberOfDistrictings = int(sys.argv[2]) # 进程池要完成的plan总量
     populationDifference = float(sys.argv[3])  # 0.015 ~ 0.03
     compactnessGoal = float(sys.argv[4])  # 0.2~0.5
 
-    arguments = [state, populationDifference, compactnessGoal]
-    arguments_list = [arguments for x in range(numberOfDistrictings)]  # <-这里好像需要改改？
-    print(arguments_list)
+    # arguments = []
+    # arguments_list = [arguments for x in range(numberOfDistrictings)]
+    # print(arguments_list)
 
     # 确认路径
     if state == 'GEORGIA':
@@ -91,7 +91,8 @@ if __name__ == '__main__':
     print("NUM CPUs", pool_size)
 
     with Pool(processes=pool_size) as pool:
-        for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)):  # <- 我把原先这里的argument list去掉了，我的function没有接受任何argument
+        # 这里明细了多进程要完成的plan总量，进程池会自动分配进程，直到所有plan都生成
+        for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)): 
             print(i)
 
     # exiting the 'with'-block has stopped the pool
