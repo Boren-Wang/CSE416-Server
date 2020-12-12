@@ -84,7 +84,6 @@ public class Box {
                 ", q3=" + q3 +
                 ", min=" + min +
                 ", max=" + max +
-                ", job=" + job +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,7 +11,7 @@ import java.util.Set;
 public class District {
     private int districtId;
     private int numberOfCounties;
-    private Set<Precinct> precincts;
+    private Set<Precinct> precincts = new HashSet<>();
     private Districting districting;
     private Demographics demographics;
 

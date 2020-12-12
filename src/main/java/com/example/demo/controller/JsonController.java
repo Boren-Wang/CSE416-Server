@@ -37,6 +37,7 @@ public class JsonController {
         //对基本类型的解析
         JSONObject obj = new JSONObject(content);
         JSONArray precincts = obj.getJSONArray("features");
+        System.out.println("Length: "+precincts.length());
         for(int i=0; i<precincts.length(); i++) {
             JSONObject properties = ((JSONObject) precincts.get(i)).getJSONObject("properties");
             int precinctId = properties.getInt("ID");
