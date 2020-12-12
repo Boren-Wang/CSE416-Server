@@ -1,6 +1,8 @@
 package com.example.demo.handler;
 
+import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.dataAccessObject.PrecinctRepo;
+import com.example.demo.enumerate.Minority;
 import com.example.demo.model.*;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -10,17 +12,15 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AlgorithmHandler {
-    private int jobId;
+    private Job job;
     private Result result;
 
     @Autowired
-    JobHandler jh;
+    JobRepo jobRepo;
 
     @Autowired
     PrecinctRepo precinctRepo;
@@ -28,8 +28,19 @@ public class AlgorithmHandler {
     // 通知状态 -> 转送文件 -> 处理结果
     public void processResult() throws IOException {
         processResultJson();
+        System.out.println("Processed result json");
         System.out.println(this.result);
+
         computeNumberOfCountiesForEachDistrict();
+        System.out.println("Computed number of counties for each district");
+        System.out.println(this.result);
+
+        computeMinoritiesVapForEachDistrict();
+        System.out.println("Computed minorities vap for each district");
+        System.out.println(this.result);
+
+        sortDistrictsForEachDistricting();
+        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
         System.out.println(this.result);
     }
 
@@ -77,12 +88,40 @@ public class AlgorithmHandler {
         }
     }
 
-    // need to be able to tell which job the result.json belongs to
-    // --> need to separate jobId and seawulfId
-    // --> set jobId manually before dispatching the job
-    // --> result.json should be renamed to jobId.json
-    public void computeDemographicsForEachDistrict() {
+    public void computeMinoritiesVapForEachDistrict() {
+        Set<Minority> minorities = job.getMinorities();
+        List<Districting> districtings = this.result.getDistrictings();
+        for(Districting districting : districtings) {
+            for(District district : districting.getDistricts()) {
+                Demographics demographics = new Demographics();
+                int minoritiesVap = 0;
+                int vap = 0;
 
+                for (Precinct p : district.getPrecincts()) {
+                    for(Minority m : minorities) {
+                        if(m==Minority.ASIAN) {
+                            minoritiesVap += p.getDemographics().getAsianVap();
+                        } else if(m==Minority.BLACK) {
+                            minoritiesVap += p.getDemographics().getBlackVap();
+                        } else if(m==Minority.WHITE) {
+                            minoritiesVap += p.getDemographics().getWhiteVap();
+                        } else if(m==Minority.HISPANIC) {
+                            minoritiesVap += p.getDemographics().getHispanicVap();
+                        } else if(m==Minority.AMIN) {
+                            minoritiesVap += p.getDemographics().getAMINVap();
+                        } else if(m==Minority.NHPI) {
+                            minoritiesVap += p.getDemographics().getNHPIVap();
+                        }
+                    }
+
+                    vap += p.getDemographics().getVotingAgePopulation();
+                }
+                demographics.setMinoritiesVap(minoritiesVap);
+                demographics.setVotingAgePopulation(vap);
+                demographics.setMinoritiesVapPercentage(minoritiesVap / vap);
+                district.setDemographics(demographics);
+            }
+        }
     }
 
     public String generateSummaryFile(Job job) {
@@ -93,23 +132,48 @@ public class AlgorithmHandler {
         List<Districting> districtings = this.result.getDistrictings();
         for(Districting districting : districtings) {
             List<District> districts = districting.getDistricts();
-            districts.sort((d1, d2) -> d1.getDemographics().getMinoritiesVap() - d2.getDemographics().getMinoritiesVap());
+            Collections.sort(districts, new Comparator<District>() {
+                @Override
+                public int compare(District d1, District d2) {
+                    double dif = d1.getDemographics().getMinoritiesVapPercentage() - d2.getDemographics().getMinoritiesVapPercentage();
+                    if(dif<0) {
+                        return -1;
+                    } else if(dif>0) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
         }
     }
 
-    public void generateSummary(List<Districting> districtings) {
+    public void generateSummary() {
         // generate summary
+        List<Districting> districtings = this.result.getDistrictings();
         List<Box> summary = null;
 
+        for(int i=0; i<districtings.get(0).getDistricts().size(); i++) {
+            Box box = new Box();
+
+            List<Double> minoritiesVapPercentages = new ArrayList<>();
+            for(Districting districting : districtings) {
+                // find the ith district of a districting
+                District district = districting.getDistricts().get(i);
+                minoritiesVapPercentages.add(district.getDemographics().getMinoritiesVapPercentage());
+            }
+
+            // compute q1, median, q3, min, max of minoritiesVapPercentage for this box
+
+        }
+
         // update job
-        jh.setSummary(jobId, summary);
+        job.setSummary(summary);
+        jobRepo.save(job);
     }
 
     public void determineAverage(List<Districting> districtings) {
         // determine the average districting
         Districting average = null;
-
-        // update average
-        jh.setAverage(jobId, average);
     }
 }

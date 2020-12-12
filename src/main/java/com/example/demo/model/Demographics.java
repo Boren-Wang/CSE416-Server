@@ -10,6 +10,7 @@ public class Demographics {
     private int population;
     private int votingAgePopulation;
     private int minoritiesVap;
+    private double minoritiesVapPercentage;
     private int asianVap;
     private int blackVap;
     private int whiteVap;
@@ -50,6 +51,14 @@ public class Demographics {
 
     public void setMinoritiesVap(int minoritiesVap) {
         this.minoritiesVap = minoritiesVap;
+    }
+
+    public double getMinoritiesVapPercentage() {
+        return minoritiesVapPercentage;
+    }
+
+    public void setMinoritiesVapPercentage(double minoritiesVapPercentage) {
+        this.minoritiesVapPercentage = minoritiesVapPercentage;
     }
 
     public int getAsianVap() {
@@ -107,6 +116,7 @@ public class Demographics {
                 ", population=" + population +
                 ", votingAgePopulation=" + votingAgePopulation +
                 ", minoritiesVap=" + minoritiesVap +
+                ", minoritiesVapPercentage=" + minoritiesVapPercentage +
                 ", asianVap=" + asianVap +
                 ", blackVap=" + blackVap +
                 ", whiteVap=" + whiteVap +
