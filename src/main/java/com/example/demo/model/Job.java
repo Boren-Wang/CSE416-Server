@@ -20,9 +20,9 @@ public class Job {
     private String status;
     private int numberOfDistrictings;
     private double compactnessGoal;
-    private int populationDifference;
+    private double populationDifference;
     private Set<Minority> minorities = new HashSet<>();
-    private Result result;
+//    private Result result;
     private List<Box> summary;
     private Districting random;
     private Districting average;
@@ -79,11 +79,11 @@ public class Job {
         this.compactnessGoal = compactnessGoal;
     }
 
-    public int getPopulationDifference() {
+    public double getPopulationDifference() {
         return populationDifference;
     }
 
-    public void setPopulationDifference(int populationDifference) {
+    public void setPopulationDifference(double populationDifference) {
         this.populationDifference = populationDifference;
     }
 
@@ -100,14 +100,14 @@ public class Job {
         this.minorities = minorities;
     }
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
+//    @OneToOne(cascade = {CascadeType.ALL})
+//    public Result getResult() {
+//        return result;
+//    }
+//
+//    public void setResult(Result result) {
+//        this.result = result;
+//    }
 
     @OneToMany(mappedBy = "job", cascade = {CascadeType.ALL})
     public List<Box> getSummary() {

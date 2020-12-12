@@ -45,7 +45,7 @@ public class SeawulfHandler {
                     Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
-                    Integer.toString(job.getPopulationDifference()),
+                    Double.toString(job.getPopulationDifference()),
                     Double.toString(job.getCompactnessGoal()));
             pb.redirectErrorStream(true);
             Process process = pb.start();
@@ -58,7 +58,7 @@ public class SeawulfHandler {
                     Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
-                    Integer.toString(job.getPopulationDifference()),
+                    Double.toString(job.getPopulationDifference()),
                     Double.toString(job.getCompactnessGoal())).inheritIO();
             pb.redirectErrorStream(true);
             Process process = pb.start();

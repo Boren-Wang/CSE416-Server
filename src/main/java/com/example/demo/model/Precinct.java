@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class Precinct {
     private String state;
     private int countyId;
     private String countyName;
-    private Set<District> districts;
+    private Set<District> districts = new HashSet<>();
     private Demographics demographics;
 
     @Id
@@ -48,7 +49,7 @@ public class Precinct {
         this.countyName = countyName;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Precinct_District",
             joinColumns = { @JoinColumn(name = "precinct_id") },
@@ -70,16 +71,5 @@ public class Precinct {
 
     public void setDemographics(Demographics demographics) {
         this.demographics = demographics;
-    }
-
-    @Override
-    public String toString() {
-        return "Precinct{" +
-                "precinctId=" + precinctId +
-                ", countyId=" + countyId +
-                ", countyName='" + countyName + '\'' +
-                ", districts=" + districts +
-                ", demographics=" + demographics +
-                '}';
     }
 }

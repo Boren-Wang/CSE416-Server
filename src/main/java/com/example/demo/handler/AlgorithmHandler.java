@@ -1,5 +1,6 @@
 package com.example.demo.handler;
 
+import com.example.demo.dataAccessObject.DistrictRepo;
 import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.dataAccessObject.PrecinctRepo;
 import com.example.demo.enumerate.Minority;
@@ -26,8 +27,11 @@ public class AlgorithmHandler {
     @Autowired
     JobRepo jobRepo;
 
-    @Autowired
-    PrecinctRepo precinctRepo;
+//    @Autowired
+//    PrecinctRepo precinctRepo;
+
+//    @Autowired
+//    DistrictRepo districtRepo;
 
     // 通知状态 -> 转送文件 -> 处理结果
     public void processResult() throws Exception {
@@ -37,29 +41,29 @@ public class AlgorithmHandler {
 
         processResultJson();
         System.out.println("Processed result json");
-        System.out.println(this.result);
 
         computeNumberOfCountiesForEachDistrict();
         System.out.println("Computed number of counties for each district");
-        System.out.println(this.result);
 
         computeMinoritiesVapForEachDistrict();
         System.out.println("Computed minorities vap for each district");
-        System.out.println(this.result);
 
         sortDistrictsForEachDistricting();
         System.out.println("Sorted districts in each districting according to their minorities vap percentage");
-        System.out.println(this.result);
 
         generateSummary();
         System.out.println("Generated box and whisker data");
-        System.out.println(job);
 
         determineAverage();
+        System.out.println("Generated average plan");
         determineExtreme();
+        System.out.println("Generated extreme plan");
         determineRandom();
-        System.out.println("Generated average, extreme, and random plans");
-        System.out.println(job);
+        System.out.println("Generated random plan");
+        job.setStatus("Completed");
+        System.out.println("Persisting");
+        jobRepo.save(job);
+        System.out.println("Persisted");
     }
 
     // 从json读取precinct信息到内存里，方便之后快速查询precinct信息
@@ -143,7 +147,6 @@ public class AlgorithmHandler {
             }
             this.result.getDistrictings().add(districting);
         }
-        System.out.println(this.result);
     }
 
     public void computeNumberOfCountiesForEachDistrict() {
@@ -282,7 +285,8 @@ public class AlgorithmHandler {
 
     public void determineAverage() {
         // determine the average districting
-        System.out.println("Computing the average plan");
+//        Date date=java.util.Calendar.getInstance().getTime();
+//        System.out.println(date);
         Districting average = null;
         double minAvgDistanceToMedian = Integer.MAX_VALUE;
         List<Box> summary = this.job.getSummary();
@@ -300,8 +304,20 @@ public class AlgorithmHandler {
                 average = districting;
             }
         }
+
+        for(District d:average.getDistricts()) {
+            d.setDistricting(average);
+            for(Precinct p:d.getPrecincts()) {
+                d.getPrecinctIds().add(p.getPrecinctId());
+//                p.getDistricts().add(d);
+            }
+        }
+//        date=java.util.Calendar.getInstance().getTime();
+//        System.out.println(date);
         job.setAverage(average);
-        jobRepo.save(job);
+//        jobRepo.save(job);
+//        date=java.util.Calendar.getInstance().getTime();
+//        System.out.println(date);
     }
 
     public void determineExtreme() {
@@ -323,15 +339,31 @@ public class AlgorithmHandler {
                 extreme = districting;
             }
         }
+
+        for(District d:extreme.getDistricts()) {
+            d.setDistricting(extreme);
+            for(Precinct p:d.getPrecincts()) {
+//                p.getDistricts().add(d);
+                d.getPrecinctIds().add(p.getPrecinctId());
+            }
+        }
         job.setExtreme(extreme);
-        jobRepo.save(job);
+//        jobRepo.save(job);
     }
 
     public void determineRandom() {
         int n = this.result.getDistrictings().size();
         int randomNum = ThreadLocalRandom.current().nextInt(0, n);
         Districting random = this.result.getDistrictings().get(randomNum);
+
+        for(District d:random.getDistricts()) {
+            d.setDistricting(random);
+            for(Precinct p:d.getPrecincts()) {
+//                p.getDistricts().add(d);
+                d.getPrecinctIds().add(p.getPrecinctId());
+            }
+        }
         job.setRandom(random);
-        jobRepo.save(job);
+//        jobRepo.save(job);
     }
 }

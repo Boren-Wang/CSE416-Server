@@ -7,11 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "districting"})
+@JsonIgnoreProperties({"districting", "precincts"})
 public class District {
     private int districtId;
     private int numberOfCounties;
     private Set<Precinct> precincts = new HashSet<>();
+    private Set<Integer> precinctIds = new HashSet<>();
     private Districting districting;
     private Demographics demographics;
 
@@ -42,6 +43,17 @@ public class District {
         this.precincts = precincts;
     }
 
+    @ElementCollection
+    @CollectionTable(name="PrecinctIds", joinColumns=@JoinColumn(name="district_id"))
+    @Column(name="precinct_id")
+    public Set<Integer> getPrecinctIds() {
+        return precinctIds;
+    }
+
+    public void setPrecinctIds(Set<Integer> precinctIds) {
+        this.precinctIds = precinctIds;
+    }
+
     @ManyToOne
     @JoinColumn(name = "districting_id")
     public Districting getDistricting() {
@@ -60,16 +72,5 @@ public class District {
 
     public void setDemographics(Demographics demographics) {
         this.demographics = demographics;
-    }
-
-    @Override
-    public String toString() {
-        return "District{" +
-                "districtId=" + districtId +
-                ", numberOfCounties=" + numberOfCounties +
-                ", precincts=" + precincts +
-                ", districting=" + districting +
-                ", demographics=" + demographics +
-                '}';
     }
 }
