@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -201,13 +202,54 @@ public class AlgorithmHandler {
     public void determineAverage() {
         // determine the average districting
         Districting average = null;
+        double minAvgDistanceToMedian = Integer.MAX_VALUE;
+        List<Box> summary = this.job.getSummary();
+        for(Districting districting:result.getDistrictings()) {
+            double avgDistanceToMedian = 0;
+            double totalDistance = 0;
+            for(int i=0; i<districting.getDistricts().size(); i++) {
+                double minoritiesVapPercentage = districting.getDistricts().get(i).getDemographics().getMinoritiesVapPercentage();
+                double median = summary.get(i).getMedian();
+                totalDistance += Math.abs(minoritiesVapPercentage-median);
+            }
+            avgDistanceToMedian = totalDistance / summary.size();
+            if(avgDistanceToMedian<minAvgDistanceToMedian) {
+                minAvgDistanceToMedian = avgDistanceToMedian;
+                average = districting;
+            }
+        }
+        job.setAverage(average);
+        jobRepo.save(job);
     }
 
     public void determineExtreme() {
-
+        // determine the extreme districting
+        Districting extreme = null;
+        double maxAvgDistanceToMedian = 0;
+        List<Box> summary = this.job.getSummary();
+        for(Districting districting:result.getDistrictings()) {
+            double avgDistanceToMedian = 0;
+            double totalDistance = 0;
+            for(int i=0; i<districting.getDistricts().size(); i++) {
+                double minoritiesVapPercentage = districting.getDistricts().get(i).getDemographics().getMinoritiesVapPercentage();
+                double median = summary.get(i).getMedian();
+                totalDistance += Math.abs(minoritiesVapPercentage-median);
+            }
+            avgDistanceToMedian = totalDistance / summary.size();
+            if(avgDistanceToMedian>maxAvgDistanceToMedian) {
+                maxAvgDistanceToMedian = avgDistanceToMedian;
+                extreme = districting;
+            }
+        }
+        job.setExtreme(extreme);
+        jobRepo.save(job);
     }
 
     public void determineRandom() {
-
+        int n = this.result.getDistrictings().size();
+        int randomNum = ThreadLocalRandom.current().nextInt(0, n);
+        Districting random = this.result.getDistrictings().get(randomNum);
+        job.setRandom(random);
+        jobRepo.save(job);
     }
 }
