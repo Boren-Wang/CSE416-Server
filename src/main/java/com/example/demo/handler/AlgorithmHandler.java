@@ -6,6 +6,8 @@ import com.example.demo.dataAccessObject.PrecinctRepo;
 import com.example.demo.enumerate.Minority;
 import com.example.demo.enumerate.State;
 import com.example.demo.model.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -365,5 +367,11 @@ public class AlgorithmHandler {
         }
         job.setRandom(random);
 //        jobRepo.save(job);
+    }
+
+    public void convertDistrictingToJson(Districting d, String state) throws Exception{
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(d);
+        System.out.println(json);
     }
 }
