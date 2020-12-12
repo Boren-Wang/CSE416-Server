@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-log_name = ''"$SLURM_JOB_ID"'' + ".log"
-#SBATCH --job-name=$SLURM_JOB_ID
-#SBATCH --output=$log_name
-#SBATCH --ntasks-per-node=24
+#SBATCH --job-name=job
+#SBATCH --output=%j.log
+#SBATCH --ntasks-per-node=28
 #SBATCH --nodes=2
 #SBATCH --time=04:00:00
-#SBATCH --partition=short-24core
+#SBATCH --partition=short-28core
 
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
