@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AlgorithmHandler {
@@ -164,7 +165,20 @@ public class AlgorithmHandler {
             }
 
             // compute q1, median, q3, min, max of minoritiesVapPercentage for this box
+            double median = findMedian(minoritiesVapPercentages);
+            List<Double> list1 = minoritiesVapPercentages.stream().filter(m->m<median).collect(Collectors.toList());
+            double q1 = findMedian(list1);
+            List<Double> list2 = minoritiesVapPercentages.stream().filter(m->m>median).collect(Collectors.toList());
+            double q3 = findMedian(list2);
+            double min = minoritiesVapPercentages.get(0); // minoritiesVapPercentages has been sorted
+            double max = minoritiesVapPercentages.get(minoritiesVapPercentages.size());
 
+            box.setQ1(q1);
+            box.setQ3(q3);
+            box.setMedian(median);
+            box.setMin(min);
+            box.setMax(max);
+            summary.add(box);
         }
 
         // update job
@@ -172,8 +186,28 @@ public class AlgorithmHandler {
         jobRepo.save(job);
     }
 
-    public void determineAverage(List<Districting> districtings) {
+    public double findMedian(List<Double> doubles) {
+        double median = 0.0;
+        Collections.sort(doubles);
+        int middle = doubles.size()/2;
+        if(doubles.size()%2==0) { // even
+            median = (doubles.get(middle-1)+doubles.get(middle)) / 2;
+        } else { // odd
+            median = doubles.get(middle);
+        }
+        return median;
+    }
+
+    public void determineAverage() {
         // determine the average districting
         Districting average = null;
+    }
+
+    public void determineExtreme() {
+
+    }
+
+    public void determineRandom() {
+
     }
 }
