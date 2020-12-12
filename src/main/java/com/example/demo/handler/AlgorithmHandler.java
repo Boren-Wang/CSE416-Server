@@ -25,6 +25,14 @@ public class AlgorithmHandler {
     @Autowired
     PrecinctRepo precinctRepo;
 
+    // 通知状态 -> 转送文件 -> 处理结果
+    public void processResult() throws IOException {
+        processResultJson();
+        System.out.println(this.result);
+        computeNumberOfCountiesForEachDistrict();
+        System.out.println(this.result);
+    }
+
     public void processResultJson() throws IOException {
         this.result = new Result();
 
@@ -49,6 +57,7 @@ public class AlgorithmHandler {
             }
             this.result.getDistrictings().add(districting);
         }
+        System.out.println(this.result);
     }
 
     public void computeNumberOfCountiesForEachDistrict() {
@@ -68,11 +77,20 @@ public class AlgorithmHandler {
         }
     }
 
+    // need to be able to tell which job the result.json belongs to
+    // --> need to separate jobId and seawulfId
+    // --> set jobId manually before dispatching the job
+    // --> result.json should be renamed to jobId.json
+    public void computeDemographicsForEachDistrict() {
+
+    }
+
     public String generateSummaryFile(Job job) {
         return "";
     }
 
-    public void sortDistrictsForEachDistricting(List<Districting> districtings) {
+    public void sortDistrictsForEachDistricting() {
+        List<Districting> districtings = this.result.getDistrictings();
         for(Districting districting : districtings) {
             List<District> districts = districting.getDistricts();
             districts.sort((d1, d2) -> d1.getDemographics().getMinoritiesVap() - d2.getDemographics().getMinoritiesVap());

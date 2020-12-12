@@ -26,7 +26,6 @@ path = None
 num = 0
 graph = None
 
-
 def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
     generateSeed(graph)
     redistricting(graph, iterationLimit)
@@ -40,17 +39,16 @@ def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一�
 
     return plan
 
-
 if __name__ == '__main__':
     print(os.getcwd())
     print("Started!")
 
     # 接收arguments
-    # jobId = sys.argv[1]
-    state = sys.argv[1]
-    numberOfDistrictings = int(sys.argv[2]) # 进程池要完成的plan总量
-    populationDifference = float(sys.argv[3])  # 0.015 ~ 0.03
-    compactnessGoal = float(sys.argv[4])  # 0.2~0.5
+    jobId = sys.argv[1]
+    state = sys.argv[2]
+    numberOfDistrictings = int(sys.argv[3]) # 进程池要完成的plan总量
+    populationDifference = float(sys.argv[4])  # 0.03 ~ 0.05
+    compactnessGoal = float(sys.argv[5])  # 0.2~0.5
 
     # arguments = []
     # arguments_list = [arguments for x in range(numberOfDistrictings)]
@@ -99,7 +97,7 @@ if __name__ == '__main__':
         for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)):
             result.append(i)
             
-    with open('src/main/resources/results/result.json', 'w') as fp:
+    with open('src/main/resources/results/'+jobId+'.json', 'w') as fp:
         json.dump(result, fp)
 
     # exiting the 'with'-block has stopped the pool

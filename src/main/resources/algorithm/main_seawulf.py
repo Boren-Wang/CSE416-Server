@@ -45,10 +45,11 @@ if __name__ == '__main__':
     print(os.getcwd())
 
     # 接受arguments
-    state = sys.argv[1]
-    numberOfDistrictings = int(sys.argv[2]) # 进程池要完成的plan总量
-    populationDifference = float(sys.argv[3])  # 0.015 ~ 0.03
-    compactnessGoal = float(sys.argv[4])  # 0.2~0.5
+    jobId = sys.argv[1]
+    state = sys.argv[2]
+    numberOfDistrictings = int(sys.argv[3]) # 进程池要完成的plan总量
+    populationDifference = float(sys.argv[4])  # 0.03 ~ 0.05
+    compactnessGoal = float(sys.argv[5])  # 0.2~0.5
 
     # arguments = []
     # arguments_list = [arguments for x in range(numberOfDistrictings)]
@@ -90,10 +91,15 @@ if __name__ == '__main__':
     pool_size = mp.cpu_count()
     print("NUM CPUs", pool_size)
 
+    result = []
+
     with Pool(processes=pool_size) as pool:
         # 这里明细了多进程要完成的plan总量，进程池会自动分配进程，直到所有plan都生成
         for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)): 
-            print(i)
+            result.append(i)
+
+    with open('./'+jobId+'.json', 'w') as fp:
+        json.dump(result, fp)
 
     # exiting the 'with'-block has stopped the pool
     print("Now the pool is closed and no longer available")

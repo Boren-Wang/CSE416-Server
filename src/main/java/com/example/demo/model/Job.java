@@ -13,6 +13,7 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "result"})
 public class Job {
     private int jobId;
+//    private int seawulfId;
     private State state;
     private String status;
     private int numberOfDistrictings;
@@ -26,7 +27,6 @@ public class Job {
     private Districting extreme;
 
     @Id
-    @GeneratedValue
     public int getJobId() {
         return jobId;
     }
@@ -34,6 +34,14 @@ public class Job {
     public void setJobId(int jobId) {
         this.jobId = jobId;
     }
+
+//    public int getSeawulfId() {
+//        return seawulfId;
+//    }
+//
+//    public void setSeawulfId(int seawulfId) {
+//        this.seawulfId = seawulfId;
+//    }
 
     @Enumerated(EnumType.STRING)
     @Column(name="state_name")

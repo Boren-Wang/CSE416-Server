@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-#SBATCH --job-name=test
-#SBATCH --output=test.log
+log_name = ''"$SLURM_JOB_ID"'' + ".log"
+#SBATCH --job-name=$SLURM_JOB_ID
+#SBATCH --output=$log_name
 #SBATCH --ntasks-per-node=24
 #SBATCH --nodes=2
 #SBATCH --time=04:00:00
@@ -29,6 +30,7 @@ state = sys.argv[1]
 numberOfDistrictings = int(sys.argv[2])
 populationDifference = sys.argv[3]
 compactnessGoal = sys.argv[4]
+jobId = sys.argv[5]
 
 part1 = numberOfDistrictings // 2
 part2 = (numberOfDistrictings // 2) + (numberOfDistrictings % 2)
@@ -38,17 +40,17 @@ print("This is node {}".format(rank))
 if rank == 0:
     numberOfDistrictings = part1
     print("Number of districtings for node {} is {}".format(rank, part1))
-    command = "time python ./algorithm/main_seawulf.py"+" "+state+" "+str(numberOfDistrictings)+" "+compactnessGoal+" "+compactnessGoal
+    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+compactnessGoal+" "+compactnessGoal
     os.system(command)
 
 if rank == 1:
     numberOfDistrictings = part2
     print("Number of districtings for node {} is {}".format(rank, part2))
-    command = "time python ./algorithm/main_seawulf.py"+" "+state+" "+str(numberOfDistrictings)+" "+compactnessGoal+" "+compactnessGoal
+    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+compactnessGoal+" "+compactnessGoal
     os.system(command)
 
 comm.barrier()
 print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
 EOF
 
-mpirun -np 2 python mpi.py $1 $2 $3 $4
+mpirun -np 2 python mpi.py $1 $2 $3 $4 $SLURM_JOB_ID

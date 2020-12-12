@@ -19,11 +19,16 @@ public class JobHandler {
     SeawulfHandler sh;
 
     public Job submitJob(Job job) throws Exception {
+//        int maxJobId = jobRepo.getMaxId();
+//        job.setJobId(maxJobId++);
         int jobId = sh.dispatchJob(job);
-        if(jobId!=-1) {
+        if(jobId==-1) {
+            job.setJobId(-1);
+            job.setStatus("Run in server");
+        } else {
             job.setJobId(jobId);
+            job.setStatus("Pending");
         }
-        job.setStatus("Pending");
         jobRepo.save(job);
 //        System.out.println("Submitted job: "+job);
         return job;

@@ -16,15 +16,15 @@ public class SeawulfHandler {
     private final int THRESHOLD = 5000;
 
     private int printProcessOutput(Process process) {
-        int jobId = -1;
+        int seawulfId = -1;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 if(line.contains("Submitted batch job")) {
-                   String jobIdString  = line.split("job ")[1];
-                   jobId = Integer.valueOf(jobIdString);
+                   String seawulfIdString  = line.split("job ")[1];
+                   seawulfId = Integer.valueOf(seawulfIdString);
                 }
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
@@ -34,28 +34,28 @@ public class SeawulfHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return jobId;
+        return seawulfId;
     }
 
     public int dispatchJob(Job job) throws Exception{
-        int jobId;
+        int seawulfId;
         if(job.getNumberOfDistrictings() > THRESHOLD) {
-            System.out.println("Run in Seawulf");
+            System.out.println("Run in seawulf");
             ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh",
-//                    Integer.toString(job.getJobId()),
+                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Integer.toString(job.getPopulationDifference()),
                     Double.toString(job.getCompactnessGoal()));
             pb.redirectErrorStream(true);
             Process process = pb.start();
-            jobId = printProcessOutput(process);
+            seawulfId = printProcessOutput(process);
 //            System.out.println("jobId: "+jobId);
-            return jobId;
+            return seawulfId;
         } else {
-            System.out.println("Run in Server");
+            System.out.println("Run in server");
             ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/main.py",
-//                    Integer.toString(job.getJobId()),
+                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Integer.toString(job.getPopulationDifference()),
@@ -63,8 +63,8 @@ public class SeawulfHandler {
             pb.redirectErrorStream(true);
             Process process = pb.start();
             printProcessOutput(process);
-            jobId = -1;
-            return jobId;
+            seawulfId = -1;
+            return seawulfId;
         }
     }
 
