@@ -46,32 +46,32 @@ public class AlgorithmHandler {
         this.job = jobRepo.getOne(jobId);
         String state = job.getState().name();
 
-//        getPrecinctsFromJson(state);
-//        System.out.println("Processed state json to read precincts data");
-//
-//        processResultJson();
-//        System.out.println("Processed result json");
-//
-//        computeNumberOfCountiesForEachDistrict();
-//        System.out.println("Computed number of counties for each district");
-//
-//        computeMinoritiesVapForEachDistrict();
-//        System.out.println("Computed minorities vap for each district");
-//
-//        sortDistrictsForEachDistricting();
-//        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
-//
-//        generateSummary();
-//        System.out.println("Generated box and whisker data");
+        getPrecinctsFromJson(state);
+        System.out.println("Processed state json to read precincts data");
 
-//        determineAverage();
-//        System.out.println("Generated average plan");
-//        determineExtreme();
-//        System.out.println("Generated extreme plan");
-//        determineRandom();
-//        System.out.println("Generated random plan");
-//
-//        // 把districting plan转换为GeoJSON
+        processResultJson();
+        System.out.println("Processed result json");
+
+        computeNumberOfCountiesForEachDistrict();
+        System.out.println("Computed number of counties for each district");
+
+        computeMinoritiesVapForEachDistrict();
+        System.out.println("Computed minorities vap for each district");
+
+        sortDistrictsForEachDistricting();
+        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
+
+        generateSummary();
+        System.out.println("Generated box and whisker data");
+
+        determineAverage();
+        System.out.println("Generated average plan");
+        determineExtreme();
+        System.out.println("Generated extreme plan");
+        determineRandom();
+        System.out.println("Generated random plan");
+
+        // 把districting plan转换为GeoJSON
         Districting average = job.getAverage();
         convertDistrictingToJson(average, state, "average");
 

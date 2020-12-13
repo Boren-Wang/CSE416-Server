@@ -61,7 +61,7 @@ public class SeawulfHandler {
         } else {
             System.out.println("Run in server");
             ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/main.py",
-//                    Integer.toString(job.getJobId()),
+                    "-1",
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Double.toString(job.getPopulationDifference()),

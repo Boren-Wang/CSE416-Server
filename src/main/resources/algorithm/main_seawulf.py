@@ -25,10 +25,11 @@ districtsLA = 6
 
 path = None
 num = 0
-graph = None
 
-
-def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
+def generatePlan(arguments):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
+    num = arguments[0]
+    populationDifference = arguments[1]
+    compactnessGoal = arguments[2]
     graph = Graph(num, populationDifference, compactnessGoal)
 
     for i in range(len(data['features'])):
@@ -69,10 +70,6 @@ if __name__ == '__main__':
     compactnessGoal = float(sys.argv[5])  # 0-1 -> 0.2~0.5
     rank = sys.argv[6]
 
-    # arguments = []
-    # arguments_list = [arguments for x in range(numberOfDistrictings)]
-    # print(arguments_list)
-
     # 确认路径
     if state == 'GEORGIA':
         path = GA
@@ -89,6 +86,10 @@ if __name__ == '__main__':
         data = json.load(f)
 
     # 多进程
+    arguments = [num, populationDifference, compactnessGoal]
+    arguments_list = [arguments for x in range(numberOfDistrictings)]
+    # print(arguments_list)
+
     pool_size = mp.cpu_count()
     print("NUM CPUs", pool_size)
 
@@ -96,7 +97,7 @@ if __name__ == '__main__':
 
     with Pool(processes=pool_size) as pool:
         # 这里明细了多进程要完成的plan总量，进程池会自动分配进程，直到所有plan都生成
-        for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)): 
+        for i in pool.imap_unordered(generatePlan, arguments_list):
             result.append(i)
 
     with open('./'+jobId+"_"+rank+'.json', 'w') as fp:
