@@ -4,11 +4,15 @@ import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.enumerate.Status;
 import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 @Service
 public class JobHandler {
@@ -21,9 +25,23 @@ public class JobHandler {
     public Job submitJob(Job job) throws Exception {
 //        int maxJobId = jobRepo.getMaxId();
 //        job.setJobId(maxJobId++);
+
         int jobId = sh.dispatchJob(job);
         if(jobId==-1) {
-            job.setJobId(-1);
+            FileInputStream in = new FileInputStream("src/main/resources/application.properties");
+            Properties props = new Properties();
+            props.load(in);
+            in.close();
+
+            String max_job_id = props.getProperty("max_job_id");
+            job.setJobId(Integer.valueOf(max_job_id)+1);
+
+            // update max_job_id in application.properties
+            FileOutputStream out = new FileOutputStream("src/main/resources/application.properties");
+            props.setProperty("max_job_id", String.valueOf(job.getJobId()));
+            props.store(out, null);
+            out.close();
+
             job.setStatus("Run in server");
         } else {
             job.setJobId(jobId);
