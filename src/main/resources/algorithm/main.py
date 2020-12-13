@@ -25,15 +25,29 @@ districtsLA = 6
 
 path = None
 num = 0
-graph = None
 
-def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
-    graph_copy = copy.deepcopy(graph)
-    generateSeed(graph_copy)
-    redistricting(graph_copy, iterationLimit)
+def generatePlan(num, populationDifference, compactnessGoal):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
+    graph = Graph(num, populationDifference, compactnessGoal)
+
+    for i in range(len(data['features'])):
+        node = Node(data['features'][i]['properties']['ID'], data['features'][i]['properties']['TOTPOP'])
+        graph.addNode(node)
+
+    for i in range(len(data['features'])):
+        id = data['features'][i]['properties']['ID']
+        neighborsId = data['features'][i]['properties']['Neighbors']
+
+        for neighborId in neighborsId:
+            graph.addEdge(id, neighborId)
+
+    graph.idealPop = graph.getIdealPop()
+    graph.upper = graph.getUpper()
+    graph.lower = graph.getLower()
+    generateSeed(graph)
+    redistricting(graph, iterationLimit)
 
     plan = []
-    for cluster in graph_copy.clusters:
+    for cluster in graph.clusters:
         district = []
         for node in cluster.nodes:
             district.append(node.id)
@@ -52,9 +66,8 @@ if __name__ == '__main__':
     populationDifference = float(sys.argv[4])  # 0.03 ~ 0.05
     compactnessGoal = float(sys.argv[5])  # 0.2~0.5
 
-    # arguments = []
-    # arguments_list = [arguments for x in range(numberOfDistrictings)]
-    # print(arguments_list)
+    arguments = [num, populationDifference, compactnessGoal]
+    arguments_list = [arguments for x in range(numberOfDistrictings)]
 
     # 确认路径
     if state == 'GEORGIA':
@@ -71,23 +84,6 @@ if __name__ == '__main__':
     with open(path) as f:
         data = json.load(f)
 
-    graph = Graph(num, populationDifference, compactnessGoal)
-
-    for i in range(len(data['features'])):
-        node = Node(data['features'][i]['properties']['ID'], data['features'][i]['properties']['TOTPOP'])
-        graph.addNode(node)
-
-    for i in range(len(data['features'])):
-        id = data['features'][i]['properties']['ID']
-        neighborsId = data['features'][i]['properties']['Neighbors']
-
-        for neighborId in neighborsId:
-            graph.addEdge(id, neighborId)
-
-    graph.idealPop = graph.getIdealPop()
-    graph.upper = graph.getUpper()
-    graph.lower = graph.getLower()
-
     # 多进程
     pool_size = mp.cpu_count()
     print("NUM CPUs", pool_size)
@@ -96,7 +92,7 @@ if __name__ == '__main__':
 
     with Pool(processes=pool_size) as pool:
         # 这里明细了多进程要完成的plan总量，进程池会自动分配进程，直到所有plan都生成
-        for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)):
+        for i in pool.imap_unordered(generatePlan, arguments_list):
             result.append(i)
             
     with open('src/main/resources/results/'+jobId+'.json', 'w') as fp:

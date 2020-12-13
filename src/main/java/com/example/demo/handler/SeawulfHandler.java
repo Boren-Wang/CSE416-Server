@@ -132,6 +132,7 @@ public class SeawulfHandler {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = null;
             while ((line = reader.readLine()) != null) {
+//                System.out.println(line);
                 if(line.contains("json")) {
 //                    System.out.println("Found "+line);
                     String jobId = line.split(Pattern.quote("."))[0];
@@ -145,8 +146,10 @@ public class SeawulfHandler {
                             System.out.println("Update: job "+job.get().getJobId()+" is completed!");
                             job.get().setStatus("Processing");
                             jobRepo.save(job.get());
+                            System.out.println("Changed job status to 'Processing'");
 
 //                             move result json to server
+                            System.out.println("Start moving output files to server");
                             moveFileToServer(job.get().getJobId());
                             System.out.println("Successfully move "+jobId+".json to server");
                             System.out.println("Successfully move "+jobId+".log to server");

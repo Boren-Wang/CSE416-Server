@@ -6,6 +6,8 @@ import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @RestController
@@ -63,5 +65,32 @@ public class JobController {
     public String deleteJob(@PathVariable("jobId") int jobId) throws Exception {
         jh.deleteJob(jobId);
         return "Deleted job "+jobId;
+    }
+
+    @RequestMapping("/api/job/{jobId}/log")
+    public String downloadJobLog(HttpServletResponse response, @PathVariable("jobId") int jobId) {
+        File file = new File("src/main/resources/results/"+jobId+".log");
+        if(!file.exists()){
+            return "No log file for job "+jobId+" found";
+        }
+        response.reset();
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" + jobId + ".log" );
+
+        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+            byte[] buff = new byte[1024];
+            OutputStream os  = response.getOutputStream();
+            int i = 0;
+            while ((i = bis.read(buff)) != -1) {
+                os.write(buff, 0, i);
+                os.flush();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+            return "Download Error";
+        }
+        return "Download Success";
     }
 }

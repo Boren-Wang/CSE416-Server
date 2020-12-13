@@ -29,12 +29,28 @@ graph = None
 
 
 def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
-    graph_copy = copy.deepcopy(graph)
-    generateSeed(graph_copy)
-    redistricting(graph_copy, iterationLimit)
+    graph = Graph(num, populationDifference, compactnessGoal)
+
+    for i in range(len(data['features'])):
+        node = Node(data['features'][i]['properties']['ID'], data['features'][i]['properties']['TOTPOP'])
+        graph.addNode(node)
+
+    for i in range(len(data['features'])):
+        id = data['features'][i]['properties']['ID']
+        neighborsId = data['features'][i]['properties']['Neighbors']
+
+        for neighborId in neighborsId:
+            graph.addEdge(id, neighborId)
+
+    graph.idealPop = graph.getIdealPop()
+    graph.upper = graph.getUpper()
+    graph.lower = graph.getLower()
+
+    generateSeed(graph)
+    redistricting(graph, iterationLimit)
 
     plan = []
-    for cluster in graph_copy.clusters:
+    for cluster in graph.clusters:
         district = []
         for node in cluster.nodes:
             district.append(node.id)
@@ -71,23 +87,6 @@ if __name__ == '__main__':
     # 导入数据只需要一次，不需要多进程
     with open(path) as f:
         data = json.load(f)
-
-    graph = Graph(num, populationDifference, compactnessGoal)
-
-    for i in range(len(data['features'])):
-        node = Node(data['features'][i]['properties']['ID'], data['features'][i]['properties']['TOTPOP'])
-        graph.addNode(node)
-
-    for i in range(len(data['features'])):
-        id = data['features'][i]['properties']['ID']
-        neighborsId = data['features'][i]['properties']['Neighbors']
-
-        for neighborId in neighborsId:
-            graph.addEdge(id, neighborId)
-
-    graph.idealPop = graph.getIdealPop()
-    graph.upper = graph.getUpper()
-    graph.lower = graph.getLower()
 
     # 多进程
     pool_size = mp.cpu_count()
