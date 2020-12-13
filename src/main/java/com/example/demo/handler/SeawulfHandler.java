@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @Service
 public class SeawulfHandler {
@@ -16,6 +17,9 @@ public class SeawulfHandler {
 
     @Autowired
     JobRepo jobRepo;
+
+    @Autowired
+    AlgorithmHandler ah;
 
     private int printProcessOutput(Process process) {
         int seawulfId = -1;
@@ -120,7 +124,7 @@ public class SeawulfHandler {
         }
     }
 
-    public void getCompletedJobs() throws IOException {
+    public void getCompletedJobs() throws Exception {
         ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/list_results.sh");
         pb.redirectErrorStream(true);
         Process process = pb.start();
@@ -133,20 +137,45 @@ public class SeawulfHandler {
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
                 if(line.contains("json")) {
-                    String jobId = line.split(".")[0];
+                    String jobId = line.split(Pattern.quote("."))[0];
                     Optional<Job> job = jobRepo.findById(Integer.valueOf(jobId));
                     if(job.isPresent()) {
                         if(job.get().getStatus()=="Processing" || job.get().getStatus()=="Completed") {
                             continue;
                         } else {
+                            System.out.println("Update: job "+job.get().getJobId()+" is completed!");
                             job.get().setStatus("Processing");
                             // move result json to server
+                            moveFileToServer(job.get().getJobId());
 
                             // start processing the result
-
+//                            ah.processResult(job.get().getJobId());
                         }
                     }
                 }
+            }
+            String result = builder.toString();
+            System.out.println(result);
+            for(int key : dict.keySet()) {
+                System.out.println(Integer.toString(key)+"-"+dict.get(key));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void moveFileToServer(int jobId) throws Exception {
+        ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/move_file.sh", Integer.toString(jobId));
+        pb.redirectErrorStream(true);
+        Process process = pb.start();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            Map<Integer, String> dict = new HashMap<>();
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
             }
             String result = builder.toString();
             System.out.println(result);

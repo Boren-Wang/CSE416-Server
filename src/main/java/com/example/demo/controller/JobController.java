@@ -37,6 +37,11 @@ public class JobController {
         sh.getCompletedJobs();
     }
 
+    @GetMapping("api/jobs/update/files/{jobId}")
+    public void moveFiles(@PathVariable("jobId") int jobId) throws Exception {
+        sh.moveFileToServer(jobId);
+    }
+
     @GetMapping("api/job/{jobId}")
     public Job getJob(@PathVariable("jobId") int jobId) {
         return jh.getJob(jobId);

@@ -14,6 +14,6 @@ public class TestController {
 
     @GetMapping("api/test")
     public void test() throws Exception{
-        ah.processResult();
+        ah.processResult(415231);
     }
 }
