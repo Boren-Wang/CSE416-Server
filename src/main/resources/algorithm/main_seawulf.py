@@ -51,6 +51,7 @@ if __name__ == '__main__':
     numberOfDistrictings = int(sys.argv[3]) # 进程池要完成的plan总量
     populationDifference = float(sys.argv[4])  # 0.03 ~ 0.05
     compactnessGoal = float(sys.argv[5])  # 0-1 -> 0.2~0.5
+    rank = sys.argv[6]
 
     # arguments = []
     # arguments_list = [arguments for x in range(numberOfDistrictings)]
@@ -99,7 +100,7 @@ if __name__ == '__main__':
         for i in pool.imap_unordered(generatePlan, range(numberOfDistrictings)): 
             result.append(i)
 
-    with open('./'+jobId+'.json', 'w') as fp:
+    with open('./'+jobId+"_"+rank+'.json', 'w') as fp:
         json.dump(result, fp)
 
     # exiting the 'with'-block has stopped the pool

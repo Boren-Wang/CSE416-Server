@@ -39,13 +39,13 @@ print("This is node {}".format(rank))
 if rank == 0:
     numberOfDistrictings = part1
     print("Number of districtings for node {} is {}".format(rank, part1))
-    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+populationDifference+" "+compactnessGoal
+    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+populationDifference+" "+compactnessGoal+" "+str(rank)
     os.system(command)
 
 if rank == 1:
     numberOfDistrictings = part2
     print("Number of districtings for node {} is {}".format(rank, part2))
-    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+populationDifference+" "+compactnessGoal
+    command = "time python ./algorithm/main_seawulf.py"+" "+jobId+" "+state+" "+str(numberOfDistrictings)+" "+populationDifference+" "+compactnessGoal+" "+str(rank)
     os.system(command)
 
 comm.barrier()

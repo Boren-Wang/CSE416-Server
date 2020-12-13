@@ -48,7 +48,7 @@ public class SeawulfHandler {
         if(job.getNumberOfDistrictings() > THRESHOLD) {
             System.out.println("Run in seawulf");
             ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/trigger.sh",
-                    Integer.toString(job.getJobId()),
+//                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Double.toString(job.getPopulationDifference()),
@@ -61,7 +61,7 @@ public class SeawulfHandler {
         } else {
             System.out.println("Run in server");
             ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/main.py",
-                    Integer.toString(job.getJobId()),
+//                    Integer.toString(job.getJobId()),
                     job.getState().name(),
                     Integer.toString(job.getNumberOfDistrictings()),
                     Double.toString(job.getPopulationDifference()),
@@ -133,11 +133,12 @@ public class SeawulfHandler {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 if(line.contains("json")) {
-                    System.out.println("Found "+line);
+//                    System.out.println("Found "+line);
                     String jobId = line.split(Pattern.quote("."))[0];
                     Optional<Job> job = jobRepo.findById(Integer.valueOf(jobId));
                     if(job.isPresent()) {
-                        if(job.get().getStatus()=="Processing" || job.get().getStatus()=="Completed") {
+                        System.out.println("Found "+line);
+                        if(job.get().getStatus().equals("Processing") || job.get().getStatus().equals("Completed")) {
                             System.out.println(line+" is already processed");
                             continue;
                         } else {
@@ -157,6 +158,7 @@ public class SeawulfHandler {
                     }
                 }
             }
+            System.out.println("Finished processing completed jobs");
         } catch (IOException e) {
             e.printStackTrace();
         }
