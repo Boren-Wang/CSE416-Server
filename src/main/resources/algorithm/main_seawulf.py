@@ -49,7 +49,7 @@ if __name__ == '__main__':
     state = sys.argv[2]
     numberOfDistrictings = int(sys.argv[3]) # 进程池要完成的plan总量
     populationDifference = float(sys.argv[4])  # 0.03 ~ 0.05
-    compactnessGoal = float(sys.argv[5])  # 0.2~0.5
+    compactnessGoal = float(sys.argv[5])  # 0-1 -> 0.2~0.5
 
     # arguments = []
     # arguments_list = [arguments for x in range(numberOfDistrictings)]

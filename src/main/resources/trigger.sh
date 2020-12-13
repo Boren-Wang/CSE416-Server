@@ -1,1 +1,1 @@
-cat src/main/resources/seawulf.slurm | sshpass -p "mhw1015sz15" ssh -o StrictHostKeyChecking=no borwang@login.seawulf.stonybrook.edu 'source /etc/profile.d/modules.sh; module load slurm; module load anaconda/3; source activate my_env; cd /gpfs/scratch/borwang/; sbatch '"$1"' '"$2"' '"$3"' '"$4"''
+sshpass -p "mhw1015sz15" ssh -o StrictHostKeyChecking=no borwang@login.seawulf.stonybrook.edu 'source /etc/profile.d/modules.sh; module load slurm; module load anaconda/3; source activate my_env; cd /gpfs/scratch/borwang/; sbatch seawulf.slurm '"$1"' '"$2"' '"$3"' '"$4"''

@@ -1,6 +1,7 @@
 package com.example.demo.handler;
 
 import com.example.demo.dataAccessObject.DistrictRepo;
+import com.example.demo.dataAccessObject.DistrictingRepo;
 import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.dataAccessObject.PrecinctRepo;
 import com.example.demo.enumerate.Minority;
@@ -14,8 +15,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -32,13 +35,18 @@ public class AlgorithmHandler {
 //    @Autowired
 //    PrecinctRepo precinctRepo;
 
-//    @Autowired
-//    DistrictRepo districtRepo;
+    @Autowired
+    DistrictRepo districtRepo;
+
+    @Autowired
+    DistrictingRepo districtingRepo;
 
     // 通知状态 -> 转送文件 -> 处理结果
-    public void processResult() throws Exception {
-        this.job = jobRepo.getOne(415231);
-        getPrecinctsFromJson("GA");
+    public void processResult(int jobId) throws Exception {
+        this.job = jobRepo.getOne(jobId);
+        String state = job.getState().name();
+
+        getPrecinctsFromJson(state);
         System.out.println("Processed state json to read precincts data");
 
         processResultJson();
@@ -62,26 +70,42 @@ public class AlgorithmHandler {
         System.out.println("Generated extreme plan");
         determineRandom();
         System.out.println("Generated random plan");
+
+        // 把districting plan转换为GeoJSON
+        Districting average = job.getAverage();
+        convertDistrictingToJson(average, state, "average");
+
+        Districting extreme = job.getExtreme();
+        convertDistrictingToJson(extreme, state, "extreme");
+
+        Districting random = job.getRandom();
+        convertDistrictingToJson(random, state, "random");
+
+        average.setGeojsonFilePath("src/main/resources/"+job.getJobId()+"_average.json");
+        extreme.setGeojsonFilePath("src/main/resources/"+job.getJobId()+"_extreme.json");
+        random.setGeojsonFilePath("src/main/resources/"+job.getJobId()+"_random.json");
+
         job.setStatus("Completed");
         System.out.println("Persisting");
         jobRepo.save(job);
         System.out.println("Persisted");
+
     }
 
     // 从json读取precinct信息到内存里，方便之后快速查询precinct信息
     // 比从数据库中读取precinct信息快
     public void getPrecinctsFromJson(String stateName) throws Exception{
         System.out.println("Making precinct objects from json!");
-        String state;
-        if(stateName.equals("GA")) {
-            state = State.GEORGIA.name().toLowerCase();
-        } else if(stateName.equals("LA")) {
-            state = State.LOUISIANA.name().toLowerCase();
-        } else if(stateName.equals("MI")) {
-            state = State.MISSISSIPPI.name().toLowerCase();
-        } else {
-            return;
-        }
+        String state = stateName;
+//        if(stateName.equals("GA")) {
+//            state = State.GEORGIA.name().toLowerCase();
+//        } else if(stateName.equals("LA")) {
+//            state = State.LOUISIANA.name().toLowerCase();
+//        } else if(stateName.equals("MI")) {
+//            state = State.MISSISSIPPI.name().toLowerCase();
+//        } else {
+//            return;
+//        }
         System.out.println("State: "+state);
         File file = new File("src/main/resources/static/"+state+".json");
         String content = FileUtils.readFileToString(file);
@@ -126,7 +150,7 @@ public class AlgorithmHandler {
         System.out.println("Processing result json");
         this.result = new Result();
 
-        File file = new File("src/main/resources/results/415231.json");
+        File file = new File("src/main/resources/results/"+job.getJobId()+".json");
         String content = FileUtils.readFileToString(file);
         JSONArray plans = new JSONArray(content);
 
@@ -176,6 +200,13 @@ public class AlgorithmHandler {
                 Demographics demographics = new Demographics();
                 int minoritiesVap = 0;
                 int vap = 0;
+                int totpop = 0;
+                int asianVap = 0;
+                int blackVap = 0;
+                int whiteVap = 0;
+                int hispanicVap = 0;
+                int aminvap = 0;
+                int nhpivap = 0;
 
                 for (Precinct p : district.getPrecincts()) {
                     for(Minority m : minorities) {
@@ -195,9 +226,23 @@ public class AlgorithmHandler {
                     }
 
                     vap += p.getDemographics().getVotingAgePopulation();
+                    totpop += p.getDemographics().getPopulation();
+                    asianVap += p.getDemographics().getAsianVap();
+                    blackVap += p.getDemographics().getBlackVap();
+                    whiteVap += p.getDemographics().getWhiteVap();
+                    hispanicVap += p.getDemographics().getHispanicVap();
+                    aminvap += p.getDemographics().getAMINVap();
+                    nhpivap += p.getDemographics().getNHPIVap();
                 }
                 demographics.setMinoritiesVap(minoritiesVap);
                 demographics.setVotingAgePopulation(vap);
+                demographics.setPopulation(totpop);
+                demographics.setAsianVap(asianVap);
+                demographics.setBlackVap(blackVap);
+                demographics.setWhiteVap(whiteVap);
+                demographics.setHispanicVap(hispanicVap);
+                demographics.setAMINVap(aminvap);
+                demographics.setNHPIVap(nhpivap);
                 double minoritiesVapPercentage = minoritiesVap / new Double(vap);
                 demographics.setMinoritiesVapPercentage(minoritiesVapPercentage);
                 district.setDemographics(demographics);
@@ -314,6 +359,7 @@ public class AlgorithmHandler {
 //                p.getDistricts().add(d);
             }
         }
+        districtingRepo.save(average);
 //        date=java.util.Calendar.getInstance().getTime();
 //        System.out.println(date);
         job.setAverage(average);
@@ -349,6 +395,7 @@ public class AlgorithmHandler {
                 d.getPrecinctIds().add(p.getPrecinctId());
             }
         }
+        districtingRepo.save(extreme);
         job.setExtreme(extreme);
 //        jobRepo.save(job);
     }
@@ -365,13 +412,40 @@ public class AlgorithmHandler {
                 d.getPrecinctIds().add(p.getPrecinctId());
             }
         }
+        districtingRepo.save(random);
         job.setRandom(random);
 //        jobRepo.save(job);
     }
 
-    public void convertDistrictingToJson(Districting d, String state) throws Exception{
+    public void convertDistrictingToJson(Districting d, String state, String type) throws Exception{
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json = ow.writeValueAsString(d);
-        System.out.println(json);
+        ow.writeValue(new File("src/main/resources/results/"+job.getJobId()+"_"+type+".json"), d);
+        String districtingJsonPath = "src/main/resources/results/"+job.getJobId()+"_"+type+".json";
+        String stateJsonPath = "src/main/resources/static/"+state+".json";
+        ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/merge.py",
+                districtingJsonPath,
+                stateJsonPath,
+                Integer.toString(job.getJobId()),
+                type
+        );
+        pb.redirectErrorStream(true);
+        Process process = pb.start();
+        printProcessOutput(process);
+    }
+
+    private void printProcessOutput(Process process) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+            }
+            String result = builder.toString();
+            System.out.println(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

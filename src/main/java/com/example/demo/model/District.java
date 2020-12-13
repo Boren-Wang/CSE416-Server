@@ -34,7 +34,8 @@ public class District {
         this.numberOfCounties = numberOfCounties;
     }
 
-    @ManyToMany(mappedBy = "districts")
+//    @ManyToMany(mappedBy = "districts")
+    @Transient
     public Set<Precinct> getPrecincts() {
         return precincts;
     }

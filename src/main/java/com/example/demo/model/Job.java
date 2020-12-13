@@ -29,6 +29,7 @@ public class Job {
     private Districting extreme;
 
     @Id
+    @GeneratedValue
     public int getJobId() {
         return jobId;
     }

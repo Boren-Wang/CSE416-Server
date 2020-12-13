@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.handler.JobHandler;
+import com.example.demo.handler.SeawulfHandler;
 import com.example.demo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,9 @@ import java.util.List;
 public class JobController {
     @Autowired
     JobHandler jh;
+
+    @Autowired
+    SeawulfHandler sh;
 
     @PostMapping("api/job")
     public Job addJob(@RequestBody Job job) throws Exception{
@@ -26,6 +30,11 @@ public class JobController {
     @GetMapping("api/jobs/update")
     public List<Job> getJobUpdates() throws Exception {
         return jh.getJobUpdates();
+    }
+
+    @GetMapping("api/jobs/update/completed")
+    public void getCompletedJobs() throws Exception {
+        sh.getCompletedJobs();
     }
 
     @GetMapping("api/job/{jobId}")

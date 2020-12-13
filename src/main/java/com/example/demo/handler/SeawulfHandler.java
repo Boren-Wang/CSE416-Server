@@ -1,19 +1,21 @@
 package com.example.demo.handler;
 
+import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.model.Job;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SeawulfHandler {
-    private final int THRESHOLD = 5000;
+    private final int THRESHOLD = 8;
+
+    @Autowired
+    JobRepo jobRepo;
 
     private int printProcessOutput(Process process) {
         int seawulfId = -1;
@@ -94,6 +96,8 @@ public class SeawulfHandler {
                     String status = parts.get(4);
                     if(status.equals("PD")) {
                         dict.put(jobId, "Pending");
+                    } else if (status.equals("R")) {
+                        dict.put(jobId, "Running");
                     } else {
                         dict.put(jobId, status);
                     }
@@ -113,6 +117,44 @@ public class SeawulfHandler {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void getCompletedJobs() throws IOException {
+        ProcessBuilder pb = new ProcessBuilder("bash", "src/main/resources/list_results.sh");
+        pb.redirectErrorStream(true);
+        Process process = pb.start();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            Map<Integer, String> dict = new HashMap<>();
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+                if(line.contains("json")) {
+                    String jobId = line.split(".")[0];
+                    Optional<Job> job = jobRepo.findById(Integer.valueOf(jobId));
+                    if(job.isPresent()) {
+                        if(job.get().getStatus()=="Processing" || job.get().getStatus()=="Completed") {
+                            continue;
+                        } else {
+                            job.get().setStatus("Processing");
+                            // move result json to server
+
+                            // start processing the result
+
+                        }
+                    }
+                }
+            }
+            String result = builder.toString();
+            System.out.println(result);
+            for(int key : dict.keySet()) {
+                System.out.println(Integer.toString(key)+"-"+dict.get(key));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

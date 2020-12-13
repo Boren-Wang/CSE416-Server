@@ -49,19 +49,19 @@ public class Precinct {
         this.countyName = countyName;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Precinct_District",
-            joinColumns = { @JoinColumn(name = "precinct_id") },
-            inverseJoinColumns = { @JoinColumn(name = "district_id") }
-    )
-    public Set<District> getDistricts() {
-        return districts;
-    }
-
-    public void setDistricts(Set<District> districts) {
-        this.districts = districts;
-    }
+//    @ManyToMany
+//    @JoinTable(
+//            name = "Precinct_District",
+//            joinColumns = { @JoinColumn(name = "precinct_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "district_id") }
+//    )
+//    public Set<District> getDistricts() {
+//        return districts;
+//    }
+//
+//    public void setDistricts(Set<District> districts) {
+//        this.districts = districts;
+//    }
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "demographics_id")

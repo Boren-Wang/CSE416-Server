@@ -1,0 +1,215 @@
+{
+  "districtingId" : 499,
+  "districts" : [ {
+    "districtId" : 500,
+    "numberOfCounties" : 19,
+    "demographics" : {
+      "population" : 702223,
+      "votingAgePopulation" : 514633,
+      "minoritiesVap" : 27123,
+      "minoritiesVapPercentage" : 0.05270357711223338,
+      "asianVap" : 1265,
+      "blackVap" : 27123,
+      "whiteVap" : 409231,
+      "hispanicVap" : 54899,
+      "aminvap" : 17112,
+      "nhpivap" : 160
+    }
+  }, {
+    "districtId" : 502,
+    "numberOfCounties" : 11,
+    "demographics" : {
+      "population" : 700805,
+      "votingAgePopulation" : 506740,
+      "minoritiesVap" : 36937,
+      "minoritiesVapPercentage" : 0.0728914236097407,
+      "asianVap" : 932,
+      "blackVap" : 36937,
+      "whiteVap" : 388259,
+      "hispanicVap" : 38536,
+      "aminvap" : 34938,
+      "nhpivap" : 192
+    }
+  }, {
+    "districtId" : 504,
+    "numberOfCounties" : 13,
+    "demographics" : {
+      "population" : 683450,
+      "votingAgePopulation" : 504055,
+      "minoritiesVap" : 43271,
+      "minoritiesVapPercentage" : 0.08584579063792641,
+      "asianVap" : 1224,
+      "blackVap" : 43271,
+      "whiteVap" : 401544,
+      "hispanicVap" : 45095,
+      "aminvap" : 7602,
+      "nhpivap" : 201
+    }
+  }, {
+    "districtId" : 506,
+    "numberOfCounties" : 18,
+    "demographics" : {
+      "population" : 689590,
+      "votingAgePopulation" : 519834,
+      "minoritiesVap" : 144127,
+      "minoritiesVapPercentage" : 0.2772558162798124,
+      "asianVap" : 1467,
+      "blackVap" : 144127,
+      "whiteVap" : 335792,
+      "hispanicVap" : 23866,
+      "aminvap" : 7954,
+      "nhpivap" : 454
+    }
+  }, {
+    "districtId" : 508,
+    "numberOfCounties" : 33,
+    "demographics" : {
+      "population" : 683419,
+      "votingAgePopulation" : 526642,
+      "minoritiesVap" : 149580,
+      "minoritiesVapPercentage" : 0.2840259607095522,
+      "asianVap" : 991,
+      "blackVap" : 149580,
+      "whiteVap" : 344017,
+      "hispanicVap" : 19858,
+      "aminvap" : 7509,
+      "nhpivap" : 195
+    }
+  }, {
+    "districtId" : 510,
+    "numberOfCounties" : 13,
+    "demographics" : {
+      "population" : 701105,
+      "votingAgePopulation" : 507224,
+      "minoritiesVap" : 146325,
+      "minoritiesVapPercentage" : 0.28848201189218176,
+      "asianVap" : 1219,
+      "blackVap" : 146325,
+      "whiteVap" : 321580,
+      "hispanicVap" : 25415,
+      "aminvap" : 6788,
+      "nhpivap" : 216
+    }
+  }, {
+    "districtId" : 512,
+    "numberOfCounties" : 29,
+    "demographics" : {
+      "population" : 690746,
+      "votingAgePopulation" : 516270,
+      "minoritiesVap" : 171947,
+      "minoritiesVapPercentage" : 0.3330563464853662,
+      "asianVap" : 1289,
+      "blackVap" : 171947,
+      "whiteVap" : 301428,
+      "hispanicVap" : 26162,
+      "aminvap" : 8943,
+      "nhpivap" : 612
+    }
+  }, {
+    "districtId" : 514,
+    "numberOfCounties" : 3,
+    "demographics" : {
+      "population" : 683964,
+      "votingAgePopulation" : 550856,
+      "minoritiesVap" : 184453,
+      "minoritiesVapPercentage" : 0.334847945742626,
+      "asianVap" : 978,
+      "blackVap" : 184453,
+      "whiteVap" : 268771,
+      "hispanicVap" : 51645,
+      "aminvap" : 35406,
+      "nhpivap" : 191
+    }
+  }, {
+    "districtId" : 516,
+    "numberOfCounties" : 4,
+    "demographics" : {
+      "population" : 685610,
+      "votingAgePopulation" : 509772,
+      "minoritiesVap" : 174684,
+      "minoritiesVapPercentage" : 0.34267084108189544,
+      "asianVap" : 1088,
+      "blackVap" : 174684,
+      "whiteVap" : 258490,
+      "hispanicVap" : 50328,
+      "aminvap" : 16733,
+      "nhpivap" : 201
+    }
+  }, {
+    "districtId" : 518,
+    "numberOfCounties" : 3,
+    "demographics" : {
+      "population" : 694824,
+      "votingAgePopulation" : 505432,
+      "minoritiesVap" : 173879,
+      "minoritiesVapPercentage" : 0.344020560629323,
+      "asianVap" : 912,
+      "blackVap" : 173879,
+      "whiteVap" : 174632,
+      "hispanicVap" : 95581,
+      "aminvap" : 52138,
+      "nhpivap" : 220
+    }
+  }, {
+    "districtId" : 520,
+    "numberOfCounties" : 27,
+    "demographics" : {
+      "population" : 686897,
+      "votingAgePopulation" : 515688,
+      "minoritiesVap" : 182307,
+      "minoritiesVapPercentage" : 0.35352189696095315,
+      "asianVap" : 1455,
+      "blackVap" : 182307,
+      "whiteVap" : 296488,
+      "hispanicVap" : 21367,
+      "aminvap" : 7839,
+      "nhpivap" : 454
+    }
+  }, {
+    "districtId" : 522,
+    "numberOfCounties" : 38,
+    "demographics" : {
+      "population" : 696701,
+      "votingAgePopulation" : 520421,
+      "minoritiesVap" : 187915,
+      "minoritiesVapPercentage" : 0.3610826619217902,
+      "asianVap" : 1350,
+      "blackVap" : 187915,
+      "whiteVap" : 298112,
+      "hispanicVap" : 24615,
+      "aminvap" : 4233,
+      "nhpivap" : 199
+    }
+  }, {
+    "districtId" : 524,
+    "numberOfCounties" : 12,
+    "demographics" : {
+      "population" : 700587,
+      "votingAgePopulation" : 503160,
+      "minoritiesVap" : 182977,
+      "minoritiesVapPercentage" : 0.36365569600127196,
+      "asianVap" : 1034,
+      "blackVap" : 182977,
+      "whiteVap" : 275198,
+      "hispanicVap" : 26294,
+      "aminvap" : 11155,
+      "nhpivap" : 187
+    }
+  }, {
+    "districtId" : 526,
+    "numberOfCounties" : 9,
+    "demographics" : {
+      "population" : 687106,
+      "votingAgePopulation" : 494921,
+      "minoritiesVap" : 267390,
+      "minoritiesVapPercentage" : 0.5402680427785445,
+      "asianVap" : 1119,
+      "blackVap" : 267390,
+      "whiteVap" : 168659,
+      "hispanicVap" : 35246,
+      "aminvap" : 15806,
+      "nhpivap" : 217
+    }
+  } ],
+  "geojsonFilePath" : null
+}

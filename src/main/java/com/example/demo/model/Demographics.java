@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "demographicsId"})
 public class Demographics {
     private int demographicsId;
     private int population;
@@ -17,7 +20,6 @@ public class Demographics {
     private int hispanicVap;
     private int AMINVap; // American Indians and Alaska Natives
     private int NHPIVap; // Native Hawaiians and other Pacific Islanders
-
 
     @Id
     @GeneratedValue
