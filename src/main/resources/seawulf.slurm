@@ -49,7 +49,7 @@ if rank == 1:
     os.system(command)
 
 comm.barrier()
-print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
+# print("Completed in {:.2f}s for rank {}:".format(time.time() - start_time, rank))
 EOF
 
 mpirun -np 2 python mpi.py $1 $2 $3 $4 $SLURM_JOB_ID

@@ -133,9 +133,9 @@ public class SeawulfHandler {
             String line = null;
             while ((line = reader.readLine()) != null) {
 //                System.out.println(line);
-                if(line.contains("json")) {
+                if(line.contains("json") && line.contains("_")) {
 //                    System.out.println("Found "+line);
-                    String jobId = line.split(Pattern.quote("."))[0];
+                    String jobId = line.split(Pattern.quote("."))[0].split("_")[0];
                     Optional<Job> job = jobRepo.findById(Integer.valueOf(jobId));
                     if(job.isPresent()) {
                         System.out.println("Found "+line);
@@ -151,7 +151,8 @@ public class SeawulfHandler {
 //                             move result json to server
                             System.out.println("Start moving output files to server");
                             moveFileToServer(job.get().getJobId());
-                            System.out.println("Successfully move "+jobId+".json to server");
+                            System.out.println("Successfully move "+jobId+"_0.json to server");
+                            System.out.println("Successfully move "+jobId+"_1.json to server");
                             System.out.println("Successfully move "+jobId+".log to server");
 
 //                             start processing the result

@@ -58,37 +58,40 @@ public class AlgorithmHandler {
         computeMinoritiesVapForEachDistrict();
         System.out.println("Computed minorities vap for each district");
 
-//        sortDistrictsForEachDistricting();
-//        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
-//
-//        generateSummary();
-//        System.out.println("Generated box and whisker data");
-//
-//        determineAverage();
-//        System.out.println("Generated average plan");
-//        determineExtreme();
-//        System.out.println("Generated extreme plan");
-//        determineRandom();
-//        System.out.println("Generated random plan");
-//
-//        // 把districting plan转换为GeoJSON
-//        Districting average = job.getAverage();
-//        convertDistrictingToJson(average, state, "average");
-//
-//        Districting extreme = job.getExtreme();
-//        convertDistrictingToJson(extreme, state, "extreme");
-//
-//        Districting random = job.getRandom();
-//        convertDistrictingToJson(random, state, "random");
-////
-//        average.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_average_geo.json");
-//        extreme.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_extreme_geo.json");
-//        random.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_random_geo.json");
-////
-//        job.setStatus("Completed");
-//        System.out.println("Persisting");
-//        jobRepo.save(job);
-//        System.out.println("Persisted");
+        sortDistrictsForEachDistricting();
+        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
+
+        generateSummary();
+        System.out.println("Generated box and whisker data");
+
+        System.out.println("Start generating average, extreme, and random plans");
+        determineAverage();
+        System.out.println("Generated average plan");
+        determineExtreme();
+        System.out.println("Generated extreme plan");
+        determineRandom();
+        System.out.println("Generated random plan");
+
+        // 把districting plan转换为GeoJSON
+        Districting average = job.getAverage();
+        convertDistrictingToJson(average, state, "average");
+
+        Districting extreme = job.getExtreme();
+        convertDistrictingToJson(extreme, state, "extreme");
+
+        Districting random = job.getRandom();
+        convertDistrictingToJson(random, state, "random");
+
+        System.out.println("Start generating geojson files for average, extreme, and random plans");
+        average.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_average_geo.json");
+        extreme.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_extreme_geo.json");
+        random.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_random_geo.json");
+        System.out.println("Generated geojson files for average, extreme, and random plans");
+
+        job.setStatus("Completed");
+        System.out.println("Persisting");
+        jobRepo.save(job);
+        System.out.println("Persisted");
     }
 
     // 从json读取precinct信息到内存里，方便之后快速查询precinct信息
@@ -149,9 +152,33 @@ public class AlgorithmHandler {
         System.out.println("Processing result json");
         this.result = new Result();
 
-        File file = new File("src/main/resources/results/"+job.getJobId()+".json");
+        File file = new File("src/main/resources/results/"+job.getJobId()+"_0.json");
         String content = FileUtils.readFileToString(file);
         JSONArray plans = new JSONArray(content);
+
+        // for each plan in result
+        for(int i=0; i<plans.length(); i++) {
+            Districting districting = new Districting();
+            JSONArray districts = (JSONArray) plans.get(i);
+            // for each district in each plan:
+            for(int j=0; j<districts.length(); j++) {
+                District district = new District();
+                JSONArray precincts = (JSONArray) districts.get(j);
+                // for each precinct in each district:
+                for(int k=0; k<precincts.length(); k++) {
+                    int precinctId = (int) precincts.get(k);
+//                    Precinct p = precinctRepo.getOne(precinctId);
+                    Precinct p = this.precinctDict.get(precinctId);
+                    district.getPrecincts().add(p);
+                }
+                districting.getDistricts().add(district);
+            }
+            this.result.getDistrictings().add(districting);
+        }
+
+        file = new File("src/main/resources/results/"+job.getJobId()+"_1.json");
+        content = FileUtils.readFileToString(file);
+        plans = new JSONArray(content);
 
         // for each plan in result
         for(int i=0; i<plans.length(); i++) {
@@ -243,7 +270,9 @@ public class AlgorithmHandler {
                 demographics.setAMINVap(aminvap);
                 demographics.setNHPIVap(nhpivap);
                 double minoritiesVapPercentage = minoritiesVap / new Double(vap);
-                minoritiesVapPercentage = (double) Math.round(minoritiesVapPercentage * 1000) / 1000;
+                System.out.println(minoritiesVapPercentage);
+                minoritiesVapPercentage = ((double) Math.round(minoritiesVapPercentage * 1000)) / 1000;
+                System.out.println("Rounded: "+minoritiesVapPercentage);
                 demographics.setMinoritiesVapPercentage(minoritiesVapPercentage);
                 district.setDemographics(demographics);
             }
@@ -290,15 +319,17 @@ public class AlgorithmHandler {
             }
 
             // compute q1, median, q3, min, max of minoritiesVapPercentage for this box
+            System.out.println("VAP% List: "+minoritiesVapPercentages);
             double median = findMedian(minoritiesVapPercentages);
-//            System.out.println("Median: "+median);
-//            System.out.println("VAP% List: "+minoritiesVapPercentages);
+            System.out.println("Median: "+median);
             List<Double> list1 = minoritiesVapPercentages.stream().filter(m->m<median).collect(Collectors.toList());
 //            System.out.println("List1: "+list1);
             double q1 = findMedian(list1);
+            System.out.println("Q1: "+q1);
             List<Double> list2 = minoritiesVapPercentages.stream().filter(m->m>median).collect(Collectors.toList());
 //            System.out.println("List2: "+list2);
             double q3 = findMedian(list2);
+            System.out.println("Q3: "+q3);
             double min = minoritiesVapPercentages.get(0); // minoritiesVapPercentages has been sorted
             double max = minoritiesVapPercentages.get(minoritiesVapPercentages.size()-1);
 
