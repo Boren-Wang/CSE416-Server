@@ -130,34 +130,32 @@ public class SeawulfHandler {
         Process process = pb.start();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            Map<Integer, String> dict = new HashMap<>();
-            StringBuilder builder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
-                builder.append(line);
-                builder.append(System.getProperty("line.separator"));
                 if(line.contains("json")) {
+                    System.out.println("Found "+line);
                     String jobId = line.split(Pattern.quote("."))[0];
                     Optional<Job> job = jobRepo.findById(Integer.valueOf(jobId));
                     if(job.isPresent()) {
                         if(job.get().getStatus()=="Processing" || job.get().getStatus()=="Completed") {
+                            System.out.println(line+" is already processed");
                             continue;
                         } else {
                             System.out.println("Update: job "+job.get().getJobId()+" is completed!");
                             job.get().setStatus("Processing");
-                            // move result json to server
-                            moveFileToServer(job.get().getJobId());
+                            jobRepo.save(job.get());
 
-                            // start processing the result
-//                            ah.processResult(job.get().getJobId());
+//                             move result json to server
+                            moveFileToServer(job.get().getJobId());
+                            System.out.println("Successfully move "+jobId+".json to server");
+                            System.out.println("Successfully move "+jobId+".log to server");
+
+//                             start processing the result
+                            System.out.println("Start processing the result of job "+jobId);
+                            ah.processResult(job.get().getJobId());
                         }
                     }
                 }
-            }
-            String result = builder.toString();
-            System.out.println(result);
-            for(int key : dict.keySet()) {
-                System.out.println(Integer.toString(key)+"-"+dict.get(key));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,7 +168,6 @@ public class SeawulfHandler {
         Process process = pb.start();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            Map<Integer, String> dict = new HashMap<>();
             StringBuilder builder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -179,9 +176,6 @@ public class SeawulfHandler {
             }
             String result = builder.toString();
             System.out.println(result);
-            for(int key : dict.keySet()) {
-                System.out.println(Integer.toString(key)+"-"+dict.get(key));
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }

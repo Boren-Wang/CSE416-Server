@@ -7,6 +7,7 @@ import multiprocessing as mp
 from redistricting import redistricting
 from seed import generateSeed
 from graph import Graph, Node
+import copy
 
 iterationLimit = 1000  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
 
@@ -28,18 +29,18 @@ graph = None
 
 
 def generatePlan(dummy_arg):  # 被imap调用的的函数必须至少接受一个参数，这里的dummy_arg并不会被使用到
-    generateSeed(graph)
-    redistricting(graph, iterationLimit)
+    graph_copy = copy.deepcopy(graph)
+    generateSeed(graph_copy)
+    redistricting(graph_copy, iterationLimit)
 
     plan = []
-    for cluster in graph.clusters:
+    for cluster in graph_copy.clusters:
         district = []
         for node in cluster.nodes:
             district.append(node.id)
         plan.append(district)
 
     return plan
-
 
 if __name__ == '__main__':
     print(os.getcwd())

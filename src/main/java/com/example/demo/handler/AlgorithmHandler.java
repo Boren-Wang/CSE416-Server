@@ -89,7 +89,6 @@ public class AlgorithmHandler {
         System.out.println("Persisting");
         jobRepo.save(job);
         System.out.println("Persisted");
-
     }
 
     // 从json读取precinct信息到内存里，方便之后快速查询precinct信息
