@@ -3,6 +3,8 @@ package com.example.demo.handler;
 import com.example.demo.dataAccessObject.JobRepo;
 import com.example.demo.enumerate.Status;
 import com.example.demo.model.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -79,7 +81,6 @@ public class JobHandler {
             }
         }
         String result = dict.get(-1);
-
         return result;
     }
 
