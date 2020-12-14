@@ -13,7 +13,7 @@ public class TestController {
     AlgorithmHandler ah;
 
     @GetMapping("api/test")
-    public void test() throws Exception{
-        ah.processResult(415836);
+    public String test() throws Exception{
+        return ah.processResult(416443);
     }
 }

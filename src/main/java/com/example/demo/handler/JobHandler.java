@@ -66,9 +66,9 @@ public class JobHandler {
         return jobHistory;
     }
 
-    public List<Job> getJobUpdates() throws Exception {
-        // asynchronously get all completed jobs and process their results
-        sh.getCompletedJobs();
+    public String getJobUpdates() throws Exception {
+//        asynchronously get all completed jobs and process their results
+//        sh.getCompletedJobs();
 
         List<Job> jobHistory = jobRepo.findAll();
         Map<Integer, String> dict = sh.getUpdates(); // dict stores the current status of each job
@@ -78,7 +78,9 @@ public class JobHandler {
                 jobRepo.save(job);
             }
         }
-        return jobHistory;
+        String result = dict.get(-1);
+
+        return result;
     }
 
     public Job updateJob(Job job) {

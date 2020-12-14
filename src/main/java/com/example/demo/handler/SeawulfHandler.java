@@ -112,11 +112,15 @@ public class SeawulfHandler {
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
             }
+//            String result = builder.toString();
+//            System.out.println(result);
+            for(int key : dict.keySet()) {
+                System.out.println("Job "+Integer.toString(key)+" -> "+dict.get(key));
+                builder.append(Integer.toString(key)+"-"+dict.get(key));
+            }
             String result = builder.toString();
             System.out.println(result);
-            for(int key : dict.keySet()) {
-                System.out.println(Integer.toString(key)+"-"+dict.get(key));
-            }
+            dict.put(-1, result);
             return dict;
         } catch (IOException e) {
             e.printStackTrace();

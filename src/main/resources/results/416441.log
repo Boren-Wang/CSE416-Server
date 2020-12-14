@@ -1,0 +1,314 @@
+I am using the following nodes: sn[152-153]
+My job ID is: 416441
+/gpfs/home/borwang
+NUM CPUs 28
+/gpfs/home/borwang
+NUM CPUs 28
+ID       Population  PopulationVariation  Compactness
+730      746911       5179                0.9038076152304609
+668      743993       2261                0.9194915254237288
+929      750263       8531                0.8423645320197044
+1066     725764       15968               0.9393939393939394
+700 iterations over. All clusters acceptable after: 36 iterations.
+ID       Population  PopulationVariation  Compactness
+635      755893       14161               0.8556263269639066
+121      727295       14437               0.934010152284264
+1839     749537       7805                0.8626086956521739
+1248     734206       7526                0.8638059701492538
+700 iterations over. All clusters acceptable after: 34 iterations.
+ID       Population  PopulationVariation  Compactness
+996      740206       1526                0.8779342723004695
+343      740997       735                 0.890652557319224
+626      731386       10346               0.7519230769230769
+771      754342       12610               0.9028077753779697
+700 iterations over. All clusters acceptable after: 28 iterations.
+ID       Population  PopulationVariation  Compactness
+1215     731037       10695               0.8791208791208791
+1048     758409       16677               0.8876811594202898
+33       749929       8197                0.8456140350877193
+34       727556       14176               0.9298245614035088
+700 iterations over. All clusters acceptable after: 31 iterations.
+ID       Population  PopulationVariation  Compactness
+132      758447       16715               0.8489208633093526
+73       724590       17142               0.9133663366336634
+1364     727666       14066               0.8471223021582734
+1177     756228       14496               0.8978260869565218
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+1411     755508       13776               0.8168103448275862
+1798     736293       5439                0.9061784897025171
+334      734648       7084                0.8721311475409836
+318      740482       1250                0.853763440860215
+700 iterations over. All clusters acceptable after: 34 iterations.
+ID       Population  PopulationVariation  Compactness
+909      748889       7157                0.8275862068965517
+895      735810       5922                0.9047619047619048
+1112     735780       5952                0.8671454219030521
+1114     746452       4720                0.8199513381995134
+700 iterations over. All clusters acceptable after: 24 iterations.
+ID       Population  PopulationVariation  Compactness
+1801     734554       7178                0.8717391304347826
+1645     727833       13899               0.922566371681416
+1867     751584       9852                0.8624338624338624
+499      752960       11228               0.8008048289738431
+700 iterations over. All clusters acceptable after: 16 iterations.
+ID       Population  PopulationVariation  Compactness
+661      745046       3314                0.8403361344537815
+34       724876       16856               0.8525423728813559
+1204     739824       1908                0.8845360824742268
+1406     757185       15453               0.908235294117647
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+1702     754925       13193               0.8917050691244239
+1022     756800       15068               0.835978835978836
+1274     725058       16674               0.8217054263565892
+743      730148       11584               0.8910675381263616
+700 iterations over. All clusters acceptable after: 22 iterations.
+ID       Population  PopulationVariation  Compactness
+1193     759299       17567               0.8809523809523809
+1253     745390       3658                0.8459016393442623
+1893     728179       13553               0.8351648351648352
+1895     734063       7669                0.866369710467706
+700 iterations over. All clusters acceptable after: 32 iterations.
+ID       Population  PopulationVariation  Compactness
+901      740863       869                 0.8956310679611651
+1844     755906       14174               0.8297872340425532
+552      724202       17530               0.8888888888888888
+547      745960       4228                0.8949771689497716
+700 iterations over. All clusters acceptable after: 24 iterations.
+ID       Population  PopulationVariation  Compactness
+501      740624       1108                0.8886679920477137
+1786     753280       11548               0.9116379310344828
+808      727885       13847               0.8717948717948718
+1519     745142       3410                0.8891509433962264
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+1795     730069       11663               0.7535885167464115
+877      739504       2228                0.9045643153526971
+806      754681       12949               0.8867595818815331
+1164     742677       945                 0.7928286852589641
+700 iterations over. All clusters acceptable after: 23 iterations.
+ID       Population  PopulationVariation  Compactness
+844      744329       2597                0.9054325955734407
+1808     738530       3202                0.9281045751633987
+1051     749651       7919                0.8500797448165869
+959      734421       7311                0.9033078880407125
+700 iterations over. All clusters acceptable after: 29 iterations.
+ID       Population  PopulationVariation  Compactness
+1195     734184       7548                0.8990291262135922
+1931     742346       614                 0.8004587155963303
+72       752182       10450               0.8784893267651889
+69       738219       3513                0.8125  
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+641      734327       7405                0.8397291196388261
+121      759125       17393               0.9004424778761062
+1035     732033       9699                0.8495145631067962
+949      741446       286                 0.8552915766738661
+700 iterations over. All clusters acceptable after: 30 iterations.
+ID       Population  PopulationVariation  Compactness
+888      741591       141                 0.9090909090909091
+1036     746499       4767                0.8594249201277955
+187      754191       12459               0.8020618556701031
+197      724650       17082               0.9035294117647059
+700 iterations over. All clusters acceptable after: 31 iterations.
+ID       Population  PopulationVariation  Compactness
+35       737616       4116                0.823076923076923
+1469     724599       17133               0.9101123595505618
+1372     749515       7783                0.8631984585741811
+279      755201       13469               0.8963414634146342
+700 iterations over. All clusters acceptable after: 24 iterations.
+ID       Population  PopulationVariation  Compactness
+132      744469       2737                0.941031941031941
+308      726968       14764               0.8153241650294696
+39       749424       7692                0.7929883138564273
+7        746070       4338                0.93058568329718
+700 iterations over. All clusters acceptable after: 13 iterations.
+ID       Population  PopulationVariation  Compactness
+1384     734882       6850                0.8953488372093024
+39       739187       2545                0.9372294372294372
+1105     758615       16883               0.852112676056338
+1104     734247       7485                0.8511627906976744
+700 iterations over. All clusters acceptable after: 35 iterations.
+ID       Population  PopulationVariation  Compactness
+1416     728078       13654               0.916267942583732
+316      749505       7773                0.929637526652452
+691      759105       17373               0.8030560271646859
+1060     730243       11489               0.836   
+700 iterations over. All clusters acceptable after: 23 iterations.
+ID       Population  PopulationVariation  Compactness
+1904     741497       235                 0.8216318785578748
+1972     745338       3606                0.8874734607218684
+1482     743489       1757                0.7996485061511424
+1480     736607       5125                0.9193154034229829
+700 iterations over. All clusters acceptable after: 17 iterations.
+ID       Population  PopulationVariation  Compactness
+406      751592       9860                0.9067460317460317
+146      745885       4153                0.8411764705882353
+33       737795       3937                0.8293577981651377
+34       731659       10073               0.9016786570743405
+700 iterations over. All clusters acceptable after: 33 iterations.
+ID       Population  PopulationVariation  Compactness
+321      742543       811                 0.88125 
+680      740528       1204                0.8530066815144766
+1697     746454       4722                0.8208469055374593
+1615     737406       4326                0.9099307159353349
+700 iterations over. All clusters acceptable after: 22 iterations.
+ID       Population  PopulationVariation  Compactness
+1        727520       14212               0.9261744966442953
+1842     752482       10750               0.8054968287526427
+1759     736009       5723                0.8813008130081301
+904      750920       9188                0.9002267573696145
+700 iterations over. All clusters acceptable after: 29 iterations.
+ID       Population  PopulationVariation  Compactness
+662      727002       14730               0.8359550561797753
+1438     740481       1251                0.8697674418604651
+1956     744376       2644                0.8641975308641976
+1384     755072       13340               0.8013245033112583
+700 iterations over. All clusters acceptable after: 23 iterations.
+ID       Population  PopulationVariation  Compactness
+348      736959       4773                0.9279475982532751
+99       738340       3392                0.8419811320754718
+374      757834       16102               0.8668683812405447
+363      733798       7934                0.8937644341801385
+700 iterations over. All clusters acceptable after: 29 iterations.
+Now the pool is closed and no longer available
+
+real	137m2.634s
+user	1871m19.443s
+sys	0m35.796s
+ID       Population  PopulationVariation  Compactness
+38       738149       3583                0.9222689075630253
+1895     737231       4501                0.8689883913764511
+199      737538       4194                0.8584070796460177
+352      754013       12281               0.9168539325842696
+700 iterations over. All clusters acceptable after: 31 iterations.
+ID       Population  PopulationVariation  Compactness
+330      759944       18212               0.8329896907216495
+519      741900       168                 0.8931623931623932
+950      737771       3961                0.8167808219178082
+929      727316       14416               0.8428246013667426
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+35       753029       11297               0.9112149532710281
+389      730582       11150               0.9136069114470843
+676      741575       157                 0.8519083969465648
+685      741745       13                  0.8488372093023255
+700 iterations over. All clusters acceptable after: 31 iterations.
+ID       Population  PopulationVariation  Compactness
+766      751847       10115               0.8592132505175983
+948      735059       6673                0.9012048192771085
+609      743223       1491                0.8770053475935828
+610      736802       4930                0.8065764023210832
+700 iterations over. All clusters acceptable after: 32 iterations.
+ID       Population  PopulationVariation  Compactness
+1501     750289       8557                0.8444790046656299
+1724     744730       2998                0.9370932754880694
+337      738790       2942                0.8891257995735607
+340      733122       8610                0.8238213399503722
+700 iterations over. All clusters acceptable after: 20 iterations.
+ID       Population  PopulationVariation  Compactness
+648      750908       9176                0.794392523364486
+1657     742896       1164                0.8954545454545455
+1729     748770       7038                0.7696428571428572
+1670     724357       17375               0.9183673469387755
+700 iterations over. All clusters acceptable after: 24 iterations.
+ID       Population  PopulationVariation  Compactness
+1373     750134       8402                0.8703007518796992
+327      738188       3544                0.8231132075471699
+909      724321       17411               0.8948247078464107
+895      754288       12556               0.9216152019002375
+700 iterations over. All clusters acceptable after: 32 iterations.
+ID       Population  PopulationVariation  Compactness
+1457     747466       5734                0.8989690721649485
+1138     726311       15421               0.9153318077803203
+334      741758       26                  0.798598949211909
+318      751396       9664                0.8695652173913043
+700 iterations over. All clusters acceptable after: 30 iterations.
+ID       Population  PopulationVariation  Compactness
+1332     741906       174                 0.8436426116838488
+1672     742017       285                 0.8954248366013072
+944      729584       12148               0.8138075313807531
+1118     753424       11692               0.8730853391684902
+700 iterations over. All clusters acceptable after: 30 iterations.
+ID       Population  PopulationVariation  Compactness
+1170     749600       7868                0.8778004073319756
+34       737221       4511                0.8860544217687075
+1308     732740       8992                0.8153846153846154
+1237     747370       5638                0.8936651583710408
+700 iterations over. All clusters acceptable after: 29 iterations.
+ID       Population  PopulationVariation  Compactness
+996      757756       16024               0.8247011952191234
+38       724439       17293               0.9349775784753364
+101      728790       12942               0.832089552238806
+116      755946       14214               0.9126016260162602
+700 iterations over. All clusters acceptable after: 34 iterations.
+ID       Population  PopulationVariation  Compactness
+168      740700       1032                0.908235294117647
+517      734328       7404                0.8402366863905325
+79       752556       10824               0.9135021097046414
+65       739347       2385                0.8753117206982544
+700 iterations over. All clusters acceptable after: 17 iterations.
+ID       Population  PopulationVariation  Compactness
+597      737552       4180                0.8066528066528067
+1599     733874       7858                0.8937093275488069
+610      752329       10597               0.7978142076502732
+613      743176       1444                0.8618556701030928
+700 iterations over. All clusters acceptable after: 29 iterations.
+ID       Population  PopulationVariation  Compactness
+1406     749712       7980                0.8484288354898336
+53       723233       18499               0.9203539823008849
+1435     757781       16049               0.8207547169811321
+1431     736205       5527                0.8763796909492274
+700 iterations over. All clusters acceptable after: 25 iterations.
+ID       Population  PopulationVariation  Compactness
+1237     725244       16488               0.8493408662900188
+1422     746632       4900                0.9046511627906977
+1827     737237       4495                0.8090909090909091
+1809     757818       16086               0.8989247311827957
+700 iterations over. All clusters acceptable after: 30 iterations.
+ID       Population  PopulationVariation  Compactness
+1180     742078       346                 0.8250825082508251
+1457     735025       6707                0.8847058823529412
+1910     752524       10792               0.8858350951374208
+1903     737304       4428                0.836864406779661
+700 iterations over. All clusters acceptable after: 20 iterations.
+ID       Population  PopulationVariation  Compactness
+719      755099       13367               0.8861386138613861
+0        726054       15678               0.9314159292035398
+188      758075       16343               0.848966613672496
+1118     727703       14029               0.9022403258655805
+700 iterations over. All clusters acceptable after: 27 iterations.
+ID       Population  PopulationVariation  Compactness
+1798     732517       9215                0.8823529411764706
+762      749495       7763                0.8900862068965517
+501      756398       14666               0.823321554770318
+499      728521       13211               0.7754318618042226
+700 iterations over. All clusters acceptable after: 26 iterations.
+ID       Population  PopulationVariation  Compactness
+1923     743098       1366                0.7832167832167832
+1913     744332       2600                0.8949579831932774
+1409     751104       9372                0.8088803088803089
+1256     728397       13335               0.8780487804878049
+700 iterations over. All clusters acceptable after: 23 iterations.
+ID       Population  PopulationVariation  Compactness
+1680     750547       8815                0.910828025477707
+494      741029       703                 0.8168724279835391
+877      743190       1458                0.8258620689655173
+1118     732165       9567                0.8952164009111617
+700 iterations over. All clusters acceptable after: 18 iterations.
+ID       Population  PopulationVariation  Compactness
+121      737651       4081                0.8449744463373083
+146      739747       1985                0.8944954128440367
+323      730114       11618               0.8493723849372385
+719      759419       17687               0.911578947368421
+700 iterations over. All clusters acceptable after: 24 iterations.
+Now the pool is closed and no longer available
+
+real	140m16.625s
+user	1881m27.256s
+sys	0m37.409s
+This is node 0
+Number of districtings for node 0 is 28
+This is node 1
+Number of districtings for node 1 is 28

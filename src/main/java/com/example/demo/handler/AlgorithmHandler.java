@@ -42,56 +42,58 @@ public class AlgorithmHandler {
     DistrictingRepo districtingRepo;
 
     // 通知状态 -> 转送文件 -> 处理结果
-    public void processResult(int jobId) throws Exception {
+    public String processResult(int jobId) throws Exception {
         this.job = jobRepo.getOne(jobId);
         String state = job.getState().name();
-
-        getPrecinctsFromJson(state);
-        System.out.println("Processed state json to read precincts data");
-
-        processResultJson();
-        System.out.println("Processed result json");
-
-        computeNumberOfCountiesForEachDistrict();
-        System.out.println("Computed number of counties for each district");
-
-        computeMinoritiesVapForEachDistrict();
-        System.out.println("Computed minorities vap for each district");
-
-        sortDistrictsForEachDistricting();
-        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
-
-        generateSummary();
-        System.out.println("Generated box and whisker data");
-
-        System.out.println("Start generating average, extreme, and random plans");
-        determineAverage();
-        System.out.println("Generated average plan");
-        determineExtreme();
-        System.out.println("Generated extreme plan");
-        determineRandom();
-        System.out.println("Generated random plan");
+        return generateSummaryJson();
+//
+//        getPrecinctsFromJson(state);
+//        System.out.println("Processed state json to read precincts data");
+//
+//        processResultJson();
+//        System.out.println("Processed result json");
+//
+//        computeNumberOfCountiesForEachDistrict();
+//        System.out.println("Computed number of counties for each district");
+//
+//        computeMinoritiesVapForEachDistrict();
+//        System.out.println("Computed minorities vap for each district");
+//
+//        sortDistrictsForEachDistricting();
+//        System.out.println("Sorted districts in each districting according to their minorities vap percentage");
+//
+//        generateSummary();
+//        System.out.println("Generated box and whisker data");
+//
+//        System.out.println("Start generating average, extreme, and random plans");
+//        determineAverage();
+//        System.out.println("Generated average plan");
+//        determineExtreme();
+//        System.out.println("Generated extreme plan");
+//        determineRandom();
+//        System.out.println("Generated random plan");
 
         // 把districting plan转换为GeoJSON
-        Districting average = job.getAverage();
-        convertDistrictingToJson(average, state, "average");
+//        Districting average = job.getAverage();
+//        convertDistrictingToJson(average, state, "average");
+//
+//        Districting extreme = job.getExtreme();
+//        convertDistrictingToJson(extreme, state, "extreme");
+//
+//        Districting random = job.getRandom();
+//        convertDistrictingToJson(random, state, "random");
 
-        Districting extreme = job.getExtreme();
-        convertDistrictingToJson(extreme, state, "extreme");
+//        System.out.println("Start generating geojson files for average, extreme, and random plans");
+//        average.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_average_geo.json");
+//        extreme.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_extreme_geo.json");
+//        random.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_random_geo.json");
+//        System.out.println("Generated geojson files for average, extreme, and random plans");
 
-        Districting random = job.getRandom();
-        convertDistrictingToJson(random, state, "random");
-
-        System.out.println("Start generating geojson files for average, extreme, and random plans");
-        average.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_average_geo.json");
-        extreme.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_extreme_geo.json");
-        random.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_random_geo.json");
-        System.out.println("Generated geojson files for average, extreme, and random plans");
-
-        job.setStatus("Completed");
-        System.out.println("Persisting");
-        jobRepo.save(job);
-        System.out.println("Persisted");
+//
+//        job.setStatus("Completed");
+//        System.out.println("Persisting");
+//        jobRepo.save(job);
+//        System.out.println("Persisted");
     }
 
     // 从json读取precinct信息到内存里，方便之后快速查询precinct信息
@@ -109,7 +111,8 @@ public class AlgorithmHandler {
 //            return;
 //        }
         System.out.println("State: "+state);
-        File file = new File("src/main/resources/static/"+state+".json");
+        String filePath = "src/main/resources/static/"+state+".json";
+        File file = new File(filePath);
         String content = FileUtils.readFileToString(file);
         //对基本类型的解析
         JSONObject obj = new JSONObject(content);
@@ -118,7 +121,14 @@ public class AlgorithmHandler {
         for(int i=0; i<precinctArray.length(); i++) {
             JSONObject properties = ((JSONObject) precinctArray.get(i)).getJSONObject("properties");
             int precinctId = properties.getInt("ID");
-            String countyName = properties.getString("CTYNAME");
+
+            String countyName;
+            try {
+                countyName = properties.getString("CTYNAME");
+            } catch(Exception e) {
+                countyName = String.valueOf(properties.getInt("CTYNAME"));
+            }
+
             int totalPopulation = properties.getInt("TOTPOP");
             int vap = properties.getInt("VAP");
             int hvap = properties.getInt("HVAP");
@@ -193,6 +203,9 @@ public class AlgorithmHandler {
                     int precinctId = (int) precincts.get(k);
 //                    Precinct p = precinctRepo.getOne(precinctId);
                     Precinct p = this.precinctDict.get(precinctId);
+                    if(p==null) {
+                        System.out.println("Precinct "+precinctId+" not found");
+                    }
                     district.getPrecincts().add(p);
                 }
                 districting.getDistricts().add(district);
@@ -270,17 +283,77 @@ public class AlgorithmHandler {
                 demographics.setAMINVap(aminvap);
                 demographics.setNHPIVap(nhpivap);
                 double minoritiesVapPercentage = minoritiesVap / new Double(vap);
-                System.out.println(minoritiesVapPercentage);
+//                System.out.println(minoritiesVapPercentage);
                 minoritiesVapPercentage = ((double) Math.round(minoritiesVapPercentage * 1000)) / 1000;
-                System.out.println("Rounded: "+minoritiesVapPercentage);
+//                System.out.println("Rounded: "+minoritiesVapPercentage);
                 demographics.setMinoritiesVapPercentage(minoritiesVapPercentage);
                 district.setDemographics(demographics);
             }
         }
     }
 
-    public String generateSummaryFile(Job job) {
-        return "";
+    public String generateSummaryJson() throws Exception{
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String state = job.getState().name();
+
+        String filePath = "src/main/resources/static/"+state+".json";
+        File file = new File(filePath);
+        String content = FileUtils.readFileToString(file);
+        JSONObject precinctsGeojson = new JSONObject(content);
+
+        int averageId = job.getAverage().getDistrictingId();
+        int extremeId = job.getExtreme().getDistrictingId();
+        int randomId = job.getRandom().getDistrictingId();
+
+        // districtings
+        JSONArray districtings = new JSONArray();
+
+        Districting average = job.getAverage();
+        Districting extreme = job.getExtreme();
+        Districting random = job.getRandom();
+
+        String averageString = objectMapper.writeValueAsString(average);
+        JSONObject averageJson = new JSONObject(averageString);
+        averageJson.remove("precinctIds");
+        filePath = "src/main/resources/results/"+job.getJobId()+"_average_geo.json";
+        file = new File(filePath);
+        content = FileUtils.readFileToString(file);
+        JSONObject geojson = new JSONObject(content);
+        averageJson.put("congressionalDistrictsGeoJSON", averageJson);
+        districtings.put(averageJson);
+
+        String extremeString = objectMapper.writeValueAsString(extreme);
+        JSONObject extremeJson = new JSONObject(extremeString);
+        extremeJson.remove("precinctIds");
+        filePath = "src/main/resources/results/"+job.getJobId()+"_extreme_geo.json";
+        file = new File(filePath);
+        content = FileUtils.readFileToString(file);
+        geojson = new JSONObject(content);
+        extremeJson.put("congressionalDistrictsGeoJSON", extremeJson);
+        districtings.put(extremeJson);
+
+        String randomString = objectMapper.writeValueAsString(random);
+        JSONObject randomJson = new JSONObject(randomString);
+        randomJson.remove("precinctIds");
+        filePath = "src/main/resources/results/"+job.getJobId()+"_random_geo.json";
+        file = new File(filePath);
+        content = FileUtils.readFileToString(file);
+        geojson = new JSONObject(content);
+        randomJson.put("congressionalDistrictsGeoJSON", randomJson);
+        districtings.put(randomJson);
+
+        String jobJsonString = objectMapper.writeValueAsString(job);
+//        System.out.println(jobJsonString);
+        JSONObject obj = new JSONObject(jobJsonString);
+        obj.remove("summary");
+        obj.put("precinctsGeojson", precinctsGeojson);
+//        obj.put("averageDistricting", averageId);
+//        obj.put("extremeDistricting", extremeId);
+//        obj.put("randomDistricting", randomId);
+//        obj.put("districtings", districtings);
+        System.out.println(obj.toString(4));
+        return obj.toString(4);
     }
 
     public void sortDistrictsForEachDistricting() {
@@ -319,7 +392,7 @@ public class AlgorithmHandler {
             }
 
             // compute q1, median, q3, min, max of minoritiesVapPercentage for this box
-            System.out.println("VAP% List: "+minoritiesVapPercentages);
+            System.out.println("Minorities VAP% List for Box "+i+": "+minoritiesVapPercentages);
             double median = findMedian(minoritiesVapPercentages);
             System.out.println("Median: "+median);
             List<Double> list1 = minoritiesVapPercentages.stream().filter(m->m<median).collect(Collectors.toList());
@@ -453,6 +526,7 @@ public class AlgorithmHandler {
         ow.writeValue(new File("src/main/resources/results/"+job.getJobId()+"_"+type+".json"), d);
         String districtingJsonPath = "src/main/resources/results/"+job.getJobId()+"_"+type+".json";
         String stateJsonPath = "src/main/resources/static/"+state+".json";
+
         ProcessBuilder pb = new ProcessBuilder("python", "src/main/resources/algorithm/merge.py",
                 districtingJsonPath,
                 stateJsonPath,

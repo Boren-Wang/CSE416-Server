@@ -9,15 +9,15 @@ from seed import generateSeed
 from graph import Graph, Node
 import copy
 
-iterationLimit = 1000  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
+iterationLimit = 700  # 测试速度或者会不会报错的时候改成50，实际run的时候改成1000
 
-GA = './algorithm/GA.json' # 测试速度或者会不会报错的时候用ga速度最快
+GA = './algorithm/georgia.json' # 测试速度或者会不会报错的时候用ga速度最快
 districtsGA = 14
 
-MI = './algorithm/MI.json'
+MI = './algorithm/mississippi.json'
 districtsMI = 4
 
-LA = './algorithm/LA.json'
+LA = './algorithm/louisiana.json'
 districtsLA = 6
 
 # popDifference = 0.03

@@ -30,7 +30,7 @@ public class JobController {
     }
 
     @GetMapping("api/jobs/update")
-    public List<Job> getJobUpdates() throws Exception {
+    public String getJobUpdates() throws Exception {
         return jh.getJobUpdates();
     }
 
