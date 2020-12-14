@@ -27,6 +27,7 @@ public class Job {
     private Districting random;
     private Districting average;
     private Districting extreme;
+    private String summaryFilePath;
 
     @Id
 //    @GeneratedValue
@@ -144,6 +145,14 @@ public class Job {
 
     public void setExtreme(Districting extreme) {
         this.extreme = extreme;
+    }
+
+    public String getSummaryFilePath() {
+        return summaryFilePath;
+    }
+
+    public void setSummaryFilePath(String summaryFilePath) {
+        this.summaryFilePath = summaryFilePath;
     }
 
     @Override
