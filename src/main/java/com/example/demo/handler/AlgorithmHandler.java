@@ -1,5 +1,4 @@
 package com.example.demo.handler;
-
 import com.example.demo.dataAccessObject.DistrictRepo;
 import com.example.demo.dataAccessObject.DistrictingRepo;
 import com.example.demo.dataAccessObject.JobRepo;
@@ -15,10 +14,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -42,11 +38,11 @@ public class AlgorithmHandler {
     DistrictingRepo districtingRepo;
 
     // 通知状态 -> 转送文件 -> 处理结果
-    public String processResult(int jobId) throws Exception {
+    public void processResult(int jobId) throws Exception {
         this.job = jobRepo.getOne(jobId);
         String state = job.getState().name();
-        return generateSummaryJson();
-//
+        generateSummaryJson();
+
 //        getPrecinctsFromJson(state);
 //        System.out.println("Processed state json to read precincts data");
 //
@@ -89,7 +85,6 @@ public class AlgorithmHandler {
 //        random.setGeojsonFilePath("src/main/resources/results/"+job.getJobId()+"_random_geo.json");
 //        System.out.println("Generated geojson files for average, extreme, and random plans");
 
-//
 //        job.setStatus("Completed");
 //        System.out.println("Persisting");
 //        jobRepo.save(job);
@@ -292,7 +287,7 @@ public class AlgorithmHandler {
         }
     }
 
-    public String generateSummaryJson() throws Exception{
+    public void generateSummaryJson() throws Exception{
         ObjectMapper objectMapper = new ObjectMapper();
 
         String state = job.getState().name();
@@ -315,45 +310,65 @@ public class AlgorithmHandler {
 
         String averageString = objectMapper.writeValueAsString(average);
         JSONObject averageJson = new JSONObject(averageString);
-        averageJson.remove("precinctIds");
+        // remove precinctIds
+        removePrecinctIds(averageJson.getJSONArray("districts"));
+        System.out.println(averageJson.toString(4));
         filePath = "src/main/resources/results/"+job.getJobId()+"_average_geo.json";
         file = new File(filePath);
         content = FileUtils.readFileToString(file);
         JSONObject geojson = new JSONObject(content);
-        averageJson.put("congressionalDistrictsGeoJSON", averageJson);
+//        averageJson.put("congressionalDistrictsGeoJSON", averageJson);
         districtings.put(averageJson);
 
         String extremeString = objectMapper.writeValueAsString(extreme);
         JSONObject extremeJson = new JSONObject(extremeString);
-        extremeJson.remove("precinctIds");
+        // remove precinctIds
+        removePrecinctIds(extremeJson.getJSONArray("districts"));
         filePath = "src/main/resources/results/"+job.getJobId()+"_extreme_geo.json";
         file = new File(filePath);
         content = FileUtils.readFileToString(file);
         geojson = new JSONObject(content);
-        extremeJson.put("congressionalDistrictsGeoJSON", extremeJson);
+//        extremeJson.put("congressionalDistrictsGeoJSON", extremeJson);
         districtings.put(extremeJson);
 
         String randomString = objectMapper.writeValueAsString(random);
         JSONObject randomJson = new JSONObject(randomString);
-        randomJson.remove("precinctIds");
+        // remove precinctIds
+        removePrecinctIds(randomJson.getJSONArray("districts"));
         filePath = "src/main/resources/results/"+job.getJobId()+"_random_geo.json";
         file = new File(filePath);
         content = FileUtils.readFileToString(file);
         geojson = new JSONObject(content);
-        randomJson.put("congressionalDistrictsGeoJSON", randomJson);
+//        randomJson.put("congressionalDistrictsGeoJSON", randomJson);
         districtings.put(randomJson);
 
         String jobJsonString = objectMapper.writeValueAsString(job);
-//        System.out.println(jobJsonString);
+        System.out.println(jobJsonString);
         JSONObject obj = new JSONObject(jobJsonString);
         obj.remove("summary");
+        obj.remove("average");
+        obj.remove("extreme");
+        obj.remove("random");
         obj.put("precinctsGeojson", precinctsGeojson);
-//        obj.put("averageDistricting", averageId);
-//        obj.put("extremeDistricting", extremeId);
-//        obj.put("randomDistricting", randomId);
-//        obj.put("districtings", districtings);
-        System.out.println(obj.toString(4));
-        return obj.toString(4);
+        obj.put("averageDistricting", averageId);
+        obj.put("extremeDistricting", extremeId);
+        obj.put("randomDistricting", randomId);
+        obj.put("districtings", districtings);
+
+        //Write JSON file
+        try (FileWriter fw = new FileWriter("src/main/resources/results/"+job.getJobId()+"_summary.json")) {
+            fw.write(obj.toString(4));
+            fw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removePrecinctIds(JSONArray districts) {
+        for(int i=0; i<districts.length(); i++) {
+            JSONObject obj = (JSONObject) districts.get(i);
+            obj.remove("precinctIds");
+        }
     }
 
     public void sortDistrictsForEachDistricting() {

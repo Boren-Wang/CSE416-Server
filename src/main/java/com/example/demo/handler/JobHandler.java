@@ -93,18 +93,17 @@ public class JobHandler {
         sh.cancelJob(jobId);
         Optional<Job> jobOptional = jobRepo.findById(jobId);
         if(jobOptional.isPresent()) {
-            Job job = jobOptional.get();
-            job.setStatus("Canceled");
-            jobRepo.save(job);
+            jobRepo.delete(jobOptional.get());
         }
         System.out.println("Canceled job: "+jobId);
     }
 
     public void deleteJob(int jobId) throws Exception {
-        Job job = jobRepo.getOne(jobId);
-        jobRepo.delete(job);
+        Optional<Job> jobOptional = jobRepo.findById(jobId);
+        if(jobOptional.isPresent()) {
+            jobRepo.delete(jobOptional.get());
+        }
         System.out.println("Deleted job: "+jobId);
-        sh.cancelJob(jobId);
     }
 
     public void setSummary(int jobId, List<Box> summary) {
