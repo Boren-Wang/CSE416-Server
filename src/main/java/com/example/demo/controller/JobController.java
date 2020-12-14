@@ -93,4 +93,31 @@ public class JobController {
         }
         return "Download Success";
     }
+
+    @RequestMapping("/api/job/{jobId}/summary")
+    public String downloadJobSummary(HttpServletResponse response, @PathVariable("jobId") int jobId) {
+        File file = new File("src/main/resources/results/"+jobId+"_summary.json");
+        if(!file.exists()){
+            return "No summary file for job "+jobId+" found";
+        }
+        response.reset();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" + jobId + "_summary.json" );
+
+        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+            byte[] buff = new byte[1024];
+            OutputStream os  = response.getOutputStream();
+            int i = 0;
+            while ((i = bis.read(buff)) != -1) {
+                os.write(buff, 0, i);
+                os.flush();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+            return "Download Error";
+        }
+        return "Download Success";
+    }
 }
