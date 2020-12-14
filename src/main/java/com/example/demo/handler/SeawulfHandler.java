@@ -115,8 +115,7 @@ public class SeawulfHandler {
 //            String result = builder.toString();
 //            System.out.println(result);
             for(int key : dict.keySet()) {
-                System.out.println("Job "+Integer.toString(key)+" -> "+dict.get(key));
-                builder.append("Job "+Integer.toString(key)+" -> "+dict.get(key));
+                System.out.println("Job "+Integer.toString(key)+" --- "+dict.get(key));
             }
             String result = builder.toString();
             System.out.println(result);
