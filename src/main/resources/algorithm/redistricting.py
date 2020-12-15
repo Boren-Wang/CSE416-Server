@@ -21,7 +21,6 @@ def generateTree(cluster):
 
     return ST
 
-
 # create new cluster
 def getNewCluster(graph, cutEdge, nodes, edges):
     newcluster = Cluster()
@@ -384,5 +383,5 @@ def redistricting(graph, iterationLimit):
     #print("\nEdges are acceptable: " + str(acceptableEdge) + "(" + str(acceptableEdge/totalEdge*100) + "%)")
     #print("Edges improve the graph: : " + str(improvingEdge) + "(" + str(improvingEdge/totalEdge*100) + "%)")
     #print("Edges are not acceptable and not improve the graph: " + str(noneEdge) + "(" + str(noneEdge/totalEdge*100) + "%)")
-    print(str(n) + " iterations over. All clusters acceptable after: " + str(allAcceptableIteration) + " iterations.")
+    # print(str(n) + " iterations over. All clusters acceptable after: " + str(allAcceptableIteration) + " iterations.")
 

@@ -2,10 +2,10 @@
 
 #SBATCH --job-name=job
 #SBATCH --output=%j.log
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=24
 #SBATCH --nodes=2
-#SBATCH --time=04:00:00
-#SBATCH --partition=short-28core
+#SBATCH --time=12:00:00
+#SBATCH --partition=long-24core
 
 echo I am using the following nodes: $SLURM_JOB_NODELIST
 echo My job ID is: $SLURM_JOB_ID
