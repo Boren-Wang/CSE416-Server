@@ -12,8 +12,8 @@ public class TestController {
     @Autowired
     AlgorithmHandler ah;
 
-    @GetMapping("api/test")
-    public void test() throws Exception{
-        ah.processResult(416443);
+    @GetMapping("api/test/{jobId}")
+    public void test(@PathVariable("jobId") int jobId) throws Exception{
+        ah.processResult(jobId);
     }
 }

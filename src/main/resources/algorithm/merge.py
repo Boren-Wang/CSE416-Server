@@ -83,13 +83,13 @@ for district in districts:
                 aminvap += precincts[i]["properties"]["AMINVAP"]
                 asianvap += precincts[i]["properties"]["ASIANVAP"]
                 nhpivap += precincts[i]["properties"]["NHPIVAP"]
-                # WHITE += precincts[i]["properties"]["WHITE"]
-                # BLACK += precincts[i]["properties"]["BLACK"]
-                # HISP += precincts[i]["properties"]["HISP"]
-                # AMIN += precincts[i]["properties"]["AMIN"]
-                # OTHER += precincts[i]["properties"]["OTHER"]
-                # ASIAN += precincts[i]["properties"]["ASIAN"]
-                # NHPI += precincts[i]["properties"]["NHPI"]
+                WHITE += precincts[i]["properties"]["WHITE"]
+                BLACK += precincts[i]["properties"]["BLACK"]
+                HISP += precincts[i]["properties"]["HISP"]
+                AMIN += precincts[i]["properties"]["AMIN"]
+                OTHER += precincts[i]["properties"]["OTHER"]
+                ASIAN += precincts[i]["properties"]["ASIAN"]
+                NHPI += precincts[i]["properties"]["NHPI"]
 
     u = cascaded_union(districtPolygons)
     districtsPoly.append(u)
@@ -106,13 +106,13 @@ for district in districts:
     poly["properties"]["AMINVAP"] = aminvap
     poly["properties"]["ASIANVAP"] = asianvap
     poly["properties"]["NHPIVAP"] = nhpivap
-    # poly["properties"]["WHITE"] = WHITE
-    # poly["properties"]["BLACK"] = BLACK
-    # poly["properties"]["HISP"] = HISP
-    # poly["properties"]["AMIN"] = AMIN
-    # poly["properties"]["OTHER"] = OTHER
-    # poly["properties"]["ASIAN"] = ASIAN
-    # poly["properties"]["NHPI"] = NHPI
+    poly["properties"]["WHITE"] = WHITE
+    poly["properties"]["BLACK"] = BLACK
+    poly["properties"]["HISP"] = HISP
+    poly["properties"]["AMIN"] = AMIN
+    poly["properties"]["OTHER"] = OTHER
+    poly["properties"]["ASIAN"] = ASIAN
+    poly["properties"]["NHPI"] = NHPI
 
     new_data['features'].append(poly)
 
