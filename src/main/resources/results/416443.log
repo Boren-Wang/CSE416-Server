@@ -19,7 +19,7 @@ ID       Population  PopulationVariation  Compactness
 971      693651       1721                0.7804878048780488
 918      688914       3016                0.7729257641921398
 953      690667       1263                0.6524064171122994
-700 iterations over. All clusters acceptable after: 240 iterations.
+All clusters acceptable after: 240 iterations.
 ID       Population  PopulationVariation  Compactness
 281      688010       3920                0.8072727272727273
 753      688650       3280                0.875   
@@ -35,7 +35,7 @@ ID       Population  PopulationVariation  Compactness
 2037     694856       2926                0.6342857142857143
 1520     690916       1014                0.7543859649122807
 1519     693861       1931                0.6322580645161291
-700 iterations over. All clusters acceptable after: 207 iterations.
+All clusters acceptable after: 207 iterations.
 ID       Population  PopulationVariation  Compactness
 2817     688060       3870                0.7159763313609467
 2095     695535       3605                0.7889447236180904
@@ -51,7 +51,7 @@ ID       Population  PopulationVariation  Compactness
 1500     692352       422                 0.6124031007751938
 664      689103       2827                0.8075313807531381
 564      694387       2457                0.75    
-700 iterations over. All clusters acceptable after: 255 iterations.
+All clusters acceptable after: 255 iterations.
 ID       Population  PopulationVariation  Compactness
 647      689594       2336                0.6583850931677019
 1040     693588       1658                0.5815217391304348
@@ -67,7 +67,7 @@ ID       Population  PopulationVariation  Compactness
 1424     690976       954                 0.6013071895424836
 1828     687767       4163                0.6167664670658682
 1827     693293       1363                0.6439393939393939
-700 iterations over. All clusters acceptable after: 292 iterations.
+All clusters acceptable after: 292 iterations.
 ID       Population  PopulationVariation  Compactness
 1504     688326       3604                0.6442953020134228
 2968     693037       1107                0.7085427135678393
@@ -83,7 +83,7 @@ ID       Population  PopulationVariation  Compactness
 784      690353       1577                0.8986175115207373
 1942     696271       4341                0.6205357142857143
 1943     690965       965                 0.7239583333333333
-700 iterations over. All clusters acceptable after: 315 iterations.
+All clusters acceptable after: 315 iterations.
 ID       Population  PopulationVariation  Compactness
 1475     690068       1862                0.8157894736842105
 1938     696618       4688                0.5956284153005464
@@ -99,7 +99,7 @@ ID       Population  PopulationVariation  Compactness
 304      696838       4908                0.8977272727272727
 2897     690536       1394                0.6616161616161615
 2906     689196       2734                0.6878306878306879
-700 iterations over. All clusters acceptable after: 223 iterations.
+All clusters acceptable after: 223 iterations.
 ID       Population  PopulationVariation  Compactness
 1433     692530       600                 0.6891891891891893
 1475     694466       2536                0.6141732283464567
@@ -115,7 +115,7 @@ ID       Population  PopulationVariation  Compactness
 2207     690048       1882                0.6650717703349283
 1153     688379       3551                0.7749077490774907
 1166     691836       94                  0.6255506607929515
-700 iterations over. All clusters acceptable after: 231 iterations.
+All clusters acceptable after: 231 iterations.
 ID       Population  PopulationVariation  Compactness
 3004     695361       3431                0.7341040462427746
 2171     694889       2959                0.7041666666666666
@@ -131,7 +131,7 @@ ID       Population  PopulationVariation  Compactness
 316      687094       4836                0.8711111111111112
 2590     692968       1038                0.5895953757225434
 2581     691613       317                 0.6298701298701299
-700 iterations over. All clusters acceptable after: 254 iterations.
+All clusters acceptable after: 254 iterations.
 ID       Population  PopulationVariation  Compactness
 2173     687320       4610                0.6759776536312849
 2261     693902       1972                0.7411167512690355
@@ -147,7 +147,7 @@ ID       Population  PopulationVariation  Compactness
 2835     696344       4414                0.43442622950819676
 36       689416       2514                0.8431372549019608
 267      693011       1081                0.5393939393939393
-700 iterations over. All clusters acceptable after: 225 iterations.
+All clusters acceptable after: 225 iterations.
 ID       Population  PopulationVariation  Compactness
 2623     689857       2073                0.5930232558139534
 265      697059       5129                0.6720647773279352
@@ -163,7 +163,7 @@ ID       Population  PopulationVariation  Compactness
 917      688386       3544                0.7701612903225806
 2517     689846       2084                0.5638297872340425
 2448     691233       697                 0.5923076923076923
-700 iterations over. All clusters acceptable after: 284 iterations.
+All clusters acceptable after: 284 iterations.
 ID       Population  PopulationVariation  Compactness
 2401     694450       2520                0.7307692307692308
 1146     689486       2444                0.8611111111111112
@@ -179,7 +179,7 @@ ID       Population  PopulationVariation  Compactness
 2562     688250       3680                0.5950920245398773
 17       696816       4886                0.7468354430379747
 122      691629       301                 0.63    
-700 iterations over. All clusters acceptable after: 337 iterations.
+All clusters acceptable after: 337 iterations.
 ID       Population  PopulationVariation  Compactness
 633      690663       1267                0.6030150753768844
 2132     687462       4468                0.8197674418604651
@@ -195,7 +195,7 @@ ID       Population  PopulationVariation  Compactness
 942      694699       2769                0.755   
 2170     688234       3696                0.7237354085603113
 2243     692705       775                 0.625668449197861
-700 iterations over. All clusters acceptable after: 195 iterations.
+All clusters acceptable after: 195 iterations.
 ID       Population  PopulationVariation  Compactness
 2428     688329       3601                0.6283783783783784
 1754     693371       1441                0.7547169811320755
@@ -211,7 +211,7 @@ ID       Population  PopulationVariation  Compactness
 970      693500       1570                0.7333333333333334
 2662     693066       1136                0.7346938775510203
 2655     688602       3328                0.575268817204301
-700 iterations over. All clusters acceptable after: 184 iterations.
+All clusters acceptable after: 184 iterations.
 ID       Population  PopulationVariation  Compactness
 2089     695392       3462                0.6324786324786325
 1806     693230       1300                0.7021276595744681
@@ -227,7 +227,7 @@ ID       Population  PopulationVariation  Compactness
 1824     689270       2660                0.53125 
 2602     693004       1074                0.6153846153846154
 2604     687767       4163                0.6964285714285714
-700 iterations over. All clusters acceptable after: 240 iterations.
+All clusters acceptable after: 240 iterations.
 ID       Population  PopulationVariation  Compactness
 100      693749       1819                0.6490384615384616
 1778     693510       1580                0.6799999999999999
@@ -243,7 +243,7 @@ ID       Population  PopulationVariation  Compactness
 752      695581       3651                0.753968253968254
 2808     693166       1236                0.5172413793103448
 2802     689386       2544                0.65    
-700 iterations over. All clusters acceptable after: 356 iterations.
+All clusters acceptable after: 356 iterations.
 ID       Population  PopulationVariation  Compactness
 2554     692236       306                 0.6503496503496504
 2739     691563       367                 0.6119402985074627
@@ -259,7 +259,7 @@ ID       Population  PopulationVariation  Compactness
 28       689408       2522                0.7393617021276595
 1963     696786       4856                0.5178571428571428
 1979     694125       2195                0.4055944055944056
-700 iterations over. All clusters acceptable after: 239 iterations.
+All clusters acceptable after: 239 iterations.
 ID       Population  PopulationVariation  Compactness
 1429     696154       4224                0.5714285714285714
 2736     687283       4647                0.625   
@@ -275,7 +275,7 @@ ID       Population  PopulationVariation  Compactness
 1025     689859       2071                0.7947598253275109
 972      692367       437                 0.8148148148148149
 997      688502       3428                0.8552631578947368
-700 iterations over. All clusters acceptable after: 327 iterations.
+All clusters acceptable after: 327 iterations.
 ID       Population  PopulationVariation  Compactness
 935      690756       1174                0.6030927835051547
 1495     689332       2598                0.6431718061674009
@@ -291,7 +291,7 @@ ID       Population  PopulationVariation  Compactness
 705      696412       4482                0.6918918918918919
 1709     689602       2328                0.7142857142857143
 1700     690248       1682                0.5882352941176471
-700 iterations over. All clusters acceptable after: 210 iterations.
+All clusters acceptable after: 210 iterations.
 ID       Population  PopulationVariation  Compactness
 3024     690998       932                 0.6963350785340314
 1861     695254       3324                0.7111111111111111
@@ -307,7 +307,7 @@ ID       Population  PopulationVariation  Compactness
 9        696998       5068                0.8396946564885497
 2775     688244       3686                0.7098445595854923
 2777     695410       3480                0.6825396825396826
-700 iterations over. All clusters acceptable after: 356 iterations.
+All clusters acceptable after: 356 iterations.
 ID       Population  PopulationVariation  Compactness
 910      690213       1717                0.8359375
 2177     689480       2450                0.6947791164658634
@@ -323,7 +323,7 @@ ID       Population  PopulationVariation  Compactness
 2610     694994       3064                0.5852272727272727
 2124     697119       5189                0.7044334975369457
 2181     692127       197                 0.7875  
-700 iterations over. All clusters acceptable after: 371 iterations.
+All clusters acceptable after: 371 iterations.
 ID       Population  PopulationVariation  Compactness
 921      696224       4294                0.6804123711340206
 754      696320       4390                0.8783783783783784
@@ -339,7 +339,7 @@ ID       Population  PopulationVariation  Compactness
 1659     689502       2428                0.6544502617801047
 1992     693273       1343                0.7784431137724551
 1761     690634       1296                0.5234899328859061
-700 iterations over. All clusters acceptable after: 302 iterations.
+All clusters acceptable after: 302 iterations.
 ID       Population  PopulationVariation  Compactness
 1999     691879       51                  0.7305389221556886
 1447     689107       2823                0.7058823529411764
@@ -355,7 +355,7 @@ ID       Population  PopulationVariation  Compactness
 1180     691334       596                 0.8740157480314961
 1575     693500       1570                0.7823529411764706
 1470     689743       2187                0.7050359712230216
-700 iterations over. All clusters acceptable after: 227 iterations.
+All clusters acceptable after: 227 iterations.
 ID       Population  PopulationVariation  Compactness
 2513     694947       3017                0.6054054054054054
 689      696259       4329                0.6588235294117647
@@ -371,7 +371,7 @@ ID       Population  PopulationVariation  Compactness
 857      690416       1514                0.8859649122807017
 2927     690427       1503                0.6205357142857143
 2930     694338       2408                0.5733333333333333
-700 iterations over. All clusters acceptable after: 295 iterations.
+All clusters acceptable after: 295 iterations.
 ID       Population  PopulationVariation  Compactness
 2113     689323       2607                0.651685393258427
 688      694868       2938                0.65625 
@@ -387,7 +387,7 @@ ID       Population  PopulationVariation  Compactness
 2478     689886       2044                0.5960591133004927
 2541     694044       2114                0.6793478260869565
 2543     696869       4939                0.6     
-700 iterations over. All clusters acceptable after: 287 iterations.
+All clusters acceptable after: 287 iterations.
 ID       Population  PopulationVariation  Compactness
 2944     696615       4685                0.8516483516483516
 1994     692141       211                 0.6872037914691943
@@ -403,7 +403,7 @@ ID       Population  PopulationVariation  Compactness
 645      689246       2684                0.6567164179104478
 2523     687284       4646                0.6968503937007874
 2520     694904       2974                0.6057142857142856
-700 iterations over. All clusters acceptable after: 206 iterations.
+All clusters acceptable after: 206 iterations.
 ID       Population  PopulationVariation  Compactness
 1304     695740       3810                0.8597285067873304
 2660     696495       4565                0.6268656716417911
@@ -419,7 +419,7 @@ ID       Population  PopulationVariation  Compactness
 2505     692290       360                 0.591715976331361
 2300     690162       1768                0.5561224489795918
 2332     687097       4833                0.6666666666666667
-700 iterations over. All clusters acceptable after: 362 iterations.
+All clusters acceptable after: 362 iterations.
 ID       Population  PopulationVariation  Compactness
 279      688566       3364                0.7734375
 1736     689243       2687                0.8571428571428572
@@ -435,7 +435,7 @@ ID       Population  PopulationVariation  Compactness
 288      694421       2491                0.7089947089947091
 2800     687082       4848                0.5771428571428572
 1829     687572       4358                0.6344827586206896
-700 iterations over. All clusters acceptable after: 141 iterations.
+All clusters acceptable after: 141 iterations.
 ID       Population  PopulationVariation  Compactness
 872      689149       2781                0.8081632653061225
 3019     693733       1803                0.7727272727272727
@@ -451,7 +451,7 @@ ID       Population  PopulationVariation  Compactness
 933      689039       2891                0.7028301886792453
 834      693180       1250                0.8084291187739463
 819      691834       96                  0.8428571428571429
-700 iterations over. All clusters acceptable after: 268 iterations.
+All clusters acceptable after: 268 iterations.
 ID       Population  PopulationVariation  Compactness
 2820     691712       218                 0.6495327102803738
 297      688683       3247                0.7510729613733905
@@ -467,7 +467,7 @@ ID       Population  PopulationVariation  Compactness
 2528     687921       4009                0.7083333333333333
 2917     694721       2791                0.7954545454545454
 29       690649       1281                0.5988023952095809
-700 iterations over. All clusters acceptable after: 238 iterations.
+All clusters acceptable after: 238 iterations.
 ID       Population  PopulationVariation  Compactness
 1324     686740       5190                0.8271604938271605
 3010     696521       4591                0.8338983050847457
@@ -483,7 +483,7 @@ ID       Population  PopulationVariation  Compactness
 1891     692766       836                 0.4933333333333333
 1655     689831       2099                0.6134969325153374
 1660     690079       1851                0.7861635220125787
-700 iterations over. All clusters acceptable after: 209 iterations.
+All clusters acceptable after: 209 iterations.
 ID       Population  PopulationVariation  Compactness
 2088     694264       2334                0.6802030456852792
 1263     695622       3692                0.8166666666666667
@@ -499,7 +499,7 @@ ID       Population  PopulationVariation  Compactness
 196      691695       235                 0.7234042553191489
 664      690336       1594                0.6     
 642      690783       1147                0.7096774193548387
-700 iterations over. All clusters acceptable after: 269 iterations.
+All clusters acceptable after: 269 iterations.
 ID       Population  PopulationVariation  Compactness
 2714     688608       3322                0.619718309859155
 899      694753       2823                0.8464566929133859
@@ -515,7 +515,7 @@ ID       Population  PopulationVariation  Compactness
 696      692058       128                 0.6045197740112994
 753      692864       934                 0.8686131386861313
 989      689556       2374                0.8340425531914893
-700 iterations over. All clusters acceptable after: 233 iterations.
+All clusters acceptable after: 233 iterations.
 ID       Population  PopulationVariation  Compactness
 38       689548       2382                0.5933333333333333
 83       694650       2720                0.680473372781065
@@ -531,7 +531,7 @@ ID       Population  PopulationVariation  Compactness
 861      688682       3248                0.8451327433628318
 1963     696598       4668                0.7128205128205128
 2398     689174       2756                0.8670212765957447
-700 iterations over. All clusters acceptable after: 233 iterations.
+All clusters acceptable after: 233 iterations.
 ID       Population  PopulationVariation  Compactness
 2397     694187       2257                0.6548672566371682
 2662     694698       2768                0.6633165829145728
@@ -547,7 +547,7 @@ ID       Population  PopulationVariation  Compactness
 1899     815066       123136              0.48309178743961356
 1638     688627       3303                0.7442922374429224
 1642     572113       119817              0.5112781954887218
-700 iterations over. All clusters acceptable after: 287 iterations.
+All clusters acceptable after: 287 iterations.
 ID       Population  PopulationVariation  Compactness
 2013     690752       1178                0.5396825396825398
 737      695999       4069                0.8826291079812206
@@ -563,7 +563,7 @@ ID       Population  PopulationVariation  Compactness
 613      690008       1922                0.7339901477832512
 1998     695524       3594                0.6130952380952381
 2030     687263       4667                0.6012658227848101
-700 iterations over. All clusters acceptable after: 279 iterations.
+All clusters acceptable after: 279 iterations.
 ID       Population  PopulationVariation  Compactness
 942      692264       334                 0.7723577235772358
 2602     691577       353                 0.5923566878980892
@@ -579,7 +579,7 @@ ID       Population  PopulationVariation  Compactness
 2472     691639       291                 0.6149068322981366
 713      694683       2753                0.5829383886255924
 643      690339       1591                0.686046511627907
-700 iterations over. All clusters acceptable after: 381 iterations.
+All clusters acceptable after: 381 iterations.
 ID       Population  PopulationVariation  Compactness
 2058     690918       1012                0.6509803921568628
 929      689010       2920                0.6040609137055837
@@ -595,7 +595,7 @@ ID       Population  PopulationVariation  Compactness
 1828     695013       3083                0.6258992805755396
 1803     694844       2914                0.6910112359550562
 1972     693656       1726                0.6589595375722543
-700 iterations over. All clusters acceptable after: 250 iterations.
+All clusters acceptable after: 250 iterations.
 ID       Population  PopulationVariation  Compactness
 2643     687641       4289                0.7319148936170212
 2869     688538       3392                0.72    
@@ -611,7 +611,7 @@ ID       Population  PopulationVariation  Compactness
 2750     695364       3434                0.7151162790697674
 580      693153       1223                0.852112676056338
 504      691021       909                 0.699421965317919
-700 iterations over. All clusters acceptable after: 391 iterations.
+All clusters acceptable after: 391 iterations.
 ID       Population  PopulationVariation  Compactness
 609      688014       3916                0.7192118226600985
 1825     692572       642                 0.5960264900662251
@@ -627,7 +627,7 @@ ID       Population  PopulationVariation  Compactness
 145      687407       4523                0.7222222222222222
 29       687355       4575                0.8365019011406845
 2897     691385       545                 0.5465838509316769
-700 iterations over. All clusters acceptable after: 265 iterations.
+All clusters acceptable after: 265 iterations.
 ID       Population  PopulationVariation  Compactness
 642      689548       2382                0.6457142857142857
 1926     693857       1927                0.7370892018779343
@@ -643,7 +643,7 @@ ID       Population  PopulationVariation  Compactness
 1166     692892       962                 0.5934579439252337
 37       696150       4220                0.8389513108614233
 2967     694630       2700                0.6768292682926829
-700 iterations over. All clusters acceptable after: 321 iterations.
+All clusters acceptable after: 321 iterations.
 Now the pool is closed and no longer available
 
 real	61m19.723s
@@ -664,7 +664,7 @@ ID       Population  PopulationVariation  Compactness
 2486     688221       3709                0.6844919786096257
 2020     696782       4852                0.6610878661087867
 2188     689689       2241                0.7268722466960352
-700 iterations over. All clusters acceptable after: 282 iterations.
+All clusters acceptable after: 282 iterations.
 ID       Population  PopulationVariation  Compactness
 479      693217       1287                0.7543103448275862
 1525     686845       5085                0.8852459016393442
@@ -680,7 +680,7 @@ ID       Population  PopulationVariation  Compactness
 1484     687085       4845                0.7153284671532847
 749      690157       1773                0.8516949152542372
 1033     693215       1285                0.6205128205128205
-700 iterations over. All clusters acceptable after: 230 iterations.
+All clusters acceptable after: 230 iterations.
 ID       Population  PopulationVariation  Compactness
 2612     696967       5037                0.6270270270270271
 1778     691197       733                 0.7134502923976609
@@ -696,7 +696,7 @@ ID       Population  PopulationVariation  Compactness
 2670     695517       3587                0.6453488372093024
 1699     692140       210                 0.7035398230088495
 1700     692294       364                 0.6724137931034483
-700 iterations over. All clusters acceptable after: 272 iterations.
+All clusters acceptable after: 272 iterations.
 ID       Population  PopulationVariation  Compactness
 2687     688949       2981                0.7245762711864407
 2475     696176       4246                0.6585365853658536
@@ -712,7 +712,7 @@ ID       Population  PopulationVariation  Compactness
 386      691829       101                 0.6751592356687899
 1628     692453       523                 0.8563829787234043
 1671     690676       1254                0.6436170212765957
-700 iterations over. All clusters acceptable after: 198 iterations.
+All clusters acceptable after: 198 iterations.
 ID       Population  PopulationVariation  Compactness
 2565     695841       3911                0.6055555555555556
 1153     689821       2109                0.8545454545454545
@@ -728,7 +728,7 @@ ID       Population  PopulationVariation  Compactness
 1099     696859       4929                0.6666666666666667
 2993     693977       2047                0.7934782608695652
 2873     690695       1235                0.5802469135802469
-700 iterations over. All clusters acceptable after: 299 iterations.
+All clusters acceptable after: 299 iterations.
 ID       Population  PopulationVariation  Compactness
 2819     689414       2516                0.6293706293706294
 573      691775       155                 0.780373831775701
@@ -744,7 +744,7 @@ ID       Population  PopulationVariation  Compactness
 2180     691092       838                 0.6560509554140128
 2431     689651       2279                0.699421965317919
 2430     696541       4611                0.5816993464052287
-700 iterations over. All clusters acceptable after: 242 iterations.
+All clusters acceptable after: 242 iterations.
 ID       Population  PopulationVariation  Compactness
 1178     692573       643                 0.8376068376068376
 645      692772       842                 0.7478632478632479
@@ -760,7 +760,7 @@ ID       Population  PopulationVariation  Compactness
 2486     692277       347                 0.6386138613861386
 1928     693062       1132                0.6886792452830188
 1924     693565       1635                0.6387434554973822
-700 iterations over. All clusters acceptable after: 371 iterations.
+All clusters acceptable after: 371 iterations.
 ID       Population  PopulationVariation  Compactness
 2933     694384       2454                0.7021276595744681
 840      694998       3068                0.8130081300813008
@@ -776,7 +776,7 @@ ID       Population  PopulationVariation  Compactness
 1808     690153       1777                0.6416184971098267
 89       692105       175                 0.6742081447963801
 86       691733       197                 0.5843373493975903
-700 iterations over. All clusters acceptable after: 223 iterations.
+All clusters acceptable after: 223 iterations.
 ID       Population  PopulationVariation  Compactness
 1488     689512       2418                0.6598639455782314
 1853     692512       582                 0.7065217391304348
@@ -792,7 +792,7 @@ ID       Population  PopulationVariation  Compactness
 29       690902       1028                0.5497076023391814
 835      689101       2829                0.6810344827586207
 834      696189       4259                0.8796296296296297
-700 iterations over. All clusters acceptable after: 264 iterations.
+All clusters acceptable after: 264 iterations.
 ID       Population  PopulationVariation  Compactness
 2549     687387       4543                0.6174863387978142
 2776     690300       1630                0.6899563318777293
@@ -808,7 +808,7 @@ ID       Population  PopulationVariation  Compactness
 2159     692688       758                 0.6976744186046512
 1969     691530       400                 0.6397849462365591
 1447     689870       2060                0.6975308641975309
-700 iterations over. All clusters acceptable after: 277 iterations.
+All clusters acceptable after: 277 iterations.
 ID       Population  PopulationVariation  Compactness
 2401     687426       4504                0.8222222222222222
 929      694521       2591                0.7777777777777778
@@ -824,7 +824,7 @@ ID       Population  PopulationVariation  Compactness
 963      692191       261                 0.7918367346938775
 2867     692973       1043                0.8058608058608059
 3006     691695       235                 0.7167630057803468
-700 iterations over. All clusters acceptable after: 312 iterations.
+All clusters acceptable after: 312 iterations.
 ID       Population  PopulationVariation  Compactness
 1006     694396       2466                0.8498168498168498
 1138     690881       1049                0.6811594202898551
@@ -840,7 +840,7 @@ ID       Population  PopulationVariation  Compactness
 550      687520       4410                0.8392156862745098
 680      696078       4148                0.7440758293838863
 79       687869       4061                0.6294117647058823
-700 iterations over. All clusters acceptable after: 274 iterations.
+All clusters acceptable after: 274 iterations.
 ID       Population  PopulationVariation  Compactness
 916      695748       3818                0.8246445497630331
 1485     692359       429                 0.6976744186046512
@@ -856,7 +856,7 @@ ID       Population  PopulationVariation  Compactness
 1840     691475       455                 0.6715328467153285
 2312     689161       2769                0.5763546798029557
 2305     690233       1697                0.6548223350253808
-700 iterations over. All clusters acceptable after: 206 iterations.
+All clusters acceptable after: 206 iterations.
 ID       Population  PopulationVariation  Compactness
 921      692177       247                 0.8357664233576643
 252      686811       5119                0.7470355731225297
@@ -872,7 +872,7 @@ ID       Population  PopulationVariation  Compactness
 293      688664       3266                0.650887573964497
 1458     695051       3121                0.6666666666666667
 1459     692040       110                 0.5693430656934306
-700 iterations over. All clusters acceptable after: 313 iterations.
+All clusters acceptable after: 313 iterations.
 ID       Population  PopulationVariation  Compactness
 2426     688484       3446                0.6867469879518072
 696      694869       2939                0.6457142857142857
@@ -888,7 +888,7 @@ ID       Population  PopulationVariation  Compactness
 1979     690402       1528                0.6038647342995169
 1980     693197       1267                0.8539325842696629
 1769     696151       4221                0.7261146496815287
-700 iterations over. All clusters acceptable after: 312 iterations.
+All clusters acceptable after: 312 iterations.
 ID       Population  PopulationVariation  Compactness
 1023     687722       4208                0.6909090909090909
 1433     695044       3114                0.8877005347593583
@@ -904,7 +904,7 @@ ID       Population  PopulationVariation  Compactness
 2609     686912       5018                0.6604938271604939
 2131     690504       1426                0.755   
 2183     692193       263                 0.7411167512690355
-700 iterations over. All clusters acceptable after: 252 iterations.
+All clusters acceptable after: 252 iterations.
 ID       Population  PopulationVariation  Compactness
 2887     694556       2626                0.7724550898203593
 2486     689662       2268                0.6285714285714286
@@ -920,7 +920,7 @@ ID       Population  PopulationVariation  Compactness
 840      687864       4066                0.8169014084507042
 2964     689355       2575                0.5853658536585367
 2892     694781       2851                0.5403225806451613
-700 iterations over. All clusters acceptable after: 314 iterations.
+All clusters acceptable after: 314 iterations.
 ID       Population  PopulationVariation  Compactness
 2131     689339       2591                0.7790055248618785
 1149     696239       4309                0.8421052631578947
@@ -936,7 +936,7 @@ ID       Population  PopulationVariation  Compactness
 98       693503       1573                0.5900621118012422
 1818     696931       5001                0.6145251396648045
 1444     693278       1348                0.6428571428571428
-700 iterations over. All clusters acceptable after: 346 iterations.
+All clusters acceptable after: 346 iterations.
 ID       Population  PopulationVariation  Compactness
 2662     694742       2812                0.6582914572864322
 357      694604       2674                0.694267515923567
@@ -952,7 +952,7 @@ ID       Population  PopulationVariation  Compactness
 2853     694563       2633                0.7300613496932515
 1841     686891       5039                0.6060606060606061
 2803     687903       4027                0.5751633986928104
-700 iterations over. All clusters acceptable after: 239 iterations.
+All clusters acceptable after: 239 iterations.
 ID       Population  PopulationVariation  Compactness
 1283     695859       3929                0.7896995708154506
 280      693874       1944                0.6604938271604939
@@ -968,7 +968,7 @@ ID       Population  PopulationVariation  Compactness
 2962     690229       1701                0.5869565217391304
 265      693169       1239                0.84765625
 1051     692640       710                 0.7873563218390804
-700 iterations over. All clusters acceptable after: 243 iterations.
+All clusters acceptable after: 243 iterations.
 ID       Population  PopulationVariation  Compactness
 2330     695342       3412                0.680672268907563
 1698     690113       1817                0.7654867256637168
@@ -984,7 +984,7 @@ ID       Population  PopulationVariation  Compactness
 1437     690297       1633                0.6333333333333333
 756      688607       3323                0.74235807860262
 760      693491       1561                0.8967136150234741
-700 iterations over. All clusters acceptable after: 317 iterations.
+All clusters acceptable after: 317 iterations.
 ID       Population  PopulationVariation  Compactness
 2819     689536       2394                0.6898395721925134
 1766     687622       4308                0.7126436781609196
@@ -1000,7 +1000,7 @@ ID       Population  PopulationVariation  Compactness
 504      689583       2347                0.6984126984126984
 2535     687520       4410                0.6126126126126126
 2744     696478       4548                0.6666666666666667
-700 iterations over. All clusters acceptable after: 323 iterations.
+All clusters acceptable after: 323 iterations.
 ID       Population  PopulationVariation  Compactness
 977      688231       3699                0.8051948051948052
 1946     696201       4271                0.699421965317919
@@ -1016,7 +1016,7 @@ ID       Population  PopulationVariation  Compactness
 2956     687147       4783                0.6758620689655173
 964      689045       2885                0.8188679245283019
 1006     687479       4451                0.6558704453441295
-700 iterations over. All clusters acceptable after: 255 iterations.
+All clusters acceptable after: 255 iterations.
 ID       Population  PopulationVariation  Compactness
 844      689269       2661                0.8036529680365296
 312      691444       486                 0.842741935483871
@@ -1032,7 +1032,7 @@ ID       Population  PopulationVariation  Compactness
 918      694187       2257                0.5697674418604651
 1991     694325       2395                0.7772511848341233
 1654     689865       2065                0.8677248677248677
-700 iterations over. All clusters acceptable after: 274 iterations.
+All clusters acceptable after: 274 iterations.
 ID       Population  PopulationVariation  Compactness
 2612     687196       4734                0.6666666666666667
 626      692137       207                 0.6528497409326425
@@ -1048,7 +1048,7 @@ ID       Population  PopulationVariation  Compactness
 222      688931       2999                0.5670103092783505
 895      696261       4331                0.8773946360153256
 916      686914       5016                0.8699551569506727
-700 iterations over. All clusters acceptable after: 239 iterations.
+All clusters acceptable after: 239 iterations.
 ID       Population  PopulationVariation  Compactness
 1958     687429       4501                0.7692307692307692
 141      689052       2878                0.6650943396226415
@@ -1064,7 +1064,7 @@ ID       Population  PopulationVariation  Compactness
 1067     692312       382                 0.5245901639344263
 1099     692765       835                 0.6200873362445415
 1140     696173       4243                0.7863636363636364
-700 iterations over. All clusters acceptable after: 238 iterations.
+All clusters acceptable after: 238 iterations.
 ID       Population  PopulationVariation  Compactness
 2464     694799       2869                0.6858638743455497
 2291     696333       4403                0.7419354838709677
@@ -1080,7 +1080,7 @@ ID       Population  PopulationVariation  Compactness
 765      696527       4597                0.8151260504201681
 27       689371       2559                0.7347826086956522
 254      687805       4125                0.5868263473053892
-700 iterations over. All clusters acceptable after: 238 iterations.
+All clusters acceptable after: 238 iterations.
 ID       Population  PopulationVariation  Compactness
 1204     691732       198                 0.85    
 2971     694821       2891                0.5714285714285714
@@ -1096,7 +1096,7 @@ ID       Population  PopulationVariation  Compactness
 2001     690335       1595                0.5347222222222222
 2883     687726       4204                0.5309278350515464
 2881     691580       350                 0.765625
-700 iterations over. All clusters acceptable after: 206 iterations.
+All clusters acceptable after: 206 iterations.
 ID       Population  PopulationVariation  Compactness
 2799     687575       4355                0.5803571428571428
 2036     689488       2442                0.6860986547085202
@@ -1112,7 +1112,7 @@ ID       Population  PopulationVariation  Compactness
 1169     687436       4494                0.71875 
 1178     691306       624                 0.83206106870229
 972      695741       3811                0.8553191489361702
-700 iterations over. All clusters acceptable after: 197 iterations.
+All clusters acceptable after: 197 iterations.
 ID       Population  PopulationVariation  Compactness
 2184     693378       1448                0.6635514018691588
 2544     696707       4777                0.6095890410958904
@@ -1128,7 +1128,7 @@ ID       Population  PopulationVariation  Compactness
 1625     696714       4784                0.7234042553191489
 2855     689756       2174                0.6666666666666667
 2856     686971       4959                0.6936416184971098
-700 iterations over. All clusters acceptable after: 361 iterations.
+All clusters acceptable after: 361 iterations.
 ID       Population  PopulationVariation  Compactness
 1490     695684       3754                0.6181818181818182
 624      692546       616                 0.8577075098814229
@@ -1144,7 +1144,7 @@ ID       Population  PopulationVariation  Compactness
 1504     690546       1384                0.5801526717557253
 1447     687033       4897                0.6923076923076923
 1969     691823       107                 0.6666666666666667
-700 iterations over. All clusters acceptable after: 334 iterations.
+All clusters acceptable after: 334 iterations.
 ID       Population  PopulationVariation  Compactness
 832      691580       350                 0.8146551724137931
 280      688102       3828                0.6885245901639344
@@ -1160,7 +1160,7 @@ ID       Population  PopulationVariation  Compactness
 942      694512       2582                0.8648648648648649
 7        694328       2398                0.6359223300970873
 653      690085       1845                0.6633663366336633
-700 iterations over. All clusters acceptable after: 209 iterations.
+All clusters acceptable after: 209 iterations.
 ID       Population  PopulationVariation  Compactness
 628      693424       1494                0.7195767195767195
 2775     693318       1388                0.5     
@@ -1176,7 +1176,7 @@ ID       Population  PopulationVariation  Compactness
 959      687109       4821                0.6444444444444444
 2799     689858       2072                0.6666666666666667
 1829     692120       190                 0.6506849315068493
-700 iterations over. All clusters acceptable after: 208 iterations.
+All clusters acceptable after: 208 iterations.
 ID       Population  PopulationVariation  Compactness
 2298     687565       4365                0.7120418848167539
 2706     696100       4170                0.6972972972972973
@@ -1192,7 +1192,7 @@ ID       Population  PopulationVariation  Compactness
 191      688084       3846                0.8727272727272728
 982      687308       4622                0.8093220338983051
 980      696377       4447                0.6451612903225806
-700 iterations over. All clusters acceptable after: 326 iterations.
+All clusters acceptable after: 326 iterations.
 ID       Population  PopulationVariation  Compactness
 2749     695057       3127                0.6405228758169934
 2466     689283       2647                0.5849056603773585
@@ -1208,7 +1208,7 @@ ID       Population  PopulationVariation  Compactness
 85       687406       4524                0.7005988023952097
 2177     696741       4811                0.6390243902439025
 1508     696725       4795                0.7784810126582279
-700 iterations over. All clusters acceptable after: 165 iterations.
+All clusters acceptable after: 165 iterations.
 ID       Population  PopulationVariation  Compactness
 2641     695559       3629                0.6553191489361703
 1173     694206       2276                0.782051282051282
@@ -1224,7 +1224,7 @@ ID       Population  PopulationVariation  Compactness
 1940     695609       3679                0.7112299465240641
 989      687663       4267                0.8444444444444444
 942      692644       714                 0.6492146596858639
-700 iterations over. All clusters acceptable after: 165 iterations.
+All clusters acceptable after: 165 iterations.
 ID       Population  PopulationVariation  Compactness
 2312     689170       2760                0.7121951219512195
 3036     687923       4007                0.7277777777777779
@@ -1240,7 +1240,7 @@ ID       Population  PopulationVariation  Compactness
 661      694476       2546                0.5344827586206897
 576      689243       2687                0.8645418326693227
 591      696036       4106                0.7142857142857143
-700 iterations over. All clusters acceptable after: 328 iterations.
+All clusters acceptable after: 328 iterations.
 ID       Population  PopulationVariation  Compactness
 2825     696880       4950                0.5616438356164384
 1506     692828       898                 0.558659217877095
@@ -1256,7 +1256,7 @@ ID       Population  PopulationVariation  Compactness
 2079     691613       317                 0.5935828877005347
 2916     690026       1904                0.6473429951690821
 2931     689907       2023                0.6224489795918368
-700 iterations over. All clusters acceptable after: 257 iterations.
+All clusters acceptable after: 257 iterations.
 ID       Population  PopulationVariation  Compactness
 2566     688410       3520                0.6421052631578947
 565      696555       4625                0.5934065934065934
@@ -1272,7 +1272,7 @@ ID       Population  PopulationVariation  Compactness
 785      694270       2340                0.8571428571428572
 1762     692976       1046                0.775330396475771
 118      688226       3704                0.7888888888888889
-700 iterations over. All clusters acceptable after: 337 iterations.
+All clusters acceptable after: 337 iterations.
 ID       Population  PopulationVariation  Compactness
 2081     696023       4093                0.7239263803680982
 2814     688689       3241                0.49193548387096775
@@ -1288,7 +1288,7 @@ ID       Population  PopulationVariation  Compactness
 1769     691036       894                 0.7790055248618785
 2967     694353       2423                0.7173913043478262
 2971     687505       4425                0.6666666666666667
-700 iterations over. All clusters acceptable after: 182 iterations.
+All clusters acceptable after: 182 iterations.
 Now the pool is closed and no longer available
 
 real	62m10.825s

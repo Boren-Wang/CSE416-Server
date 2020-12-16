@@ -4511,12 +4511,4 @@ ID       Population  PopulationVariation  Compactness
 618      704825       12895               0.625   
 Now the pool is closed and no longer available
 
-real	159m55.165s
-user	1845m46.279s
-sys	0m47.659s
-This is node 1
-Number of districtings for node 1 is 150
-Completed in 9595.17s for rank 1:
-This is node 0
-Number of districtings for node 0 is 150
-Completed in 9595.17s for rank 0:
+
